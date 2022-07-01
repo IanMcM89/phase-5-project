@@ -14,6 +14,6 @@ User.create(
 
 User.create(
   username: "user2",
-  password: "password1",
-  password_confirmation: "password1"
+  password: "password2",
+  password_confirmation: "password2"
 )
