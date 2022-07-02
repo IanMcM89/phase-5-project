@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import LoginForm from "../components/LoginForm";
 import SignUpForm from "../components/SignUpForm";
-import { Header, FormField, Error, Button, Overlay } from "../styles";
+import { Header, FormField, Error, Button } from "../styles";
 import styled, { css } from "styled-components";
 
 function Login({ onLogin }) {
