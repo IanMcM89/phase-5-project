@@ -3,7 +3,7 @@ import { Header, Button } from "../styles";
 import styled from "styled-components";
 
 function NavBar({ user, setUser }) {
-  function handleLogout() {
+  const handleLogout = () => {
     fetch("/api/logout", {
       method: "DELETE"
     }).then((response) => {
