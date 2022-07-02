@@ -1,25 +1,44 @@
-import logo from './logo.svg';
-import './App.css';
+import React, { useEffect, useState } from "react";
+import { Switch, Route } from 'react-router-dom';
+import Login from "../pages/Login";
+import NavBar from "./NavBar";
+import styled from "styled-components";
 
 function App() {
+  const [user, setUser] = useState(null);
+
+  useEffect(() => {
+    // auto-login user
+    fetch("/api/me").then((r) => {
+      if (r.ok) {
+        r.json().then((userData) => setUser(userData));
+      }
+    });
+  }, []);
+
+  if (!user) return <Login onLogin={setUser} />;
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <>
+      <NavBar user={user} setUser={setUser} />
+      <Main>
+        <Switch>
+          <Route path="/">
+            <>
+            </>
+          </Route>
+        </Switch>
+      </Main>
+    </>
   );
 }
+
+const Main = styled.main`
+  display: flex;
+  width: 100vw;
+  height: 90vh;
+  margin: 0;
+  overflow: hidden;
+`;
 
 export default App;
