@@ -1,6 +1,11 @@
 class Api::UsersController < ApplicationController
   skip_before_action :authorize, only: :create
 
+  # GET /users
+  def index
+    render json: User.all
+  end
+
   # POST /signup
   def create
     user = User.create!(user_params)
