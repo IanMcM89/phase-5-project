@@ -8,12 +8,28 @@
 
 User.create(
   username: "user1",
-  password: "password",
-  password_confirmation: "password"
+  password: "password1",
+  password_confirmation: "password1"
 )
 
 User.create(
   username: "user2",
   password: "password2",
   password_confirmation: "password2"
+)
+
+User.create(
+  username: "user3",
+  password: "password3",
+  password_confirmation: "password3"
+)
+User.create(
+  username: "user4",
+  password: "password4",
+  password_confirmation: "password4"
+)
+User.create(
+  username: "user5",
+  password: "password5",
+  password_confirmation: "password5"
 )
