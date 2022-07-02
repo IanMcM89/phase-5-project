@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { Switch, Route } from 'react-router-dom';
 import Login from "../pages/Login";
 import NavBar from "./NavBar";
+import Home from "../pages/Home";
 import styled from "styled-components";
 
 function App() {
@@ -16,7 +17,7 @@ function App() {
     });
   }, []);
 
-  if (!user) return <Login onLogin={setUser} />;
+  if (!user) return (<Login onLogin={setUser} />);
 
   return (
     <>
@@ -24,8 +25,7 @@ function App() {
       <Main>
         <Switch>
           <Route path="/">
-            <>
-            </>
+            <Home user={user}/>
           </Route>
         </Switch>
       </Main>
