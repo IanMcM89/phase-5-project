@@ -3,7 +3,7 @@ class Api::UsersController < ApplicationController
 
   # GET /users
   def index
-    render json: User.all
+    render json: User.all.to_json(only: [:id, :username])
   end
 
   # POST /signup
