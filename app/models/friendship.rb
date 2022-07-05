@@ -5,9 +5,8 @@ class Friendship < ApplicationRecord
   after_create :create_inverse, unless: :has_inverse?
   after_destroy :destroy_inverse, if: :has_inverse?
 
-  validate :not_self
-  # validate :not_friends
-  # validate :not_pending
+  validate :befriending_self?
+  validate :already_friends?
 
   def create_inverse
     self.class.create(inverse_params)
@@ -23,19 +22,5 @@ class Friendship < ApplicationRecord
 
   def inverse_params
     {friend_id: user_id, user_id: friend_id}
-  end
-
-  private
-
-  def not_self
-    errors.add(:friend, "can't befriend self") if user == friend
-  end
-
-  def not_friends
-    errors.add(:friend, "already exists") if user.friends.include?(friend)
-  end
-
-  def not_pending
-    errors.add(:friend, "already requested") if user.pending_friends.include?(friend)
   end
 end
