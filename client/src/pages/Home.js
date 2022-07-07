@@ -1,10 +1,13 @@
 import React, { useState, useEffect } from "react";
 import styled, { css } from "styled-components";
+import DynamicMap from "../components/DynamicMap";
 
 function Home({ user }) {
   const [users, setUsers] = useState([]);
 
-  console.log(users)
+  const mapIsReadyCallback = (map) => {
+    console.log(map);
+  };
 
   useEffect(() => {
     fetch("/api/users").then((r) => {
@@ -18,14 +21,15 @@ function Home({ user }) {
 
   return (
     <Wrapper>
-      <ul>
+      <DynamicMap mapIsReadyCallback={mapIsReadyCallback}/>
+      {/* <ul>
         {users.map((u) => u.username !== user.username ? (
           <li key={u.id}>{u.username}</li>
         ) : (
           null
         )
         )}
-      </ul>
+      </ul> */}
     </Wrapper>
   );
 }
