@@ -1,31 +1,11 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 import styled, { css } from "styled-components";
-import DynamicMap from "../components/DynamicMap";
+import GeoapifyMap from "../components/GeoapifyMap";
 
-function Home({ user }) {
-  const [users, setUsers] = useState([]);
-
-  useEffect(() => {
-    fetch("/api/users").then((r) => {
-      if (r.ok) {
-        r.json().then((users) => {
-          setUsers(users);
-        });
-      }
-    });
-  }, []);
-
+function Home() {
   return (
     <Wrapper>
-      <DynamicMap />
-      {/* <ul>
-        {users.map((u) => u.username !== user.username ? (
-          <li key={u.id}>{u.username}</li>
-        ) : (
-          null
-        )
-        )}
-      </ul> */}
+      <GeoapifyMap />
     </Wrapper>
   );
 }

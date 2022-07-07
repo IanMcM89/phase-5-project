@@ -25,7 +25,7 @@ function App() {
       <Main>
         <Switch>
           <Route path="/">
-            <Home user={user}/>
+            <Home />
           </Route>
         </Switch>
       </Main>
