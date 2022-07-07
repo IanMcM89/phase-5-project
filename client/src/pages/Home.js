@@ -5,10 +5,6 @@ import DynamicMap from "../components/DynamicMap";
 function Home({ user }) {
   const [users, setUsers] = useState([]);
 
-  const mapIsReadyCallback = (map) => {
-    console.log(map);
-  };
-
   useEffect(() => {
     fetch("/api/users").then((r) => {
       if (r.ok) {
@@ -21,7 +17,7 @@ function Home({ user }) {
 
   return (
     <Wrapper>
-      <DynamicMap mapIsReadyCallback={mapIsReadyCallback}/>
+      <DynamicMap />
       {/* <ul>
         {users.map((u) => u.username !== user.username ? (
           <li key={u.id}>{u.username}</li>
