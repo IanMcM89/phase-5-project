@@ -52,9 +52,9 @@ const GoogleMap = () => {
         <Button variant="orange" onClick={fetchPlaces}>Search</Button>
       </SearchWrapper>
       {userLocation ? <GoogleMaps
-        apiKey={"AIzaSyCd8r2uiMhkaHw5p8WJe1inGbiQSgXX3co"}
+        apiKey={process.env.REACT_APP_GOOGLE_MAPS_API_KEY}
         style={{ height: "100%", width: "100%" }}
-        zoom={12}
+        zoom={11}
         center={userLocation}
         markers={markers}
       /> : (
