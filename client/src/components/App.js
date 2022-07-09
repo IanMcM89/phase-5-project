@@ -2,10 +2,11 @@ import React, { useEffect, useState } from "react";
 import { Switch, Route } from 'react-router-dom';
 import Login from "../pages/Login";
 import NavBar from "./NavBar";
-import Home from "../pages/Home";
+import Menu from "./Menu";
+import GeoapifyMap from "../pages/GeoapifyMap";
 import styled from "styled-components";
 
-function App() {
+const App = () => {
   const [user, setUser] = useState(null);
 
   useEffect(() => {
@@ -23,9 +24,22 @@ function App() {
     <>
       <NavBar user={user} setUser={setUser} />
       <Main>
+        <Menu />
         <Switch>
+          <Route path="/profile">
+            <></>
+          </Route>
+          <Route path="/friends">
+            <></>
+          </Route>
+          <Route path="/events/:id">
+            <></>
+          </Route>
+          <Route path="/events">
+            <></>
+          </Route>
           <Route path="/">
-            <Home />
+            <GeoapifyMap />
           </Route>
         </Switch>
       </Main>
