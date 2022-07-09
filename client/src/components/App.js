@@ -3,7 +3,7 @@ import { Switch, Route } from 'react-router-dom';
 import Login from "../pages/Login";
 import NavBar from "./NavBar";
 import Menu from "./Menu";
-import GeoapifyMap from "../pages/GeoapifyMap";
+import GoogleMap from "../pages/GoogleMap";
 import styled from "styled-components";
 
 const App = () => {
@@ -39,7 +39,7 @@ const App = () => {
             <></>
           </Route>
           <Route path="/">
-            <GeoapifyMap />
+            <GoogleMap />
           </Route>
         </Switch>
       </Main>
