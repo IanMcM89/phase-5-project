@@ -1,7 +1,7 @@
 import styled from "styled-components";
 
 const Input = styled.input`
-  background-color: gainsboro;
+  background-color: beige;
   border-radius: 6px;
   border: 1px solid gray;
   max-width: 100%;
