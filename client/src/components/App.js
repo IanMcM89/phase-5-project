@@ -4,6 +4,7 @@ import Login from "../pages/Login";
 import NavBar from "./NavBar";
 import Menu from "./Menu";
 import GoogleMap from "../pages/GoogleMap";
+import FriendsList from "../pages/FriendsList";
 import styled from "styled-components";
 
 const App = () => {
@@ -30,7 +31,7 @@ const App = () => {
             <></>
           </Route>
           <Route path="/friends">
-            <></>
+            <FriendsList />
           </Route>
           <Route path="/events/:id">
             <></>
@@ -39,7 +40,8 @@ const App = () => {
             <></>
           </Route>
           <Route path="/">
-            <GoogleMap />
+            <></>
+            {/* <GoogleMap /> */}
           </Route>
         </Switch>
       </Main>
