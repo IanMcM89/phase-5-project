@@ -6,37 +6,37 @@ const Menu = () => {
   return (
     <Wrapper>
       <Nav>
-        <IconWrapper1>
+        <WrapperRed>
           <Icon
             src="/images/icons/menu.png"
             alt="Menu"
             style={{ cursor: 'default' }}
           />
-        </IconWrapper1>
-        <IconWrapper2>
+        </WrapperRed>
+        <WrapperNavy>
           <Link to="/">
             <Icon
               src="/images/icons/map.png"
               alt="GeoMapper"
             />
           </Link>
-        </IconWrapper2>
-        <IconWrapper2>
+        </WrapperNavy>
+        <WrapperNavy>
           <Link to="/events">
             <Icon
               src="/images/icons/events.png"
               alt="Events"
             />
           </Link>
-        </IconWrapper2>
-        <IconWrapper2>
+        </WrapperNavy>
+        <WrapperNavy>
           <Link to="/friends">
             <Icon
               src="/images/icons/friends.png"
               alt="Friends"
             />
           </Link>
-        </IconWrapper2>
+        </WrapperNavy>
       </Nav>
     </Wrapper>
   )
@@ -51,7 +51,7 @@ const Wrapper = styled.div`
   margin: 0;
 `;
 
-const IconWrapper1 = styled.div`
+const WrapperRed = styled.div`
   background-color: rgb(186, 43, 43);
   border: 1px solid gray;
   display: flex;
@@ -59,8 +59,12 @@ const IconWrapper1 = styled.div`
   width: 100%;
 `;
 
-const IconWrapper2 = styled(IconWrapper1)`
+const WrapperNavy = styled(WrapperRed)`
   background-color: rgb(45, 50, 61);
+
+  &:hover {
+    background-color: dimgray;
+  }
 `;
 
 const Nav = styled.nav`
