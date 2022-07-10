@@ -1,7 +1,7 @@
 import styled from "styled-components";
 
 const Header = styled.header`
-  background-color: rgb(38, 44, 54);
+  background-color: rgb(32, 36, 44);
   display: flex;
   justify-content: left;
   align-items: center;
