@@ -61,7 +61,7 @@ const GoogleMap = ({ google }) => {
           value={searchValue}
           onChange={(e) => setSearchValue(e.target.value)}
         />
-        <Button variant="orange" onClick={searchValue ? fetchPlaces : null}>Search</Button>
+        <Button variant="red" onClick={searchValue ? fetchPlaces : null}>Search</Button>
       </SearchWrapper>
       {location ? <Map
           google={google}
