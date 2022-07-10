@@ -1,36 +1,22 @@
 import styled from "styled-components";
 
-const COLORS = {
-  blue: {
-    "--main": "darkblue",
-    "--accent": "white",
-  },
-  orange: {
-    "--main": "darkorange",
-    "--accent": "white",
-  },
-  white: {
-    "--main": "white",
-    "--accent": "gray",
-  }
-};
-
 function Button({ variant = "blue", ...props }) {
   let Component;
   if (variant === "blue") {
     Component = BlueButton;
-  } else if (variant === "orange") {
-    Component = OrangeButton;
+  } else if (variant === "red") {
+    Component = RedButton;
   }
 
-  return <Component style={COLORS[variant]} {...props} />;
+  return <Component {...props} />;
 }
 
 const ButtonBase = styled.button`
-  font-family: "Permanent Marker", cursive;
+  background-color: transparent;
+  color: gray;
   cursor: pointer;
   font-size: 1rem;
-  border: 1px solid transparent;
+  border: 2px solid gray;
   border-radius: 6px;
   padding: 8px 16px;
   text-decoration: none;
@@ -38,28 +24,21 @@ const ButtonBase = styled.button`
   align-items: center;
   margin: auto 0 auto 0;
   transition: 0.3s;
-  animation: hoverOut 0.4s ease forwards;
-
-  :hover {
-    animation: hoverIn 0.4s ease forwards;
-  }
 `;
 
 const BlueButton = styled(ButtonBase)`
-  background-color: var(--main);
-  color: var(--accent);
-
   &:hover {
-    background-color: blue;
+    background-color: navy;
+    border: 2px solid white;
+    color: white;
   }
 `;
 
-const OrangeButton = styled(ButtonBase)`
-  background-color: var(--main);
-  color: var(--accent);
-
+const RedButton = styled(ButtonBase)`
   &:hover {
-    background-color: orangered;
+    background-color: rgb(186, 43, 43);
+    border: 2px solid white;
+    color: white;
   }
 `;
 
