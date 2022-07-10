@@ -15,15 +15,50 @@ function NavBar({ user, setUser }) {
 
   return (
     <Header>
+      <LogoWrapper>
+        <Logo
+          src="/images/rosa-pin.png"
+          alt="Rosa-Pin Logo" 
+        />
+        <Title>GeoPlanner</Title>
+      </LogoWrapper>
       <Nav>
-        <Message>Welcome {user.username}!</Message>
-        <Button variant="orange" onClick={handleLogout}>
+        <Icon 
+          src="/images/icons/profile.png"
+          alt="Profile"
+        />
+        <Icon 
+          src="/images/icons/bell-fill.png"
+          alt="Notifications"
+          style={{ marginRight: '1%'}}
+        />
+        <Button variant="red" onClick={handleLogout}>
           Logout
         </Button>
       </Nav>
     </Header>
   )
 }
+
+const LogoWrapper = styled.div`
+  display: flex;
+  flex-direction: row;
+  height: 100%;
+  margin-left: 5px;
+`;
+
+const Logo = styled.img`
+  display: flex;
+  height: 50%;
+  margin: auto 5%;
+`;
+
+const Title = styled.h1`
+  color: white;
+  display: flex;
+  font-size: 2rem;
+  margin: auto 0;
+`;
 
 const Nav = styled.nav`
   display: flex;
@@ -34,12 +69,10 @@ const Nav = styled.nav`
   margin: 0 1% 0 auto;
 `;
 
-const Message = styled.p`
-  font-family: cursive;
-  color: white;
-  font-size: 1rem;
-  text-align: center;
-  margin: auto 2% auto 2%;
+const Icon = styled.img`
+  display: flex;
+  height: 60%;
+  margin: auto 0;
 `;
 
 export default NavBar;
