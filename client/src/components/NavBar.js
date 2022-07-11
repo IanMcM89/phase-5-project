@@ -17,6 +17,7 @@ const NavBar = ({ setUser }) => {
   return (
     <Header>
       <LogoWrapper>
+        &ensp;
         <Logo src="/images/pin.png" alt="Pin Logo" />
         <Link to="/" style={{ textDecoration: 'none' }}>
           <Title>GeoPlanner</Title>
@@ -25,6 +26,7 @@ const NavBar = ({ setUser }) => {
       <Nav>
         <Icon src="/images/icons/profile.png" alt="Profile" />
         <Icon src="/images/icons/bell-fill.png" alt="Notifications" />
+        &ensp;
         <Button variant="tr-red" onClick={handleLogout}>
           Logout
         </Button>
@@ -42,7 +44,6 @@ const commonStyles = css`
 const LogoWrapper = styled.div`
   ${commonStyles}
   height: 100%;
-  margin-left: 5px;
 `;
 
 const Logo = styled.img`
