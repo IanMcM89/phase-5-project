@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { Button, Input, Form, FormField, Label } from "../styles";
 
-function SignUpForm({ onLogin, setErrors }) {
+const SignUpForm = ({ onLogin, setErrors }) => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [passwordConfirmation, setPasswordConfirmation] = useState("");
@@ -69,12 +69,12 @@ function SignUpForm({ onLogin, setErrors }) {
         />
       </FormField>
       <FormField>
-        <Button type="submit">
+        <Button type="submit" variant="navy">
           {loading ? "Loading..." : "Sign Up"}
         </Button>
       </FormField>
     </Form>
   )
-}
+};
 
 export default SignUpForm;

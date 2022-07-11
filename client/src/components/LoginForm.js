@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { Button, Input, Form, FormField, Label } from "../styles";
 
-function LoginForm({ onLogin, setErrors }) {
+const LoginForm = ({ onLogin, setErrors }) => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [loading, setLoading] = useState(false);
@@ -19,7 +19,10 @@ function LoginForm({ onLogin, setErrors }) {
       headers: {
         "Content-Type": "application/json",
       },
-      body: JSON.stringify({ username, password }),
+      body: JSON.stringify({ 
+        username, 
+        password 
+      }),
     });
 
     const userData = await r.json();
@@ -54,12 +57,12 @@ function LoginForm({ onLogin, setErrors }) {
         />
       </FormField>
       <FormField>
-        <Button type="submit">
+        <Button type="submit" variant="navy">
           {loading ? "Loading..." : "Login"}
         </Button>
       </FormField>
     </Form>
   )
-}
+};
 
 export default LoginForm;
