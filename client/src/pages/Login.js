@@ -12,6 +12,13 @@ function Login({ onLogin }) {
     <>
       <Header />
       <Main>
+        <Section style={{ backgroundColor: 'transparent' }}>
+          <Background />
+          <LogoWrapper>
+            <Logo src="/images/pin.png" alt="Pin Logo" />
+            <Title>GeoPlanner</Title>
+          </LogoWrapper>
+        </Section>
         <Section>
           {
             showLogin ? (
@@ -19,7 +26,7 @@ function Login({ onLogin }) {
                 <LoginForm onLogin={onLogin} setErrors={setErrors} />
                 <p>
                   Don't have an account? &nbsp;
-                  <Button variant="blue" onClick={() => setShowLogin(false)}>
+                  <Button variant="red" onClick={() => setShowLogin(false)}>
                     Sign Up
                   </Button>
                 </p>
@@ -29,44 +36,79 @@ function Login({ onLogin }) {
                 <SignUpForm onLogin={onLogin} setErrors={setErrors} />
                 <p>
                   Already have an account? &nbsp;
-                  <Button variant="blue" onClick={() => setShowLogin(true)}>
+                  <Button variant="red" onClick={() => setShowLogin(true)}>
                     Login
                   </Button>
                 </p>
               </>
             )
           }
-          <FormField>
+          <ErrorField stylle={{ hight: '20%' }}>
             {errors.map((error) =>
               <Error key={error}>{error}</Error>
             )}
-          </FormField>
+          </ErrorField>
         </Section>
       </Main>
     </>
   )
-}
+};
 
 const commonStyles = css`
   display: flex;
+  height: 100%;
+  justify-content: center;
   align-items: center;
+  overflow: hidden;
 `;
 
 const Main = styled.main`
   ${commonStyles}
-  width: 100vw;
   height: 90vh;
-  margin: 0;
 `;
 
 const Section = styled.section`
   ${commonStyles}
   background-color: white;
   flex-direction: column;
-  width: 30%;
-  height: 100%;
-  margin: auto;
-  padding: 2%;
+  width: 50%;
+`;
+
+const Background = styled.div`
+  background-color: beige;
+  background: url("/images/background.png");
+  background-size: cover;
+  position: absolute;
+  top: 10vh;
+  left: 0;
+  width: 100%;
+  height: 90%;
+  filter: blur(2px);
+  z-index: -1;
+`;
+
+const LogoWrapper = styled.div`
+  ${commonStyles}
+  background-color: rgb(32, 36, 44);
+  height: 40%;
+  width: 70%;
+`;
+
+const Logo = styled.img`
+  height: 40%;
+  margin: auto 2%;
+`;
+
+const Title = styled.h1`
+  color: white;
+  font-size: 4rem;
+  margin: auto 2%;
+`;
+
+const ErrorField = styled.div`
+  ${commonStyles}
+  flex-direction: column;
+  height: 20%;
 `;
 
 export default Login;
