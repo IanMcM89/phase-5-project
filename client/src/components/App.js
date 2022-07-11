@@ -3,7 +3,7 @@ import { Switch, Route } from 'react-router-dom';
 import Login from "../pages/Login";
 import NavBar from "./NavBar";
 import Menu from "./Menu";
-import GoogleMap from "../pages/GoogleMap";
+import Map from "../pages/Map";
 import FriendsList from "../pages/FriendsList";
 import styled from "styled-components";
 
@@ -40,8 +40,7 @@ const App = () => {
             <></>
           </Route>
           <Route path="/">
-            <></>
-            {/* <GoogleMap /> */}
+            <Map />
           </Route>
         </Switch>
       </Main>
