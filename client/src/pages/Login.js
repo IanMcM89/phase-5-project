@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import LoginForm from "../components/LoginForm";
 import SignUpForm from "../components/SignUpForm";
-import { Header, FormField, Error, Button } from "../styles";
+import { Header, Error, Button } from "../styles";
 import styled, { css } from "styled-components";
 
 function Login({ onLogin }) {
@@ -83,13 +83,15 @@ const Background = styled.div`
   left: 0;
   width: 100%;
   height: 90%;
-  filter: blur(2px);
+  filter: blur(3px);
   z-index: -1;
 `;
 
 const LogoWrapper = styled.div`
   ${commonStyles}
   background-color: rgb(32, 36, 44);
+  border: solid 1px black;
+  box-shadow: 0 0 20px;
   height: 40%;
   width: 70%;
 `;
@@ -108,7 +110,7 @@ const Title = styled.h1`
 const ErrorField = styled.div`
   ${commonStyles}
   flex-direction: column;
-  height: 20%;
+  height: 15%;
 `;
 
 export default Login;
