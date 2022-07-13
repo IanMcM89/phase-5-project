@@ -1,63 +1,55 @@
-import React, { useState } from 'react';
-import { GoogleMap, LoadScript, StandaloneSearchBox, Marker } from "@react-google-maps/api";
+import React, { useEffect, useState } from 'react';
+import { GoogleMap, LoadScript, StandaloneSearchBox, Marker } from '@react-google-maps/api';
 import styled from "styled-components";
 
-const libraries = ["places"];
+const libraries = ['places'];
 
-const Map = () => {
+function Map() {
+  const [currentLoc, setCurrentLoc] = useState({ lat: 42, lng: -118 });
+  const [searchBox, setSearchBox] = useState(null);
+  const [places, setPlaces] = useState([]);
   const [map, setMap] = useState(null);
-  const [coordsResult, setCoordsResult] = useState([]);
-  const [currentLoc, setCurrentLoc] = useState({ lat: 0, lng: 0 });
-  const [searchValue, setSearchValue] = useState('');
-  const [zoom, setZoom] = useState(12);
-  
-  // Fetch current user's geolocation using Google Maps API:
-  const onLoad = (map) => { setMap(map);
+  const [zoom, setZoom] = useState(11);
+
+  // Fetches current user's geolocation:
+  useEffect(() => {
     if (navigator.geolocation) {
-      navigator.geolocation.getCurrentPosition((position) => {
+      navigator.geolocation.getCurrentPosition((pos) => {
         setCurrentLoc({
-          lat: position.coords.latitude,
-          lng: position.coords.longitude,
+          lat: pos.coords.latitude,
+          lng: pos.coords.longitude,
         });
       });
     }
+  });
+
+  // Sets map ref on load:
+  const onMapLoad = (ref) => {
+    setMap(ref);
+  }
+
+  // Sets search ref on load:
+  const onSBLoad = (ref) => {
+    setSearchBox(ref);
   };
-  
-  // Add Enter key event listener to searchbox:
-  const input = document.getElementById("searchbox");
-  if (input) input.addEventListener("keyup", ({key}) => {
-    if (key === 'Enter') {
-      searchPlaces();
+
+  // Fetches places from Google Places API using searchbox query:
+  const onPlacesChanged = () => {
+    const results = searchBox.getPlaces();
+    if (results) {
+      const loc = results[0].geometry.location;
+      setPlaces(results);
+      setZoom(14);
+      setCurrentLoc({
+        lat: loc.lat(),
+        lng: loc.lng()
+      });
     }
-  })
+  }
 
-  // Fetch places request using Google Places textsearch query:
-  const searchPlaces = () => {
-    let service = new window.google.maps.places.PlacesService(map);
-    let request = {
-      query: searchValue,
-      fields: ["name", "geometry"]
-    };
-
-    if (searchValue) service.findPlaceFromQuery(request, (results, status) => {
-      let loc = results[0].geometry.location;
-
-      console.log(results)
-
-      if (status) {
-        setCoordsResult(results);
-        setZoom(14);
-        setCurrentLoc({
-          lat: loc.lat(),
-          lng: loc.lng()
-        });
-      };
-    });
-  };
-
-  // Set currentLoc state to new coords after map drag:
-  const changeCenterPos = () => {
-    if (map && !map) setCurrentLoc(map.getCenter().toJSON());
+  // Sets currentLoc to new center coords after map drag:
+  const onCenterChange = () => {
+    if (map) setCurrentLoc(map.getCenter().toJSON());
   }
 
   return (
@@ -68,41 +60,41 @@ const Map = () => {
       >
         <GoogleMap
           mapContainerStyle={mapStyles}
+          onDragEnd={onCenterChange}
+          onClick={e => console.log(e.placeId)}
+          onLoad={onMapLoad}
+          zoom={zoom}
           center={{
             lat: currentLoc.lat,
             lng: currentLoc.lng
           }}
-          onDragEnd={changeCenterPos}
-          zoom={zoom}
-          onLoad={onLoad}
         >
           <StandaloneSearchBox
-            map={map}
+            onPlacesChanged={onPlacesChanged}
+            onLoad={onSBLoad}
+            bounds={map ? map.getBounds() : null}
           >
             <input
-              id="searchbox"
               type="text"
               placeholder="Search Places"
               style={searchStyles}
-              value={searchValue}
-              onChange={(e) => setSearchValue(e.target.value)}
             />
           </StandaloneSearchBox>
-          {coordsResult !== [] &&
-            coordsResult.map((result, i) => <Marker 
-              key={i} 
-              position={result.geometry.location} 
-              onClick={() => console.log(result)}
+          {places !== [] &&
+            places.map((place, i) => <Marker
+              key={i}
+              position={place.geometry.location}
+              onClick={() => console.log(place)}
             />)
           }
         </GoogleMap>
       </LoadScript>
     </Wrapper>
   );
-};
+}
 
 const Wrapper = styled.div`
-  width: 95vw;
+  width: 100%;
   height: 90vh;
   overflow: hidden;
 `;
@@ -129,4 +121,4 @@ const searchStyles = {
   marginTop: '1%'
 };
 
-export default React.memo(Map);
+export default Map;
