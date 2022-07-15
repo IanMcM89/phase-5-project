@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import { Header, Button } from "../styles";
 import styled, { css } from "styled-components";
 
-const NavBar = ({ setUser }) => {
+const UINavBar = ({ setUser }) => {
   const handleLogout = () => {
     fetch("/api/logout", {
       method: "DELETE"
@@ -70,4 +70,4 @@ const Icon = styled.img`
   cursor: pointer;
 `;
 
-export default NavBar;
+export default UINavBar;

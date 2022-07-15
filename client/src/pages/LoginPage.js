@@ -1,10 +1,10 @@
 import React, { useState } from "react";
-import LoginForm from "../components/LoginForm";
-import SignUpForm from "../components/SignUpForm";
+import FormLogin from "../components/FormLogin";
+import FormSignUp from "../components/FormSignUp";
 import { Header, Error, Button } from "../styles";
 import styled, { css } from "styled-components";
 
-function Login({ onLogin }) {
+const LoginPage = ({ onLogin }) => {
   const [showLogin, setShowLogin] = useState(true);
   const [errors, setErrors] = useState([]);
 
@@ -23,7 +23,7 @@ function Login({ onLogin }) {
           {
             showLogin ? (
               <>
-                <LoginForm onLogin={onLogin} setErrors={setErrors} />
+                <FormLogin onLogin={onLogin} setErrors={setErrors} />
                 <p>
                   Don't have an account? &nbsp;
                   <Button variant="red" onClick={() => setShowLogin(false)}>
@@ -33,7 +33,7 @@ function Login({ onLogin }) {
               </>
             ) : (
               <>
-                <SignUpForm onLogin={onLogin} setErrors={setErrors} />
+                <FormSignUp onLogin={onLogin} setErrors={setErrors} />
                 <p>
                   Already have an account? &nbsp;
                   <Button variant="red" onClick={() => setShowLogin(true)}>
@@ -113,4 +113,4 @@ const ErrorField = styled.div`
   height: 15%;
 `;
 
-export default Login;
+export default LoginPage;

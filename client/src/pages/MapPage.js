@@ -61,7 +61,7 @@ function Map() {
         <GoogleMap
           mapContainerStyle={mapStyles}
           onDragEnd={onCenterChange}
-          onClick={e => console.log(e.placeId)}
+          clickableIcons={false}
           onLoad={onMapLoad}
           zoom={zoom}
           center={{
@@ -70,9 +70,9 @@ function Map() {
           }}
         >
           <StandaloneSearchBox
+            bounds={map ? map.getBounds() : null}
             onPlacesChanged={onPlacesChanged}
             onLoad={onSBLoad}
-            bounds={map ? map.getBounds() : null}
           >
             <input
               type="text"

@@ -1,8 +1,8 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import styled from "styled-components";
+import styled, { css } from "styled-components";
 
-const Menu = () => {
+const UIMenu = () => {
   return (
     <Wrapper>
       <Nav>
@@ -30,7 +30,7 @@ const Menu = () => {
           </Link>
         </WrapperNavy>
         <WrapperNavy>
-          <Link to="/friends">
+          <Link to="/friendslist">
             <Icon
               src="/images/icons/friends.png"
               alt="Friends"
@@ -42,21 +42,23 @@ const Menu = () => {
   )
 }
 
-const Wrapper = styled.div`
-  background-color: rgb(69, 73, 86);
+const commonStyles = css`
   display: flex;
   flex-direction: column;
+  width: 100%;
+`;
+
+const Wrapper = styled.div`
+  ${commonStyles}
+  background-color: rgb(69, 73, 86);
   height: 100%;
-  width: 4%;
-  margin: 0;
+  width: 5%;
 `;
 
 const WrapperRed = styled.div`
+  ${commonStyles}
   background-color: rgb(186, 43, 43);
   border: 1px solid gray;
-  display: flex;
-  height: fit-content;
-  width: 100%;
 `;
 
 const WrapperNavy = styled(WrapperRed)`
@@ -68,18 +70,15 @@ const WrapperNavy = styled(WrapperRed)`
 `;
 
 const Nav = styled.nav`
-  display: flex;
-  flex-direction: column;
-  width: 100%;
-  height: fit-content;
+  ${commonStyles}
   margin: 0;
 `;
 
 const Icon = styled.img`
-  display: flex;
+  ${commonStyles}
   width: 70%;
   margin: 10% auto;
   cursor: pointer;
 `;
 
-export default Menu;
+export default UIMenu;

@@ -1,10 +1,9 @@
 import React, { useState, useEffect } from "react";
 import { Button, Input, Form, FormField, Label } from "../styles";
 
-const SignUpForm = ({ onLogin, setErrors }) => {
+const FormLogin = ({ onLogin, setErrors }) => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
-  const [passwordConfirmation, setPasswordConfirmation] = useState("");
   const [loading, setLoading] = useState(false);
 
   useEffect(() => {
@@ -15,24 +14,23 @@ const SignUpForm = ({ onLogin, setErrors }) => {
     e.preventDefault();
     setLoading(true);
 
-    const r = await fetch("/api/signup", {
+    const r = await fetch("/api/login", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
       },
-      body: JSON.stringify({
-        username: username,
-        password: password,
-        password_confirmation: passwordConfirmation
+      body: JSON.stringify({ 
+        username, 
+        password 
       }),
     });
 
-    const newUserData = await r.json();
+    const userData = await r.json();
     setLoading(false);
     if (r.ok) {
-      onLogin(newUserData);
+      onLogin(userData);
     } else {
-      setErrors(newUserData.errors);
+      setErrors(userData.errors);
     }
   }
 
@@ -59,22 +57,12 @@ const SignUpForm = ({ onLogin, setErrors }) => {
         />
       </FormField>
       <FormField>
-        <Label htmlFor="password_confirmation">Password Confirmation</Label>
-        <Input
-          type="password"
-          id="password_confirmation"
-          autoComplete="off"
-          value={passwordConfirmation}
-          onChange={(e) => setPasswordConfirmation(e.target.value)}
-        />
-      </FormField>
-      <FormField>
         <Button type="submit" variant="navy">
-          {loading ? "Loading..." : "Sign Up"}
+          {loading ? "Loading..." : "Login"}
         </Button>
       </FormField>
     </Form>
   )
 };
 
-export default SignUpForm;
+export default FormLogin;

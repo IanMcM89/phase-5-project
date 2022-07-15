@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from "react";
 import { Switch, Route } from 'react-router-dom';
-import Login from "../pages/Login";
-import NavBar from "./NavBar";
-import Menu from "./Menu";
-import Map from "../pages/Map";
-import FriendsList from "../pages/FriendsList";
+import UINavBar from "./UINavBar";
+import UIMenu from "./UIMenu";
+import LoginPage from "../pages/LoginPage";
+import MapPage from "../pages/MapPage";
+import FriendsPage from "../pages/FriendsPage";
 import styled from "styled-components";
 
 const App = () => {
@@ -19,19 +19,19 @@ const App = () => {
     });
   }, []);
 
-  if (!user) return (<Login onLogin={setUser} />);
+  if (!user) return (<LoginPage onLogin={setUser} />);
 
   return (
     <>
-      <NavBar user={user} setUser={setUser} />
+      <UINavBar user={user} setUser={setUser} />
       <Main>
-        <Menu />
+        <UIMenu />
         <Switch>
           <Route path="/profile">
             <></>
           </Route>
-          <Route path="/friends">
-            <FriendsList />
+          <Route path="/friendslist">
+            <FriendsPage user={user} />
           </Route>
           <Route path="/events/:id">
             <></>
@@ -40,7 +40,7 @@ const App = () => {
             <></>
           </Route>
           <Route path="/">
-            <Map />
+            <MapPage />
           </Route>
         </Switch>
       </Main>
