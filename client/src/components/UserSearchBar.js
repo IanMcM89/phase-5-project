@@ -13,7 +13,7 @@ const UserSearchBar = ({ setUsers }) => {
       <img 
         src="./images/icons/search.png" 
         alt="Search Icon" 
-        style={{ backgroundColor: 'rgb(32, 36, 44)' }}
+        style={{ backgroundColor: 'rgb(186, 43, 43)' }}
       />
       <Input
         type="text"
