@@ -1,6 +1,6 @@
 import React from "react";
 import ListFriends from "../components/ListFriends";
-// import ListPending from "../components/ListPending";
+import ListPending from "../components/ListPending";
 import ListUsers from "../components/ListUsers";
 import styled, { css } from "styled-components";
 
@@ -8,7 +8,10 @@ const FriendsPage = ({ user }) => {
 
 return (
   <Wrapper>
-    <ListFriends />
+    <ListWrapper>
+      <ListFriends />
+      <ListPending />
+    </ListWrapper>
     <ListUsers user={user}/>
   </Wrapper>
 )
@@ -22,7 +25,12 @@ const commonStyles = css`
 
 const Wrapper = styled.div`
   ${commonStyles}
-  flex-direction: row;
+`;
+
+const ListWrapper = styled.div`
+  ${commonStyles}
+  flex-direction: column;
+  width: 75%;
 `;
 
 export default FriendsPage;

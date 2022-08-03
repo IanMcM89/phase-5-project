@@ -1,67 +1,50 @@
 import React, { useState, useEffect } from "react";
-import { Button } from "../styles";
 import styled, { css } from "styled-components";
 
-const ListFriends = () => {
-  const [friendships, setFriendships] = useState([]);
+const ListPending = () => {
+  const [pendingFriends, setPendingFriends] = useState([]);
 
   useEffect(() => {
-    fetch("/api/friendships").then((r) => {
+    fetch("/api/pending_friends").then((r) => {
       if (r.ok) {
-        r.json().then((frshipData) => {
-          return setFriendships(frshipData);
+        r.json().then((pendingFriendData) => {
+          return setPendingFriends(pendingFriendData);
         });
       }
     });
   }, []);
 
-  const destroyFriendship = (id) => {
-    fetch(`/api/friendships/${id}`, {
-      method: "DELETE"
-    }).then(
-      setFriendships(friendships.filter((frship) => frship.id !== id))
-    )
-  };
-
-  const displayFriends = friendships.length > 0 ? friendships.map((friendship) => {
+  const displayPendingFriends = pendingFriends.length > 0 ? pendingFriends.map((pending) => {
     return (
-      <Tr key={friendship.id}>
-        <Td>{friendship.friend.username}</Td>
-        <Td>
-          <Button 
-            variant="red" 
-            style={{ margin: "0", fontSize: "0.7rem", fontWeight: "bold" }} 
-            onClick={() => destroyFriendship(friendship.id)}
-          > 
-            Remove
-          </Button>
-        </Td>
+      <Tr key={pending.id}>
+        <Td>{pending.username}</Td>
+        <Td>Awaiting Approval</Td>
       </Tr>
       )
     }) : (
       <Tr>
-        <Td>No Current Friendships</Td>
+        <Td>No Pending Friendships</Td>
       </Tr>
   );
 
   return (
     <Wrapper>
-      <Label htmlFor="friends">
-        My Friends
+      <Label htmlFor="pending-friends">
+        Pending Friends
         <img 
-          src="./images/icons/my-friends.png" 
+          src="./images/icons/pending.png" 
           alt="Pending Friends" 
-          style={{ width: "3%", marginLeft: "1%" }}
+          style={{ width: "4%", marginLeft: "1%" }}
         />
       </Label>
-      <Table id="friends">
+      <Table id="pending-friends">
         <Tr>
           <Th>Username</Th>
-          <Th/>
-          <Th/>
-          <Th/>
+          <Th></Th>
+          <Th></Th>
+          <Th>Status</Th>
         </Tr>
-        {displayFriends}
+        {displayPendingFriends}
       </Table>
     </Wrapper>
   );
@@ -69,6 +52,8 @@ const ListFriends = () => {
 
 const commonStyles = css`
   display: flex;
+  width: 25%;
+  height: 10%;
   justify-content: center;
   align-items: center;
 `;
@@ -120,8 +105,6 @@ const Th = styled.th`
 
 const Td = styled.td`
   ${commonStyles}
-  width: 25%;
-  height: 10%;
 `;
 
-export default ListFriends;
+export default ListPending;
