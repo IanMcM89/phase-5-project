@@ -13,14 +13,12 @@ function Map() {
 
   // Fetches current user's geolocation:
   useEffect(() => {
-    if (navigator.geolocation) {
-      navigator.geolocation.getCurrentPosition((pos) => {
-        setCurrentLoc({
-          lat: pos.coords.latitude,
-          lng: pos.coords.longitude,
-        });
+    navigator.geolocation.getCurrentPosition((pos) => {
+      setCurrentLoc({
+        lat: pos.coords.latitude,
+        lng: pos.coords.longitude,
       });
-    }
+    });
   });
 
   // Sets map ref on load:
