@@ -24,10 +24,10 @@ const UINavBar = ({ setUser }) => {
         </Link>
       </LogoWrapper>
       <Nav>
-        <Icon src="/images/icons/profile.png" alt="Profile" />
+        {/* <Icon src="/images/icons/profile.png" alt="Profile" /> */}
         <Icon src="/images/icons/bell-fill.png" alt="Notifications" />
         &ensp;
-        <Button variant="tr-red" onClick={handleLogout}>
+        <Button variant='red' onClick={handleLogout}>
           Logout
         </Button>
       </Nav>

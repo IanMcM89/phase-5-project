@@ -16,95 +16,76 @@ const ListPending = () => {
 
   const displayPendingFriends = pendingFriends.length > 0 ? pendingFriends.map((pending) => {
     return (
-      <Tr key={pending.id}>
-        <Td>{pending.username}</Td>
-        <Td>Awaiting Approval</Td>
-      </Tr>
+      <Li key={pending.id}>
+        <Avatar src="/images/icons/avatar.png" alt="Avatar"/>
+        <H2>{pending.username}</H2>
+      </Li>
       )
     }) : (
-      <Tr>
-        <Td>No Pending Friendships</Td>
-      </Tr>
+      <li>No Pending Friendships</li>
   );
 
   return (
     <Wrapper>
       <Label htmlFor="pending-friends">
-        Pending Friends
-        <img 
-          src="./images/icons/pending.png" 
-          alt="Pending Friends" 
-          style={{ width: "4%", marginLeft: "1%" }}
-        />
+        Pending
       </Label>
-      <Table id="pending-friends">
-        <Tr>
-          <Th>Username</Th>
-          <Th></Th>
-          <Th></Th>
-          <Th>Status</Th>
-        </Tr>
-        {displayPendingFriends}
-      </Table>
+      <Ul>
+      {displayPendingFriends}
+      </Ul>
     </Wrapper>
   );
 }
 
 const commonStyles = css`
   display: flex;
-  width: 25%;
-  height: 10%;
-  justify-content: center;
-  align-items: center;
-`;
-
-const Wrapper = styled.div`
-  display: flex;
   flex-direction: column;
-  width: 100%;
-  height: 50%;
-`;
-
-const Label = styled.label`
-  display: flex;
-  align-items: center;
-  font-size: 1rem;
-  font-weight: 500;
-  margin: 1% 4% 0 4%;
-`;
-
-const Table = styled.table`
-  display: flex;
-  flex-direction: column;
-  height: 90%;
-  margin: 1% 4%;
-  overflow-y: hidden;
-
-  tr:nth-child(even) {
-    background: #e6e6e6;
-  }
-
-  tr:nth-child(odd) {
-    background: lightgray;
-  }
-`;
-
-const Tr = styled.tr`
-  ${commonStyles}
-  width: 100%;
-  height: 15%;
-`;
-
-const Th = styled.th`
-  ${commonStyles}
-  background-color: rgb(32, 36, 44);
-  color: white;
   width: 100%;
   height: 100%;
 `;
 
-const Td = styled.td`
+const Wrapper = styled.div`
   ${commonStyles}
+  height: auto;
+`;
+
+const Label = styled.label`
+  color: white;
+  font-size: 1rem;
+`;
+
+const Ul = styled.ul`
+  ${commonStyles}
+  border-radius: 6px;
+  height: auto;
+  padding: 0;
+  overflow-y: hidden;
+  li:nth-child(odd) {
+    background: rgb(50,50,60,0.8);
+  }
+`;
+
+const Li = styled.li`
+  display: flex;
+  background-color: rgb(50,50,60,0.5);
+  color: white;
+  flex-direction: row;
+  height: fit-content;
+  margin: 0;
+`;
+
+const Avatar = styled.img`
+  ${commonStyles}
+  width: auto;
+  height: 30px;
+  margin: 2%;
+`;
+
+const H2 = styled.h2`
+  ${commonStyles}
+  justify-content: center;
+  font-size: 1rem;
+  margin: 0;
 `;
 
 export default ListPending;
