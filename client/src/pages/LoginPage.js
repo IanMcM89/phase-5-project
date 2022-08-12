@@ -11,7 +11,6 @@ const LoginPage = ({ onLogin }) => {
   return (
     <Main>
       <Section>
-        <Background />
         <LogoContainer>
           <Logo src="/images/pin.png" alt="Pin Logo" />
           <Title>GeoPlanner</Title>
@@ -57,22 +56,9 @@ const Main = styled.main`
   height: 100vh;
 `;
 
-const Background = styled.div`
-  background: url("/images/background.png");
-  background-color: beige;
-  background-size: cover;
-  filter: blur(4px);
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  z-index: -1;
-`;
-
 const Section = styled.section`
   ${commonStyles}
-  background-color: rgba(0,0,0,.6);
+  background: linear-gradient(153deg, rgba(70,75,85,0.7) 20%, rgba(10,15,25,0.8) 60%);
   flex-direction: column;
   border-radius: 12px;
   width: 50%;

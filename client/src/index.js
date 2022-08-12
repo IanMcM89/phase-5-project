@@ -20,6 +20,10 @@ const GlobalStyle = createGlobalStyle`
   }
 
   body {
+    background-image: url("/images/background.png");
+    background-color: beige;
+    background-size: cover;
+    backdrop-filter: blur(4px);
     font-family: BlinkMacSystemFont,-apple-system,"Segoe UI",Roboto,Oxygen,Ubuntu,Cantarell,"Fira Sans","Droid Sans","Helvetica Neue",Helvetica,Arial,sans-serif;
   }
 
@@ -40,6 +44,24 @@ const GlobalStyle = createGlobalStyle`
     }
     100% {
       opacity: 1;
+    }
+  }
+
+  @keyframes hoverIn {
+    0% {
+      transform: scale(1);
+    }
+    100% {
+      transform: scale(.8);
+    }
+  }
+
+  @keyframes hoverOut {
+    0% {
+      transform: scale(.8);
+    }
+    100% {
+      transform: scale(1);
     }
   }
 `;

@@ -4,7 +4,7 @@ import UINavBar from "./UINavBar";
 import UIMenu from "./UIMenu";
 import LoginPage from "../pages/LoginPage";
 import MapPage from "../pages/MapPage";
-import FriendsPage from "../pages/FriendsPage";
+import FriendsTab from "./FriendsTab";
 import styled from "styled-components";
 
 const App = () => {
@@ -25,13 +25,10 @@ const App = () => {
     <>
       <UINavBar user={user} setUser={setUser} />
       <Main>
-        <UIMenu />
+        <FriendsTab user={user} />
         <Switch>
           <Route path="/profile">
             <></>
-          </Route>
-          <Route path="/friendslist">
-            <FriendsPage user={user} />
           </Route>
           <Route path="/events/:id">
             <></>
@@ -43,6 +40,7 @@ const App = () => {
             <MapPage />
           </Route>
         </Switch>
+        <UIMenu/>
       </Main>
     </>
   );
