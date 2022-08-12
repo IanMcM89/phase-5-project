@@ -9,7 +9,7 @@ function Map() {
   const [searchBox, setSearchBox] = useState(null);
   const [places, setPlaces] = useState([]);
   const [map, setMap] = useState(null);
-  const [zoom, setZoom] = useState(11);
+  const [zoom, setZoom] = useState(12);
 
   // Fetches current user's geolocation:
   useEffect(() => {
@@ -19,7 +19,7 @@ function Map() {
         lng: pos.coords.longitude,
       });
     });
-  });
+  }, []);
 
   // Sets map ref on load:
   const onMapLoad = (ref) => {
@@ -46,7 +46,7 @@ function Map() {
   }
 
   // Sets currentLoc to new center coords after map drag:
-  const onCenterChange = () => {
+  const updateCenter = () => {
     if (map) setCurrentLoc(map.getCenter().toJSON());
   }
 
@@ -58,7 +58,7 @@ function Map() {
       >
         <GoogleMap
           mapContainerStyle={mapStyles}
-          onDragEnd={onCenterChange}
+          onDragEnd={updateCenter}
           clickableIcons={false}
           onLoad={onMapLoad}
           zoom={zoom}
