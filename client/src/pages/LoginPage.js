@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import FormLogin from "../components/FormLogin";
 import FormSignUp from "../components/FormSignUp";
-import { Header, Error, Button } from "../styles";
+import { Button, Error } from "../styles";
 import styled, { css } from "styled-components";
 
 const LoginPage = ({ onLogin }) => {
@@ -9,101 +9,91 @@ const LoginPage = ({ onLogin }) => {
   const [errors, setErrors] = useState([]);
 
   return (
-    <>
-      <Header />
-      <Main>
-        <Section style={{ backgroundColor: 'transparent' }}>
-          <Background />
-          <LogoWrapper>
-            <Logo src="/images/pin.png" alt="Pin Logo" />
-            <Title>GeoPlanner</Title>
-          </LogoWrapper>
-        </Section>
-        <Section>
-          {
-            showLogin ? (
-              <>
-                <FormLogin onLogin={onLogin} setErrors={setErrors} />
-                <p>
-                  Don't have an account? &nbsp;
-                  <Button variant="red" onClick={() => setShowLogin(false)}>
-                    Sign Up
-                  </Button>
-                </p>
-              </>
-            ) : (
-              <>
-                <FormSignUp onLogin={onLogin} setErrors={setErrors} />
-                <p>
-                  Already have an account? &nbsp;
-                  <Button variant="red" onClick={() => setShowLogin(true)}>
-                    Login
-                  </Button>
-                </p>
-              </>
-            )
-          }
-          <ErrorField stylle={{ hight: '20%' }}>
-            {errors.map((error) =>
-              <Error key={error}>{error}</Error>
-            )}
-          </ErrorField>
-        </Section>
-      </Main>
-    </>
+    <Main>
+      <Section>
+        <Background />
+        <LogoContainer>
+          <Logo src="/images/pin.png" alt="Pin Logo" />
+          <Title>GeoPlanner</Title>
+        </LogoContainer>
+        {showLogin ? (
+          <>
+            <FormLogin onLogin={onLogin} setErrors={setErrors} />
+            <p style={{ color: 'white' }}>
+              Don't have an account? &nbsp;
+              <Button variant='transparent' onClick={() => setShowLogin(false)}>
+                Sign Up
+              </Button>
+            </p>
+          </>
+        ) : (
+          <>
+            <FormSignUp onLogin={onLogin} setErrors={setErrors} />
+            <p style={{ color: 'white' }}>
+              Already have an account? &nbsp;
+              <Button variant='transparent' onClick={() => setShowLogin(true)}>
+                Login
+              </Button>
+            </p>
+          </>
+        )}
+        <ErrorField style={{ hight: '20%' }}>
+          {errors.map((error) => <Error key={error}>{error}</Error>)}
+        </ErrorField>
+      </Section>
+    </Main>
   )
 };
 
 const commonStyles = css`
   display: flex;
-  height: 100%;
   justify-content: center;
   align-items: center;
-  overflow: hidden;
 `;
 
 const Main = styled.main`
   ${commonStyles}
-  height: 90vh;
+  background-color: transparent;
+  height: 100vh;
+`;
+
+const Background = styled.div`
+  background: url("/images/background.png");
+  background-color: beige;
+  background-size: cover;
+  filter: blur(4px);
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: -1;
 `;
 
 const Section = styled.section`
   ${commonStyles}
-  background-color: white;
+  background-color: rgba(0,0,0,.6);
   flex-direction: column;
+  border-radius: 12px;
   width: 50%;
+  height: 80%;
+  padding: 1%;
 `;
 
-const Background = styled.div`
-  background-color: beige;
-  background: url("/images/background.png");
-  background-size: cover;
-  position: absolute;
-  top: 10vh;
-  left: 0;
-  width: 100%;
-  height: 90%;
-  filter: blur(3px);
-  z-index: -1;
-`;
-
-const LogoWrapper = styled.div`
+const LogoContainer = styled.div`
   ${commonStyles}
-  background-color: rgb(32, 36, 44);
-  border: solid 1px black;
-  box-shadow: 0 0 20px;
-  height: 40%;
+  height: 10%;
   width: 70%;
 `;
 
 const Logo = styled.img`
-  height: 40%;
+  height: 90%;
   margin: auto 2%;
 `;
 
 const Title = styled.h1`
   color: white;
-  font-size: 4rem;
+  font-size: 3rem;
   margin: auto 2%;
 `;
 

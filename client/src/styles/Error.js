@@ -11,21 +11,20 @@ function Error({ children }) {
 
 const Wrapper = styled.div`
   color: red;
-  background-color: mistyrose;
+  background-color: #ffb3b3;
+  border: solid 1px red;
   border-radius: 6px;
   display: flex;
-  padding: 8px;
+  width: 100%;
+  margin: 2px;
+  padding: 4px 6px;
   align-items: center;
-  gap: 8px;
-  margin: 8px 0;
   animation: expand 0.4s ease forwards;
 `;
 
 const Alert = styled.span`
-  background-color: white;
   height: 30px;
   width: 30px;
-  border-radius: 50%;
   font-weight: bold;
   display: grid;
   place-content: center;

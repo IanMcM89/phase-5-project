@@ -6,8 +6,8 @@ function Button({ variant = "tr-navy", ...props }) {
     Component = ButtonTransN;
   } else if (variant === "tr-red") {
     Component = ButtonTransR;
-  } else if (variant === "navy") {
-    Component = ButtonNavy;
+  } else if (variant === "transparent") {
+    Component = ButtonTransparent;
   } else if (variant === "red") {
     Component = ButtonRed;
   }
@@ -21,7 +21,6 @@ const ButtonBase = styled.button`
   cursor: pointer;
   font-size: 1rem;
   border: 2px solid gray;
-  border-radius: 6px;
   padding: 8px 16px;
   text-decoration: none;
   justify-content: center;
@@ -57,11 +56,13 @@ const ButtonRed = styled(ButtonBase)`
   }
 `;
 
-const ButtonNavy = styled(ButtonRed)`
-  background-color: rgb(32, 36, 44);
+const ButtonTransparent = styled(ButtonBase)`
+  background-color: rgb(100,100,100,.7);
+  color: white;
+  border: 2px solid white;
 
   &:hover {
-    background-color: forestgreen;
+    background-color: gray;
   }
 `;
 

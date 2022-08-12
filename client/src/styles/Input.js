@@ -1,9 +1,10 @@
 import styled from "styled-components";
 
 const Input = styled.input`
-  background-color: beige;
-  border-radius: 6px;
-  border: 1px solid gray;
+  background-color: rgba(0,0,0,.4);
+  color: lightgray;
+  border-radius: 4px;
+  border: none;
   max-width: 100%;
   width: 100%;
   font-size: 1rem;

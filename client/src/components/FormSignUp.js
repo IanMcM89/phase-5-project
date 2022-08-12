@@ -69,7 +69,7 @@ const FormSignUp = ({ onLogin, setErrors }) => {
         />
       </FormField>
       <FormField>
-        <Button type="submit" variant="navy">
+        <Button type="submit" variant="red">
           {loading ? "Loading..." : "Sign Up"}
         </Button>
       </FormField>
