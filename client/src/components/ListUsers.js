@@ -38,8 +38,7 @@ const ListUsers = ({ user }) => {
     );
   };
   
-  const displayUsers = users.map((userObj) => {
-    return (
+  const displayUsers = users.map((userObj) => (
       <Li key={userObj.id}>
         <H3 style={{ marginRight: "auto" }}>{userObj.username}</H3>
         <Button onClick={() => createFriendRequest(userObj.id)}>
@@ -51,7 +50,7 @@ const ListUsers = ({ user }) => {
         </Button>
       </Li>
     )
-  });
+  );
 
   return (
     <Wrapper>
