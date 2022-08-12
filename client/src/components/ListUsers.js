@@ -76,7 +76,6 @@ const commonStyles = css`
 const Wrapper = styled.div`
   ${commonStyles}
   background-color: rgb(72, 81, 98);
-  width: 30%;
   margin: 0;
 `;
 

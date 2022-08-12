@@ -20,7 +20,6 @@ const ButtonBase = styled.button`
   color: gray;
   cursor: pointer;
   font-size: 1rem;
-  border: 2px solid gray;
   padding: 8px 16px;
   text-decoration: none;
   justify-content: center;
@@ -47,9 +46,9 @@ const ButtonTransR = styled(ButtonBase)`
 `;
 
 const ButtonRed = styled(ButtonBase)`
-  background-color: rgb(186, 43, 43);
+  background-color: rgb(200, 55, 55);
   color: lightgray;
-  border: 2px solid lightgray;
+  border: 2px solid transparent;
 
   &:hover {
     background-color: red;
