@@ -17,7 +17,7 @@ return (
 
 const commonStyles = css`
   display: flex;
-  width: 50%;
+  width: 30%;
   height: 100%;
 `;
 
