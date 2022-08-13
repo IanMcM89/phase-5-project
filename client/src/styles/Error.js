@@ -10,22 +10,16 @@ function Error({ children }) {
 }
 
 const Wrapper = styled.div`
-  color: red;
-  background-color: #ffb3b3;
-  border: solid 1px red;
-  border-radius: 6px;
   display: flex;
+  color: #ff3333;
+  font-weight: bold;
   width: 100%;
   margin: 2px;
-  padding: 4px 6px;
-  align-items: center;
   animation: expand 0.4s ease forwards;
 `;
 
 const Alert = styled.span`
-  height: 30px;
   width: 30px;
-  font-weight: bold;
   display: grid;
   place-content: center;
 `;

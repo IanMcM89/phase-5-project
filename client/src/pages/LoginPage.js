@@ -10,42 +10,43 @@ const LoginPage = ({ onLogin }) => {
 
   return (
     <Main>
-      <Section>
+      <Wrapper>
         <LogoContainer>
           <Logo src="/images/pin.png" alt="Pin Logo" />
           <Title>GeoPlanner</Title>
         </LogoContainer>
         {showLogin ? (
-          <>
+          <Section>
             <FormLogin onLogin={onLogin} setErrors={setErrors} />
-            <p style={{ color: 'white' }}>
+            <P>
               Don't have an account? &nbsp;
               <Button variant='transparent' onClick={() => setShowLogin(false)}>
                 Sign Up
               </Button>
-            </p>
-          </>
+            </P>
+          </Section>
         ) : (
-          <>
+          <Section>
             <FormSignUp onLogin={onLogin} setErrors={setErrors} />
-            <p style={{ color: 'white' }}>
+            <P>
               Already have an account? &nbsp;
               <Button variant='transparent' onClick={() => setShowLogin(true)}>
                 Login
               </Button>
-            </p>
-          </>
+            </P>
+          </Section>
         )}
         <ErrorField style={{ hight: '20%' }}>
           {errors.map((error) => <Error key={error}>{error}</Error>)}
         </ErrorField>
-      </Section>
+      </Wrapper>
     </Main>
   )
 };
 
 const commonStyles = css`
   display: flex;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
 `;
@@ -56,37 +57,47 @@ const Main = styled.main`
   height: 100vh;
 `;
 
-const Section = styled.section`
+const Wrapper = styled.div`
   ${commonStyles}
   background: linear-gradient(153deg, rgba(70,75,85,0.7) 20%, rgba(10,15,25,0.8) 60%);
-  flex-direction: column;
+  justify-content: flex-start;
   border-radius: 12px;
   width: 50%;
   height: 80%;
-  padding: 1%;
+  padding: 5% 1%;
 `;
 
 const LogoContainer = styled.div`
   ${commonStyles}
-  height: 10%;
-  width: 70%;
+  flex-direction: row;
+  height: 15%;
 `;
 
 const Logo = styled.img`
-  height: 90%;
-  margin: auto 2%;
+  height: 80%;
+  margin-right: 2%;
 `;
 
 const Title = styled.h1`
+  ${commonStyles}
   color: white;
   font-size: 3rem;
-  margin: auto 2%;
+  width: fit-content;
+`;
+
+const Section = styled.section`
+  ${commonStyles}
+  width: 100%;
+`;
+
+const P = styled.p`
+  color: white;
 `;
 
 const ErrorField = styled.div`
   ${commonStyles}
-  flex-direction: column;
-  height: 15%;
+  height: 20%;
+  width: fit-content;
 `;
 
 export default LoginPage;
