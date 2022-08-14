@@ -92,6 +92,7 @@ function Map() {
 }
 
 const Wrapper = styled.div`
+  background-color: beige;
   width: 100%;
   height: 90vh;
   overflow: hidden;
