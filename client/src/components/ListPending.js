@@ -91,7 +91,6 @@ const Ul = styled.ul`
   border-radius: 6px;
   height: auto;
   padding: 0;
-  overflow-y: hidden;
   animation: expand 0.2s ease forwards;
 
   li:nth-child(odd) {

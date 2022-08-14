@@ -7,7 +7,8 @@ const ListFriends = () => {
   const [listHidden, setListHidden] = useState(false);
 
   useEffect(() => {
-    fetch("/api/friendships").then((r) => {
+    fetch("/api/friendships")
+    .then((r) => {
       if (r.ok) {
         r.json().then((responseData) => setFriendships(responseData));
       }
@@ -17,7 +18,8 @@ const ListFriends = () => {
   const destroyFriendship = (id) => {
     fetch(`/api/friendships/${id}`, {
       method: "DELETE"
-    }).then((r) => {
+    })
+    .then((r) => {
       if (r.ok) {
         setFriendships(friendships.filter((frship) => frship.id !== id));
       }
@@ -122,7 +124,6 @@ const Ul = styled.ul`
   border-radius: 6px;
   height: auto;
   padding: 0;
-  overflow-y: hidden;
   animation: expand 0.2s ease forwards;
 
   li:nth-child(odd) {

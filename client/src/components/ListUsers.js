@@ -1,27 +1,12 @@
-import React, { useState, useEffect } from "react";
-import UserSearchBar from "./UserSearchBar";
+import React, { useState } from "react";
 import styled, { css } from "styled-components";
 
-const ListUsers = ({ user }) => {
-  const [users, setUsers] = useState([]);
-  
-  useEffect(() => {
-    fetch("/api/users")
-    .then((r) => r.json())
-    .then((userData) => {
-      setUsers(userData.filter((userObj) => {
-        if (user.pending_friends.find((fr) => fr.username === userObj.username)) {
-          return null;
-        } else if (user.friends.find((fr) => fr.username === userObj.username)) {
-          return null;
-        } else if (user.username === userObj.username) {
-          return null;
-        } else {
-          return userObj;
-        }
-      }))
-    })
-  }, [user]);
+const ListUsers = ({ user, users, setUsers }) => {
+  const [listHidden, setListHidden] = useState(false);
+
+  const toggleList = () => {
+    setListHidden(!listHidden);
+  }
 
   const createFriendRequest = (id) => {
     fetch("/api/friend_requests", {
@@ -33,32 +18,34 @@ const ListUsers = ({ user }) => {
         user_id: user.id,
         friend_id: id
       }),
-    }).then(
-      setUsers(users.filter((userObj) => userObj.id !== id))
-    );
+    })
+      .then(setUsers(users.filter((userObj) => userObj.id !== id)));
   };
-  
+
   const displayUsers = users.map((userObj) => (
-      <Li key={userObj.id}>
-        <H3 style={{ marginRight: "auto" }}>{userObj.username}</H3>
-        <Button onClick={() => createFriendRequest(userObj.id)}>
-          <img 
-            src="./images/icons/add-friend.png" 
-            alt="Add Friend" 
-            style={{ height: "100%" }}
-          />
-        </Button>
-      </Li>
-    )
+    <Li key={userObj.id}>
+      <Avatar src="/images/icons/avatar.png" alt="Avatar" />
+      <H2 style={{ marginRight: "auto" }}>{userObj.username}</H2>
+      <Button
+        src="./images/icons/add-friend.png"
+        alt="Add Friend"
+        onClick={() => createFriendRequest(userObj.id)}
+      />
+    </Li>
+  )
   );
 
   return (
     <Wrapper>
-      <UserSearchBar
-        users={users}
-        setUsers={setUsers}
-      />
-      <Ul>
+      <Label>
+        Users
+        <ArrowIcon
+          src={listHidden ? "/images/icons/arrow-close.png" : "/images/icons/arrow-open.png"}
+          alt="Edit Icon"
+          onClick={toggleList}
+        />
+      </Label>
+      <Ul style={listHidden ? { display: 'none' } : null}>
         {displayUsers}
       </Ul>
     </Wrapper>
@@ -70,52 +57,77 @@ const commonStyles = css`
   flex-direction: column;
   width: 100%;
   height: 100%;
-  margin: auto;
 `;
 
 const Wrapper = styled.div`
   ${commonStyles}
-  background-color: rgb(72, 81, 98);
-  margin: 0;
+  height: auto;
+  max-height: 40%;
+`;
+
+const Label = styled.label`
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  border-bottom: solid 1px gray;
+  color: white;
+  font-size: 1rem;
+  height: fit-content;
+`;
+
+const ArrowIcon = styled.img`
+  height: 30px;
+  width: auto;
+  margin-left: auto;
+  cursor: pointer;
 `;
 
 const Ul = styled.ul`
   ${commonStyles}
-  width: 95%;
-  height: 95%;
+  border-radius: 6px;
+  height: auto;
   padding: 0;
-  overflow-y: hidden;
+  animation: expand 0.2s ease forwards;
 
   li:nth-child(odd) {
-    background: rgb(50, 50, 60);
+    background: rgb(10,15,25,0.7);
   }
 `;
 
 const Li = styled.li`
-  ${commonStyles}
-  background-color: rgb(32, 36, 44);
+  display: flex;
+  justify-content: center;
+  background-color: rgb(10,15,25,0.5);
   color: white;
   flex-direction: row;
-  height: 8%;
+  height: fit-content;
   margin: 0;
 `;
 
-const H3 = styled.h3`
+const Avatar = styled.img`
   ${commonStyles}
-  margin-left: 2%;
-  justify-content: center;
+  width: auto;
+  height: 30px;
+  margin: 2%;
 `;
 
-const Button = styled.button`
+const H2 = styled.h2`
+  ${commonStyles}
+  justify-content: center;
+  font-size: 1rem;
+  margin: 0;
+`;
+
+const Button = styled.img`
   ${commonStyles}
   background-color: dimgray;
   border: 1px solid white;
   border-radius: 4px;
   justify-content: center;
   align-items: center;
-  width: fit-content;
-  height: 70%;
-  margin-right: 2%;
+  width: auto;
+  height: 30px;
+  margin: 2%;
   cursor: pointer;
   transition: 0.3s;
 
