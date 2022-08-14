@@ -3,14 +3,13 @@ import styled, { css } from "styled-components";
 
 const ListFriends = () => {
   const [friendships, setFriendships] = useState([]);
-  const [hidden, setHidden] = useState(true);
+  const [buttonHidden, setButtonHidden] = useState(true);
+  const [listHidden, setListHidden] = useState(false);
 
   useEffect(() => {
     fetch("/api/friendships").then((r) => {
       if (r.ok) {
-        r.json().then((frshipData) => {
-          return setFriendships(frshipData);
-        });
+        r.json().then((responseData) => setFriendships(responseData));
       }
     });
   }, []);
@@ -18,44 +17,67 @@ const ListFriends = () => {
   const destroyFriendship = (id) => {
     fetch(`/api/friendships/${id}`, {
       method: "DELETE"
-    }).then(
-      setFriendships(friendships.filter((frship) => frship.id !== id))
-    )
-  };
-
-  const toggleButton = () => {
-    setHidden(!hidden);
+    }).then((r) => {
+      if (r.ok) {
+        setFriendships(friendships.filter((frship) => frship.id !== id));
+      }
+    });
   }
 
-  const displayFriends = friendships.length > 0 ? friendships.map((friendship) => {
-    return (
-      <Li key={friendship.id}>
-        <Avatar src="/images/icons/avatar.png" alt="Avatar"/>
-        <H2>{friendship.friend.username}</H2>
-        <Button 
-          style={hidden ? {display: 'none'} : null} 
-          onClick={() => destroyFriendship(friendship.id)}
-        > 
-          Unfriend
-        </Button>
-      </Li>
-      )
-    }) : (
-      <li>No Current Friendships</li>
-  );
+  const toggleElement = (element) => {
+    switch (element) {
+      case "button":
+        return setButtonHidden(!buttonHidden);;
+      case "list":
+        return setListHidden(!listHidden);;
+      default: 
+        return null;
+    }
+  }
+
+  const displayFriends = () => {
+    if (friendships.length > 0) {
+      return friendships.map((friendship) => (
+          <Li key={friendship.id}>
+            <Avatar src="/images/icons/avatar.png" alt="Avatar" />
+            <H2>{friendship.friend.username}</H2>
+            <Button
+              style={buttonHidden ? { display: 'none' } : null}
+              onClick={() => destroyFriendship(friendship.id)}
+            >
+              Unfriend
+            </Button>
+          </Li>
+        )
+      );
+    } else {
+      return (
+        <Li>
+          <p>No Frienships</p>
+        </Li>
+      );
+    }
+  }
 
   return (
     <Wrapper>
       <Label htmlFor="friends">
         My Friends
-        <Icon 
-          src="/images/icons/edit.png" 
-          alt="Edit Icon" 
-          onClick={toggleButton}
+        <EditIcon
+          src="/images/icons/edit.png"
+          alt="Edit Icon"
+          onClick={() => toggleElement('button')}
+          style={listHidden ? { display: 'none' } : null}
+        />
+        <ArrowIcon
+          src={listHidden ? "/images/icons/arrow-close.png" : "/images/icons/arrow-open.png"}
+          alt="Edit Icon"
+          onClick={() => toggleElement('list')}
+          style={listHidden ? { marginLeft: 'auto' } : null}
         />
       </Label>
-      <Ul>
-        {displayFriends}
+      <Ul style={listHidden ? { display: 'none' } : null}>
+        {displayFriends()}
       </Ul>
     </Wrapper>
   );
@@ -71,22 +93,28 @@ const commonStyles = css`
 const Wrapper = styled.div`
   ${commonStyles}
   height: auto;
+  max-height: 40%;
+  overflow-y: hidden;
 `;
 
 const Label = styled.label`
   display: flex;
   flex-direction: row;
   align-items: center;
+  border-bottom: solid 1px gray;
   color: white;
   font-size: 1rem;
   height: fit-content;
 `;
 
-const Icon = styled.img`
-  height: 40px;
+const ArrowIcon = styled.img`
+  height: 30px;
   width: auto;
-  margin-left: auto;
   cursor: pointer;
+`;
+
+const EditIcon = styled(ArrowIcon)`
+  margin-left: auto;
 `;
 
 const Ul = styled.ul`
@@ -95,14 +123,17 @@ const Ul = styled.ul`
   height: auto;
   padding: 0;
   overflow-y: hidden;
+  animation: expand 0.2s ease forwards;
+
   li:nth-child(odd) {
-    background: rgb(50,50,60,0.8);
+    background: rgb(10,15,25,0.7);
   }
 `;
 
 const Li = styled.li`
   display: flex;
-  background-color: rgb(50,50,60,0.5);
+  justify-content: center;
+  background-color: rgb(10,15,25,0.5);
   color: white;
   flex-direction: row;
   height: fit-content;
