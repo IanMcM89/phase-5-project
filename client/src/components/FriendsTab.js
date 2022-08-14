@@ -25,7 +25,7 @@ const Wrapper = styled.div`
   ${commonStyles}
   flex-direction: column;
   background-color: rgb(32, 36, 44);
-  background: rgba(20,25,35,0.5);
+  background: rgba(20,25,35,0.7);
   padding: 1%;
 `;
 
