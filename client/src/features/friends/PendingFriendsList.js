@@ -1,44 +1,47 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import styled, { css } from "styled-components";
 
-const ListUsers = ({ user, users, setUsers }) => {
+const PendingFriendsList = () => {
+  const [pendingFriends, setPendingFriends] = useState([]);
   const [listHidden, setListHidden] = useState(false);
+
+  useEffect(() => {
+    fetch("/api/pending_friends").then((r) => {
+      if (r.ok) {
+        r.json().then((responseData) => setPendingFriends(responseData));
+      }
+    });
+  }, []);
 
   const toggleList = () => {
     setListHidden(!listHidden);
   }
 
-  const createFriendRequest = (id) => {
-    fetch("/api/friend_requests", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        user_id: user.id,
-        friend_id: id
-      }),
-    })
-      .then(setUsers(users.filter((userObj) => userObj.id !== id)));
-  };
-
-  const displayUsers = users.map((userObj) => (
-    <Li key={userObj.id}>
-      <Avatar src="/images/icons/avatar.png" alt="Avatar" />
-      <H2 style={{ marginRight: "auto" }}>{userObj.username}</H2>
-      <Button
-        src="./images/icons/add-friend.png"
-        alt="Add Friend"
-        onClick={() => createFriendRequest(userObj.id)}
-      />
-    </Li>
-  )
-  );
+  const displayPendingFriends = () => {
+    if (pendingFriends.length > 0) {
+      return pendingFriends.map((pending) => (
+        <Li key={pending.id}>
+          <Avatar src="/images/icons/avatar.png" alt="Avatar" />
+          <H2>{pending.username}</H2>
+          <Icon
+            src="/images/icons/pending.png"
+            alt="Hour Glass Icon"
+          />
+        </Li>
+      ));
+    } else {
+      return (
+        <Li style={{ justifyContent: 'center' }}>
+          <p>No Requests</p>
+        </Li>
+      );
+    }
+  }
 
   return (
     <Wrapper>
-      <Label>
-        Users
+      <Label htmlFor="pending-friends">
+        Pending
         <ArrowIcon
           src={listHidden ? "/images/icons/arrow-close.png" : "/images/icons/arrow-open.png"}
           alt="Edit Icon"
@@ -46,7 +49,7 @@ const ListUsers = ({ user, users, setUsers }) => {
         />
       </Label>
       <Ul style={listHidden ? { display: 'none' } : null}>
-        {displayUsers}
+        {displayPendingFriends()}
       </Ul>
     </Wrapper>
   );
@@ -63,16 +66,17 @@ const Wrapper = styled.div`
   ${commonStyles}
   height: auto;
   max-height: 40%;
+  overflow-y: hidden;
 `;
 
 const Label = styled.label`
   display: flex;
   flex-direction: row;
   align-items: center;
-  border-bottom: solid 1px gray;
   color: white;
   font-size: 1rem;
   height: fit-content;
+  border-bottom: solid 1px gray;
 `;
 
 const ArrowIcon = styled.img`
@@ -96,7 +100,6 @@ const Ul = styled.ul`
 
 const Li = styled.li`
   display: flex;
-  justify-content: center;
   background-color: rgb(10,15,25,0.5);
   color: white;
   flex-direction: row;
@@ -118,22 +121,11 @@ const H2 = styled.h2`
   margin: 0;
 `;
 
-const Button = styled.img`
+const Icon = styled.img`
   ${commonStyles}
-  background-color: dimgray;
-  border: 1px solid white;
-  border-radius: 4px;
-  justify-content: center;
   align-items: center;
   width: auto;
-  height: 30px;
-  margin: 2%;
-  cursor: pointer;
-  transition: 0.3s;
+  height: 40px;
+  }`
 
-  &:hover {
-    background-color: green;
-  }
-`;
-
-export default ListUsers;
+export default PendingFriendsList;

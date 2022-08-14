@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
-import { Button, Input, Form, FormField, Label } from "../styles";
+import { Button, Input, Form, FormField, Label } from "../../styles";
 
-const FormLogin = ({ onLogin, setErrors }) => {
+const LoginForm = ({ onLogin, setErrors }) => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [loading, setLoading] = useState(false);
@@ -65,4 +65,4 @@ const FormLogin = ({ onLogin, setErrors }) => {
   )
 };
 
-export default FormLogin;
+export default LoginForm;

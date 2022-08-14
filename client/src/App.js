@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from "react";
 import { Switch, Route } from 'react-router-dom';
-import UINavBar from "./components/UINavBar";
-import UIMenu from "./components/UIMenu";
+import NavBar from "./features/ui/NavBar";
+import Menu from "./features/ui/Menu";
 import LoginPage from "./pages/LoginPage";
 import MapPage from "./pages/MapPage";
-import FriendsTab from "./components/FriendsTab";
+import FriendsTab from "./features/friends/FriendsTab";
 import styled from "styled-components";
 
 const App = () => {
@@ -23,7 +23,7 @@ const App = () => {
 
   return (
     <>
-      <UINavBar user={user} setUser={setUser} />
+      <NavBar user={user} setUser={setUser} />
       <Main>
         <FriendsTab user={user} />
         <Switch>
@@ -40,7 +40,7 @@ const App = () => {
             <MapPage />
           </Route>
         </Switch>
-        <UIMenu/>
+        <Menu/>
       </Main>
     </>
   );

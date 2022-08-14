@@ -2,7 +2,7 @@ import React from "react";
 import { Link } from "react-router-dom";
 import styled, { css } from "styled-components";
 
-const UIMenu = () => {
+const Menu = () => {
   return (
     <Wrapper>
       <Nav>
@@ -76,4 +76,4 @@ const Icon = styled.img`
   cursor: pointer;
 `;
 
-export default UIMenu;
+export default Menu;

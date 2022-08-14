@@ -1,7 +1,7 @@
 import React, { useState } from "react";
-import FormLogin from "../components/FormLogin";
-import FormSignUp from "../components/FormSignUp";
-import { Button, Error } from "../styles";
+import LoginForm from "../features/login/LoginForm";
+import SignUpForm from "../features/login/SignUpForm";
+import { Button, Error } from ".././styles";
 import styled, { css } from "styled-components";
 
 const LoginPage = ({ onLogin }) => {
@@ -17,7 +17,7 @@ const LoginPage = ({ onLogin }) => {
         </LogoContainer>
         {showLogin ? (
           <Section>
-            <FormLogin onLogin={onLogin} setErrors={setErrors} />
+            <LoginForm onLogin={onLogin} setErrors={setErrors} />
             <P>
               Don't have an account? &nbsp;
               <Button variant='transparent' onClick={() => setShowLogin(false)}>
@@ -27,7 +27,7 @@ const LoginPage = ({ onLogin }) => {
           </Section>
         ) : (
           <Section>
-            <FormSignUp onLogin={onLogin} setErrors={setErrors} />
+            <SignUpForm onLogin={onLogin} setErrors={setErrors} />
             <P>
               Already have an account? &nbsp;
               <Button variant='transparent' onClick={() => setShowLogin(true)}>

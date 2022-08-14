@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import styled, { css } from "styled-components";
 
-const UserSearchBar = ({ setUsers }) => {
+const SearchBar = ({ setUsers }) => {
   const [searchValue, setSearchValue] = useState('');
 
   const handleSearch = (e) => {
@@ -44,4 +44,4 @@ const Input = styled.input`
   height: 100%;
 `;
 
-export default UserSearchBar;
+export default SearchBar;

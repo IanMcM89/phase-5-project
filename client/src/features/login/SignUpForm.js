@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
-import { Button, Input, Form, FormField, Label } from "../styles";
+import { Button, Input, Form, FormField, Label } from "../../styles";
 
-const FormSignUp = ({ onLogin, setErrors }) => {
+const SignUpForm = ({ onLogin, setErrors }) => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [passwordConfirmation, setPasswordConfirmation] = useState("");
@@ -77,4 +77,4 @@ const FormSignUp = ({ onLogin, setErrors }) => {
   )
 };
 
-export default FormSignUp;
+export default SignUpForm;

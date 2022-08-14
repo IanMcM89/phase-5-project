@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import styled, { css } from "styled-components";
 
-const ListFriends = () => {
+const FriendsList = () => {
   const [friendships, setFriendships] = useState([]);
   const [buttonHidden, setButtonHidden] = useState(true);
   const [listHidden, setListHidden] = useState(false);
@@ -169,4 +169,4 @@ const Button = styled.button`
   }
 `;
 
-export default ListFriends;
+export default FriendsList;

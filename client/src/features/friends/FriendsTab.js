@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from "react";
-import UserSearchBar from "./UserSearchBar";
-import ListFriends from "./ListFriends";
-import ListPending from "./ListPending";
-import ListUsers from "./ListUsers";
+import UserSearchBar from "./SearchBar";
+import ListFriends from "./FriendsList";
+import ListPending from "./PendingFriendsList";
+import ListUsers from "./UsersList";
 import styled, { css } from "styled-components";
 
 const FriendsTab = ({ user }) => {
