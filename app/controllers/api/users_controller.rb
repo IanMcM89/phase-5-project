@@ -3,7 +3,19 @@ class Api::UsersController < ApplicationController
 
   # GET /users
   def index
-    render json: User.all.to_json(only: [:id, :username])
+    users = []
+
+    User.all.each do |user|
+      friends = @current_user.friends.include?(user)
+      pending = @current_user.pending_friends.include?(user)
+      me = @current_user == user
+
+      if !friends && !pending && !me
+        users << user
+      end
+    end
+
+    render json: users.to_json(only: [:id, :username])
   end
 
   # POST /signup
