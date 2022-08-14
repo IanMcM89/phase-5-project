@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import styled, { css } from "styled-components";
 
-const UsersList = ({ user, users, setUsers }) => {
+const UserList = ({ user, users, setUsers }) => {
   const [listHidden, setListHidden] = useState(false);
 
   const toggleList = () => {
@@ -136,4 +136,4 @@ const Button = styled.img`
   }
 `;
 
-export default UsersList;
+export default UserList;

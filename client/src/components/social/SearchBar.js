@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import styled, { css } from "styled-components";
 
-const SearchBar = ({ setUsers }) => {
+const SearchBar = () => {
   const [searchValue, setSearchValue] = useState('');
 
   const handleSearch = (e) => {

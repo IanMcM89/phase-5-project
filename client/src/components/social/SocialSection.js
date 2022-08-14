@@ -1,11 +1,11 @@
 import React, { useState, useEffect } from "react";
-import UserSearchBar from "./SearchBar";
-import ListFriends from "./FriendsList";
-import ListPending from "./PendingFriendsList";
-import ListUsers from "./UsersList";
+import SearchBar from "./SearchBar";
+import FriendsList from "./friends/FriendsList";
+import PendingList from "./pending/PendingList";
+import UserList from "./users/UserList";
 import styled, { css } from "styled-components";
 
-const FriendsTab = ({ user }) => {
+const SocialSection = ({ user }) => {
   const [users, setUsers] = useState([]);
 
   useEffect(() => {
@@ -19,11 +19,11 @@ const FriendsTab = ({ user }) => {
 
   return (
     <Wrapper>
-      <UserSearchBar/>
+      <SearchBar/>
       <ListWrapper>
-        <ListFriends />
-        <ListPending />
-        <ListUsers 
+        <FriendsList />
+        <PendingList />
+        <UserList 
           user={user}
           users={users}
           setUsers={setUsers} 
@@ -52,6 +52,10 @@ const ListWrapper = styled.div`
   ${commonStyles}
   width: 100%;
   overflow-y: scroll;
+
+  ::-webkit-scrollbar {
+    display: none;
+  }
 `;
 
-export default FriendsTab;
+export default SocialSection;

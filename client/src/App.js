@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from "react";
 import { Switch, Route } from 'react-router-dom';
-import NavBar from "./features/ui/NavBar";
-import Menu from "./features/ui/Menu";
+import NavBar from "./components/ui/NavBar";
+import Menu from "./components/ui/Menu";
 import LoginPage from "./pages/LoginPage";
 import MapPage from "./pages/MapPage";
-import FriendsTab from "./features/friends/FriendsTab";
+import SocialSection from "./components/social/SocialSection";
 import styled from "styled-components";
 
 const App = () => {
@@ -25,7 +25,7 @@ const App = () => {
     <>
       <NavBar user={user} setUser={setUser} />
       <Main>
-        <FriendsTab user={user} />
+        <SocialSection user={user} />
         <Switch>
           <Route path="/profile">
             <></>

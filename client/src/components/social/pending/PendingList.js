@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import styled, { css } from "styled-components";
 
-const PendingFriendsList = () => {
+const PendingList = () => {
   const [pendingFriends, setPendingFriends] = useState([]);
   const [listHidden, setListHidden] = useState(false);
 
@@ -128,4 +128,4 @@ const Icon = styled.img`
   height: 40px;
   }`
 
-export default PendingFriendsList;
+export default PendingList;
