@@ -10,17 +10,17 @@ const UserSearchBar = ({ setUsers }) => {
 
   return (
     <Wrapper>
+      <Input
+        type="text"
+        name="search"
+        placeholder="Search"
+        value={searchValue}
+        onChange={(e) => handleSearch(e)}
+      />
       <img 
         src="./images/icons/search.png" 
         alt="Search Icon" 
         style={{ backgroundColor: 'rgb(186, 43, 43)' }}
-      />
-      <Input
-        type="text"
-        name="search"
-        placeholder="Search: 'JDoe88'"
-        value={searchValue}
-        onChange={(e) => handleSearch(e)}
       />
     </Wrapper>
   );
@@ -34,9 +34,8 @@ const commonStyles = css`
 
 const Wrapper = styled.div`
   ${commonStyles}
-  width: 96%;
   height: 5%;
-  margin: 2%;
+  margin-bottom: 2%;
 `;
 
 const Input = styled.input`
