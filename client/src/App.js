@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from "react";
 import { Switch, Route } from 'react-router-dom';
-import UINavBar from "./UINavBar";
-import UIMenu from "./UIMenu";
-import LoginPage from "../pages/LoginPage";
-import MapPage from "../pages/MapPage";
-import FriendsTab from "./FriendsTab";
+import UINavBar from "./components/UINavBar";
+import UIMenu from "./components/UIMenu";
+import LoginPage from "./pages/LoginPage";
+import MapPage from "./pages/MapPage";
+import FriendsTab from "./components/FriendsTab";
 import styled from "styled-components";
 
 const App = () => {
