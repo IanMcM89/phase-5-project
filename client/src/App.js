@@ -4,7 +4,7 @@ import NavBar from "./components/ui/NavBar";
 import Menu from "./components/ui/Menu";
 import LoginPage from "./pages/LoginPage";
 import MapPage from "./pages/MapPage";
-import SocialSection from "./components/social/SocialSection";
+import FriendsList from "./components/friends-list/FriendsList";
 import styled from "styled-components";
 
 const App = () => {
@@ -25,7 +25,7 @@ const App = () => {
     <>
       <NavBar user={user} setUser={setUser} />
       <Main>
-        <SocialSection user={user} />
+        <FriendsList user={user} />
         <Switch>
           <Route path="/profile">
             <></>
