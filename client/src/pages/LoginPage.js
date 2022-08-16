@@ -59,7 +59,11 @@ const Main = styled.main`
 
 const Wrapper = styled.div`
   ${commonStyles}
-  background: linear-gradient(153deg, rgba(70,75,85,0.7) 20%, rgba(10,15,25,0.8) 60%);
+  background: linear-gradient(
+    153deg, 
+    rgba(50,55,65,0.8) 20%, 
+    rgba(10,15,25,0.9) 60%
+  );
   justify-content: flex-start;
   border-radius: 12px;
   width: 50%;
