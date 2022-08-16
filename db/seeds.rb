@@ -128,41 +128,86 @@ User.create(
   password_confirmation: "password"
 )
 
-# # Friendship Seeds
+# Friendship Seeds
 
-# Friendship.create(
-#   user_id: 1,
-#   friend_id: 2
-# )
+Friendship.create(
+  user_id: 1,
+  friend_id: 2
+)
 
-# Friendship.create(
-#   user_id: 1,
-#   friend_id: 3
-# )
+Friendship.create(
+  user_id: 1,
+  friend_id: 3
+)
 
-# Friendship.create(
-#   user_id: 1,
-#   friend_id: 4
-# )
+Friendship.create(
+  user_id: 1,
+  friend_id: 4
+)
 
-# Friendship.create(
-#   user_id: 1,
-#   friend_id: 5
-# )
+Friendship.create(
+  user_id: 1,
+  friend_id: 5
+)
 
-# # Friend Request Seeds
+Friendship.create(
+  user_id: 1,
+  friend_id: 6
+)
 
-# FriendRequest.create(
-#   user_id: 1,
-#   friend_id: 6
-# )
+Friendship.create(
+  user_id: 1,
+  friend_id: 7
+)
 
-# FriendRequest.create(
-#   user_id: 1,
-#   friend_id: 7
-# )
+Friendship.create(
+  user_id: 1,
+  friend_id: 8
+)
 
-# FriendRequest.create(
-#   user_id: 1,
-#   friend_id: 8
-# )
+Friendship.create(
+  user_id: 1,
+  friend_id: 9
+)
+
+Friendship.create(
+  user_id: 1,
+  friend_id: 10
+)
+
+# Friend Request Seeds
+
+FriendRequest.create(
+  user_id: 1,
+  friend_id: 11
+)
+
+FriendRequest.create(
+  user_id: 1,
+  friend_id: 12
+)
+
+FriendRequest.create(
+  user_id: 1,
+  friend_id: 13
+)
+
+FriendRequest.create(
+  user_id: 1,
+  friend_id: 14
+)
+
+FriendRequest.create(
+  user_id: 1,
+  friend_id: 15
+)
+
+FriendRequest.create(
+  user_id: 1,
+  friend_id: 16
+)
+
+FriendRequest.create(
+  user_id: 1,
+  friend_id: 17
+)
