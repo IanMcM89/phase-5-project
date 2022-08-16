@@ -9,11 +9,6 @@ class Api::FriendshipsController < ApplicationController
     render json: @friendship
   end
 
-  def destroy
-    @friendship.destroy
-    head :no_content
-  end
-
   private
 
   def find_friendship

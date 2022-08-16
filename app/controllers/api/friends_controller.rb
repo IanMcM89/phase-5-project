@@ -9,6 +9,12 @@ class Api::FriendsController < ApplicationController
     render json: @friend.to_json(only: [:id, :username])
   end
 
+  def destroy
+    friendship = Friendship.find_by(friend: @friend)
+    friendship.destroy
+    head :no_content
+  end
+
   private
 
   def find_friend

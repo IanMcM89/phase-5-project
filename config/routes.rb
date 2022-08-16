@@ -2,8 +2,8 @@ Rails.application.routes.draw do
   namespace :api do
     resources :friend_requests
     resources :pending_friends, only: [:index, :show]
-    resources :friendships, only: [:index, :show, :destroy]
-    resources :friends, only: [:index, :show]
+    resources :friendships, only: [:index, :show]
+    resources :friends, only: [:index, :show, :destroy]
     resources :users, only: [:index]
     post "/signup", to: "users#create"
     get "/me", to: "users#show"
