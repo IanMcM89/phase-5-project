@@ -4,7 +4,10 @@ import App from "./App";
 import { BrowserRouter } from "react-router-dom";
 import { createGlobalStyle } from "styled-components";
 import { Provider } from "react-redux";
-import store from "./store";
+import { createStore, applyMiddleware } from "redux";
+import thunkMiddleware from "redux-thunk";
+import { composeWithDevTools } from "redux-devtools-extension";
+import rootReducer from "./reducer";
 // import reportWebVitals from './reportWebVitals';
 
 const GlobalStyle = createGlobalStyle`
@@ -66,6 +69,10 @@ const GlobalStyle = createGlobalStyle`
     }
   }
 `;
+
+const composedEnhancer = composeWithDevTools(applyMiddleware(thunkMiddleware));
+
+const store = createStore(rootReducer, composedEnhancer);
 
 ReactDOM.render(
   <BrowserRouter>
