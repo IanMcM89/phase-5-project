@@ -1,57 +1,54 @@
 import React, { useState, useEffect } from "react";
+import { useSelector, useDispatch } from "react-redux";
+import { fetchUsers } from "../../../reducers/users";
 import styled, { css } from "styled-components";
 
-const FriendsList = () => {
-  const [friendships, setFriendships] = useState([]);
-  const [buttonHidden, setButtonHidden] = useState(true);
-  const [listHidden, setListHidden] = useState(false);
+const Friends = () => {
+  const [showButton, setShowButton] = useState(true);
+  const [showList, setshowList] = useState(false);
+  const friends = useSelector((state) => state.friends.entities);
+  const dispatch = useDispatch();
 
   useEffect(() => {
-    fetch("/api/friendships")
-    .then((r) => {
-      if (r.ok) {
-        r.json().then((responseData) => setFriendships(responseData));
-      }
-    });
-  }, []);
+    dispatch(fetchUsers('/api/friends'));
+  }, [dispatch]);
 
   const destroyFriendship = (id) => {
-    fetch(`/api/friendships/${id}`, {
+    fetch(`/api/friends/${id}`, {
       method: "DELETE"
     })
-    .then((r) => {
-      if (r.ok) {
-        setFriendships(friendships.filter((frship) => frship.id !== id));
-      }
-    });
+      .then((r) => {
+        if (r.ok) {
+          dispatch(fetchUsers('/api/friends'));
+        }
+      });
   }
 
   const toggleElement = (element) => {
     switch (element) {
       case "button":
-        return setButtonHidden(!buttonHidden);;
+        return setShowButton(!showButton);;
       case "list":
-        return setListHidden(!listHidden);;
-      default: 
+        return setshowList(!showList);;
+      default:
         return null;
     }
   }
 
   const displayFriends = () => {
-    if (friendships.length > 0) {
-      return friendships.map((friendship) => (
-          <Li key={friendship.id}>
-            <Avatar src="/images/icons/avatar.png" alt="Avatar" />
-            <H2>{friendship.friend.username}</H2>
-            <Button
-              style={buttonHidden ? { display: 'none' } : null}
-              onClick={() => destroyFriendship(friendship.id)}
-            >
-              Unfriend
-            </Button>
-          </Li>
-        )
-      );
+    if (friends.length > 0) {
+      return friends.map((friend) => (
+        <Li key={friend.id}>
+          <Avatar src="/images/icons/avatar.png" alt="Avatar" />
+          <H2>{friend.username}</H2>
+          <Button
+            style={showButton ? { display: 'none' } : null}
+            onClick={() => destroyFriendship(friend.id)}
+          >
+            Unfriend
+          </Button>
+        </Li>
+      ));
     } else {
       return (
         <Li>
@@ -69,16 +66,22 @@ const FriendsList = () => {
           src="/images/icons/edit.png"
           alt="Edit Icon"
           onClick={() => toggleElement('button')}
-          style={listHidden ? { display: 'none' } : null}
+          style={showList ? { display: 'none' } : null}
         />
         <ArrowIcon
-          src={listHidden ? "/images/icons/arrow-close.png" : "/images/icons/arrow-open.png"}
+          src={
+            showList ? (
+              "/images/icons/arrow-close.png"
+            ) : (
+              "/images/icons/arrow-open.png"
+            )
+          }
           alt="Edit Icon"
           onClick={() => toggleElement('list')}
-          style={listHidden ? { marginLeft: 'auto' } : null}
+          style={showList ? { marginLeft: 'auto' } : null}
         />
       </Label>
-      <Ul style={listHidden ? { display: 'none' } : null}>
+      <Ul style={showList ? { display: 'none' } : null}>
         {displayFriends()}
       </Ul>
     </Wrapper>
@@ -95,7 +98,7 @@ const commonStyles = css`
 const Wrapper = styled.div`
   ${commonStyles}
   height: auto;
-  max-height: 40%;
+  max-height: 50%;
   overflow-y: hidden;
 `;
 
@@ -124,7 +127,6 @@ const Ul = styled.ul`
   border-radius: 6px;
   height: auto;
   padding: 0;
-  animation: expand 0.2s ease forwards;
 
   li:nth-child(odd) {
     background: rgb(10,15,25,0.7);
@@ -139,6 +141,7 @@ const Li = styled.li`
   flex-direction: row;
   height: fit-content;
   margin: 0;
+  animation: expand 0.2s ease forwards;
 `;
 
 const Avatar = styled.img`
@@ -169,4 +172,4 @@ const Button = styled.button`
   }
 `;
 
-export default FriendsList;
+export default Friends;

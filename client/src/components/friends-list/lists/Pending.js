@@ -1,20 +1,19 @@
 import React, { useState, useEffect } from "react";
+import { useSelector, useDispatch } from "react-redux";
+import { fetchUsers } from "../../../reducers/users";
 import styled, { css } from "styled-components";
 
-const PendingList = () => {
-  const [pendingFriends, setPendingFriends] = useState([]);
-  const [listHidden, setListHidden] = useState(false);
+const Pending = () => {
+  const [hidden, sethidden] = useState(false);
+  const pendingFriends = useSelector((state) => state.pending.entities);
+  const dispatch = useDispatch();
 
   useEffect(() => {
-    fetch("/api/pending_friends").then((r) => {
-      if (r.ok) {
-        r.json().then((responseData) => setPendingFriends(responseData));
-      }
-    });
-  }, []);
+    dispatch(fetchUsers('/api/pending_friends'));
+  }, [dispatch]);
 
   const toggleList = () => {
-    setListHidden(!listHidden);
+    sethidden(!hidden);
   }
 
   const displayPendingFriends = () => {
@@ -41,14 +40,20 @@ const PendingList = () => {
   return (
     <Wrapper>
       <Label htmlFor="pending-friends">
-        Pending
+        Pending Requests
         <ArrowIcon
-          src={listHidden ? "/images/icons/arrow-close.png" : "/images/icons/arrow-open.png"}
+          src={
+            hidden ? (
+              "/images/icons/arrow-close.png"
+            ) : (
+              "/images/icons/arrow-open.png"
+            )
+          }
           alt="Edit Icon"
           onClick={toggleList}
         />
       </Label>
-      <Ul style={listHidden ? { display: 'none' } : null}>
+      <Ul style={hidden ? { display: 'none' } : null}>
         {displayPendingFriends()}
       </Ul>
     </Wrapper>
@@ -65,7 +70,7 @@ const commonStyles = css`
 const Wrapper = styled.div`
   ${commonStyles}
   height: auto;
-  max-height: 40%;
+  max-height: 50%;
   overflow-y: hidden;
 `;
 
@@ -91,7 +96,6 @@ const Ul = styled.ul`
   border-radius: 6px;
   height: auto;
   padding: 0;
-  animation: expand 0.2s ease forwards;
 
   li:nth-child(odd) {
     background: rgb(10,15,25,0.7);
@@ -105,6 +109,7 @@ const Li = styled.li`
   flex-direction: row;
   height: fit-content;
   margin: 0;
+  animation: expand 0.2s ease forwards;
 `;
 
 const Avatar = styled.img`
@@ -128,4 +133,4 @@ const Icon = styled.img`
   height: 40px;
   }`
 
-export default PendingList;
+export default Pending;

@@ -1,11 +1,19 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
+import { useSelector, useDispatch } from "react-redux";
+import { fetchUsers } from "../../../reducers/users";
 import styled, { css } from "styled-components";
 
-const UserList = ({ user, users, setUsers }) => {
-  const [listHidden, setListHidden] = useState(false);
+const Users = ({ currentUser }) => {
+  const [hidden, setHidden] = useState(false);
+  const users = useSelector((state) => state.users.entities);
+  const dispatch = useDispatch();
 
+  useEffect(() => {
+    dispatch(fetchUsers('/api/pending_friends'));
+  }, [dispatch]);
+  
   const toggleList = () => {
-    setListHidden(!listHidden);
+    setHidden(!hidden);
   }
 
   const createFriendRequest = (id) => {
@@ -15,37 +23,41 @@ const UserList = ({ user, users, setUsers }) => {
         "Content-Type": "application/json",
       },
       body: JSON.stringify({
-        user_id: user.id,
+        user_id: currentUser.id,
         friend_id: id
       }),
     })
-      .then(setUsers(users.filter((userObj) => userObj.id !== id)));
   };
 
-  const displayUsers = users.map((userObj) => (
-    <Li key={userObj.id}>
+  const displayUsers = users.map((user) => (
+    <Li key={user.id}>
       <Avatar src="/images/icons/avatar.png" alt="Avatar" />
-      <H2 style={{ marginRight: "auto" }}>{userObj.username}</H2>
+      <H2>{user.username}</H2>
       <Button
         src="./images/icons/add-friend.png"
         alt="Add Friend"
-        onClick={() => createFriendRequest(userObj.id)}
+        onClick={() => createFriendRequest(user.id)}
       />
     </Li>
-  )
-  );
+  ));
 
   return (
-    <Wrapper>
+    <Wrapper style={users.length > 0 ? (null) : ({ display: 'none' })}>
       <Label>
         Users
         <ArrowIcon
-          src={listHidden ? "/images/icons/arrow-close.png" : "/images/icons/arrow-open.png"}
+          src={
+            hidden ? (
+              "/images/icons/arrow-close.png"
+            ) : (
+              "/images/icons/arrow-open.png"
+            )
+          }
           alt="Edit Icon"
-          onClick={toggleList}
+          onClick={users.length > 0 ? (toggleList) : (null)}
         />
       </Label>
-      <Ul style={listHidden ? { display: 'none' } : null}>
+      <Ul style={hidden ? ({ display: 'none' }) : (null)}>
         {displayUsers}
       </Ul>
     </Wrapper>
@@ -115,6 +127,7 @@ const H2 = styled.h2`
   ${commonStyles}
   justify-content: center;
   font-size: 1rem;
+  margin-right: auto;
   margin: 0;
 `;
 
@@ -136,4 +149,4 @@ const Button = styled.img`
   }
 `;
 
-export default UserList;
+export default Users;
