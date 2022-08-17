@@ -1,13 +1,13 @@
 import React, { useState } from "react";
 import { useSelector } from "react-redux";
 import { UserList } from "../../../styles";
-import styled, { css } from "styled-components";
+import styled from "styled-components";
 
 const Users = ({ currentUser }) => {
   const [hidden, setHidden] = useState(false);
   const users = useSelector((state) => state.users.entities);
   const showUsers = useSelector((state) => state.showUsers);
-  
+
   const toggleList = () => {
     setHidden(!hidden);
   }
@@ -25,13 +25,14 @@ const Users = ({ currentUser }) => {
     })
   };
 
-  return (
-    <Wrapper style={!showUsers ? ({ display: 'none' }) : (null)}>
+  return showUsers ? (
+    <Wrapper>
       <Label>
         All Users
         <ArrowIcon
           src={
-            hidden ? (
+            hidden ? 
+            (
               "/images/icons/arrow-close.png"
             ) : (
               "/images/icons/arrow-open.png"
@@ -41,26 +42,22 @@ const Users = ({ currentUser }) => {
           onClick={users.length > 0 ? (toggleList) : (null)}
         />
       </Label>
-      <UserList 
+      <UserList
         variant="users"
         users={users}
         showList={hidden}
-        createFriendRequest={createFriendRequest}
+        requestFriend={createFriendRequest}
       />
     </Wrapper>
+  ) : (
+    null
   );
 }
 
-const commonStyles = css`
+const Wrapper = styled.div`
   display: flex;
   flex-direction: column;
   width: 100%;
-  height: 100%;
-`;
-
-const Wrapper = styled.div`
-  ${commonStyles}
-  height: auto;
 `;
 
 const Label = styled.label`
@@ -75,7 +72,6 @@ const Label = styled.label`
 
 const ArrowIcon = styled.img`
   height: 30px;
-  width: auto;
   margin-left: auto;
   cursor: pointer;
 `;

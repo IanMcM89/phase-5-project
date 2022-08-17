@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { fetchUsers } from "../../../reducers/users";
 import { UserList } from "../../../styles";
-import styled, { css } from "styled-components";
+import styled from "styled-components";
 
 const Friends = () => {
   const [showButton, setShowButton] = useState(true);
@@ -63,22 +63,16 @@ const Friends = () => {
         variant="friends"
         users={friends}
         showList={showList}
-        destroyFriendship={destroyFriendship}
+        removeFriend={destroyFriendship}
       />
     </Wrapper>
   );
 }
 
-const commonStyles = css`
+const Wrapper = styled.div`
   display: flex;
   flex-direction: column;
   width: 100%;
-  height: 100%;
-`;
-
-const Wrapper = styled.div`
-  ${commonStyles}
-  height: auto;
   overflow-y: hidden;
 `;
 
@@ -94,7 +88,6 @@ const Label = styled.label`
 
 const ArrowIcon = styled.img`
   height: 30px;
-  width: auto;
   cursor: pointer;
 `;
 

@@ -17,9 +17,7 @@ const UserList = ({ ...props }) => {
       ));
     } else {
       return (
-        <Li>
-          <p>No Users Found</p>
-        </Li>
+        <Li>No Users Found</Li>
       );
     }
   }

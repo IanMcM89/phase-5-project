@@ -6,7 +6,7 @@ import styled, { css } from "styled-components";
 
 const Pending = () => {
   const [hidden, sethidden] = useState(false);
-  const pendingFriends = useSelector((state) => state.pending.entities);
+  const pending = useSelector((state) => state.pending.entities);
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -35,7 +35,7 @@ const Pending = () => {
       </Label>
       <UserList 
         variant="pending"
-        users={pendingFriends}
+        users={pending}
         showList={hidden}
       />
     </Wrapper>

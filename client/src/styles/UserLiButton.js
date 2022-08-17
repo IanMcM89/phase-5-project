@@ -7,7 +7,7 @@ function UserLiButton({ props, user }) {
         return (
           <RemoveButton
             style={props.showButton ? { display: 'none' } : null}
-            onClick={() => props.destroyFriendship(user.id)}
+            onClick={() => props.removeFriend(user.id)}
           >
             Remove
           </RemoveButton>
@@ -24,7 +24,7 @@ function UserLiButton({ props, user }) {
           <AddButton
             src="./images/icons/add-friend.png"
             alt="Add Friend"
-            onClick={() => props.createFriendRequest(user)}
+            onClick={() => props.requestFriend(user)}
           />
         );
       default:
