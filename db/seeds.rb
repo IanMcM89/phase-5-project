@@ -150,31 +150,6 @@ Friendship.create(
   friend_id: 5
 )
 
-Friendship.create(
-  user_id: 1,
-  friend_id: 6
-)
-
-Friendship.create(
-  user_id: 1,
-  friend_id: 7
-)
-
-Friendship.create(
-  user_id: 1,
-  friend_id: 8
-)
-
-Friendship.create(
-  user_id: 1,
-  friend_id: 9
-)
-
-Friendship.create(
-  user_id: 1,
-  friend_id: 10
-)
-
 # Friend Request Seeds
 
 FriendRequest.create(
@@ -195,19 +170,4 @@ FriendRequest.create(
 FriendRequest.create(
   user_id: 1,
   friend_id: 14
-)
-
-FriendRequest.create(
-  user_id: 1,
-  friend_id: 15
-)
-
-FriendRequest.create(
-  user_id: 1,
-  friend_id: 16
-)
-
-FriendRequest.create(
-  user_id: 1,
-  friend_id: 17
 )
