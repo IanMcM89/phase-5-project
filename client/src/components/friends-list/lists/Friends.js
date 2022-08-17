@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { fetchUsers } from "../../../reducers/users";
+import { UserList } from "../../../styles";
 import styled, { css } from "styled-components";
 
 const Friends = () => {
@@ -35,32 +36,6 @@ const Friends = () => {
     }
   }
 
-  const displayFriends = () => {
-    if (friends.length > 0) {
-      return friends.map((friend) => (
-        <Li key={friend.id}>
-          <Avatar 
-            src={friend.avatar? friend.avatar : "/images/icons/avatar.png"} 
-            alt="Avatar" 
-          />
-          <H2>{friend.username}</H2>
-          <Button
-            style={showButton ? { display: 'none' } : null}
-            onClick={() => destroyFriendship(friend.id)}
-          >
-            Unfriend
-          </Button>
-        </Li>
-      ));
-    } else {
-      return (
-        <Li style={{ justifyContent: 'center' }}>
-          <p>No Users</p>
-        </Li>
-      );
-    }
-  }
-
   return (
     <Wrapper>
       <Label htmlFor="friends">
@@ -84,9 +59,12 @@ const Friends = () => {
           style={showList ? { marginLeft: 'auto' } : null}
         />
       </Label>
-      <Ul style={showList ? { display: 'none' } : null}>
-        {displayFriends()}
-      </Ul>
+      <UserList 
+        variant="friends"
+        users={friends}
+        showList={showList}
+        destroyFriendship={destroyFriendship}
+      />
     </Wrapper>
   );
 }
@@ -122,60 +100,6 @@ const ArrowIcon = styled.img`
 
 const EditIcon = styled(ArrowIcon)`
   margin-left: auto;
-`;
-
-const Ul = styled.ul`
-  ${commonStyles}
-  border-radius: 6px;
-  height: auto;
-  padding: 0;
-  overflow-y: scroll;
-  ::-webkit-scrollbar { 
-    display: none;
-  }
-
-  li:nth-child(odd) {
-    background: rgb(10,15,25,0.7);
-  }
-`;
-
-const Li = styled.li`
-  display: flex;
-  justify-content: center;
-  background-color: rgb(10,15,25,0.5);
-  color: white;
-  flex-direction: row;
-  height: fit-content;
-  margin: 0;
-  animation: expand 0.2s ease forwards;
-`;
-
-const Avatar = styled.img`
-  ${commonStyles}
-  width: auto;
-  height: 30px;
-  margin: 2%;
-`;
-
-const H2 = styled.h2`
-  ${commonStyles}
-  justify-content: center;
-  font-size: 1rem;
-  margin: 0;
-`;
-
-const Button = styled.button`
-  background-color: transparent;
-  color: white;
-  border: none;
-  cursor: pointer;
-  margin-right: 2%;
-  transition: 0.3s;
-  animation: hoverOut 0.2s ease forwards;
-
-  :hover {
-    animation: hoverIn 0.2s ease forwards;
-  }
 `;
 
 export default Friends;

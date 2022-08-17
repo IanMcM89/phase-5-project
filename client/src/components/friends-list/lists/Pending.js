@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { fetchUsers } from "../../../reducers/users";
+import { UserList } from "../../../styles";
 import styled, { css } from "styled-components";
 
 const Pending = () => {
@@ -14,30 +15,6 @@ const Pending = () => {
 
   const toggleList = () => {
     sethidden(!hidden);
-  }
-
-  const displayPendingFriends = () => {
-    if (pendingFriends.length > 0) {
-      return pendingFriends.map((pending) => (
-        <Li key={pending.id}>
-          <Avatar 
-            src={pending.avatar? pending.avatar : "/images/icons/avatar.png"} 
-            alt="Avatar" 
-          />
-          <H2>{pending.username}</H2>
-          <Icon
-            src="/images/icons/pending.png"
-            alt="Hour Glass Icon"
-          />
-        </Li>
-      ));
-    } else {
-      return (
-        <Li style={{ justifyContent: 'center' }}>
-          <p>No Users</p>
-        </Li>
-      );
-    }
   }
 
   return (
@@ -56,9 +33,11 @@ const Pending = () => {
           onClick={toggleList}
         />
       </Label>
-      <Ul style={hidden ? { display: 'none' } : null}>
-        {displayPendingFriends()}
-      </Ul>
+      <UserList 
+        variant="pending"
+        users={pendingFriends}
+        showList={hidden}
+      />
     </Wrapper>
   );
 }
@@ -92,51 +71,5 @@ const ArrowIcon = styled.img`
   margin-left: auto;
   cursor: pointer;
 `;
-
-const Ul = styled.ul`
-  ${commonStyles}
-  border-radius: 6px;
-  height: auto;
-  padding: 0;
-  overflow-y: scroll;
-  ::-webkit-scrollbar { 
-    display: none;
-  }
-
-  li:nth-child(odd) {
-    background: rgb(10,15,25,0.7);
-  }
-`;
-
-const Li = styled.li`
-  display: flex;
-  background-color: rgb(10,15,25,0.5);
-  color: white;
-  flex-direction: row;
-  height: fit-content;
-  margin: 0;
-  animation: expand 0.2s ease forwards;
-`;
-
-const Avatar = styled.img`
-  ${commonStyles}
-  width: auto;
-  height: 30px;
-  margin: 2%;
-`;
-
-const H2 = styled.h2`
-  ${commonStyles}
-  justify-content: center;
-  font-size: 1rem;
-  margin: 0;
-`;
-
-const Icon = styled.img`
-  ${commonStyles}
-  align-items: center;
-  width: auto;
-  height: 40px;
-  }`
 
 export default Pending;
