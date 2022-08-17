@@ -15,18 +15,16 @@ export const fetchUsers = (url, search) => {
 
 const filterUsers = (users, search) => {
   if (search) {
-    return users.filter((user) => user.username.includes(search))
+    return users.filter((user) => user.username.includes(search));
   } else {
-    return users
+    return users;
   }
 }
 
 // Reducers:
-export default function createReducer(name = '') {
+export default function createUserReducer(name = '') {
   return function reducer(state = { entities: [] }, action) {
     switch (action.type) {
-      case `${name}/loading`:
-        return state;
       case `${name}/loaded`:
         return {
           ...state,

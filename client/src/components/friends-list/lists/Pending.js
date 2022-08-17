@@ -20,7 +20,10 @@ const Pending = () => {
     if (pendingFriends.length > 0) {
       return pendingFriends.map((pending) => (
         <Li key={pending.id}>
-          <Avatar src="/images/icons/avatar.png" alt="Avatar" />
+          <Avatar 
+            src={pending.avatar? pending.avatar : "/images/icons/avatar.png"} 
+            alt="Avatar" 
+          />
           <H2>{pending.username}</H2>
           <Icon
             src="/images/icons/pending.png"
@@ -31,7 +34,7 @@ const Pending = () => {
     } else {
       return (
         <Li style={{ justifyContent: 'center' }}>
-          <p>No Requests</p>
+          <p>No Users</p>
         </Li>
       );
     }
@@ -70,7 +73,6 @@ const commonStyles = css`
 const Wrapper = styled.div`
   ${commonStyles}
   height: auto;
-  max-height: 50%;
   overflow-y: hidden;
 `;
 
@@ -96,6 +98,10 @@ const Ul = styled.ul`
   border-radius: 6px;
   height: auto;
   padding: 0;
+  overflow-y: scroll;
+  ::-webkit-scrollbar { 
+    display: none;
+  }
 
   li:nth-child(odd) {
     background: rgb(10,15,25,0.7);

@@ -1,22 +1,21 @@
-import React, { useState, useEffect } from "react";
-import { useSelector, useDispatch } from "react-redux";
-import { fetchUsers } from "../../../reducers/users";
+import React, { useState } from "react";
+import { useSelector } from "react-redux";
 import styled, { css } from "styled-components";
 
 const Users = ({ currentUser }) => {
   const [hidden, setHidden] = useState(false);
   const users = useSelector((state) => state.users.entities);
-  const dispatch = useDispatch();
+  const showUsers = useSelector((state) => state.showUsers);
 
-  useEffect(() => {
-    dispatch(fetchUsers('/api/pending_friends'));
-  }, [dispatch]);
+  console.log(useSelector((state) => state))
+
+  console.log(users.length)
   
   const toggleList = () => {
     setHidden(!hidden);
   }
 
-  const createFriendRequest = (id) => {
+  const createFriendRequest = (user) => {
     fetch("/api/friend_requests", {
       method: "POST",
       headers: {
@@ -24,27 +23,40 @@ const Users = ({ currentUser }) => {
       },
       body: JSON.stringify({
         user_id: currentUser.id,
-        friend_id: id
+        friend_id: user.id
       }),
     })
   };
 
-  const displayUsers = users.map((user) => (
-    <Li key={user.id}>
-      <Avatar src="/images/icons/avatar.png" alt="Avatar" />
-      <H2>{user.username}</H2>
-      <Button
-        src="./images/icons/add-friend.png"
-        alt="Add Friend"
-        onClick={() => createFriendRequest(user.id)}
-      />
-    </Li>
-  ));
+  const displayUsers = () => {
+    if (users.length > 0) {
+      return users.map((user) => (
+        <Li key={user.id}>
+          <Avatar 
+            src={user.avatar? user.avatar : "/images/icons/avatar.png"} 
+            alt="Avatar" 
+          />
+          <H2>{user.username}</H2>
+          <Button
+            src="./images/icons/add-friend.png"
+            alt="Add Friend"
+            onClick={() => createFriendRequest(user)}
+          /> 
+        </Li>
+      ));
+    } else {
+      return (
+        <Li>
+          <p>No Users</p>
+        </Li>
+      );
+    }
+  };
 
   return (
-    <Wrapper style={users.length > 0 ? (null) : ({ display: 'none' })}>
+    <Wrapper style={!showUsers ? ({ display: 'none' }) : (null)}>
       <Label>
-        Users
+        All Users
         <ArrowIcon
           src={
             hidden ? (
@@ -58,7 +70,7 @@ const Users = ({ currentUser }) => {
         />
       </Label>
       <Ul style={hidden ? ({ display: 'none' }) : (null)}>
-        {displayUsers}
+        {displayUsers()}
       </Ul>
     </Wrapper>
   );
@@ -74,7 +86,6 @@ const commonStyles = css`
 const Wrapper = styled.div`
   ${commonStyles}
   height: auto;
-  max-height: 40%;
 `;
 
 const Label = styled.label`
@@ -99,7 +110,10 @@ const Ul = styled.ul`
   border-radius: 6px;
   height: auto;
   padding: 0;
-  animation: expand 0.2s ease forwards;
+  overflow-y: scroll;
+  ::-webkit-scrollbar { 
+    display: none;
+  }
 
   li:nth-child(odd) {
     background: rgb(10,15,25,0.7);
@@ -114,6 +128,7 @@ const Li = styled.li`
   flex-direction: row;
   height: fit-content;
   margin: 0;
+  animation: expand 0.2s ease forwards;
 `;
 
 const Avatar = styled.img`
@@ -133,9 +148,6 @@ const H2 = styled.h2`
 
 const Button = styled.img`
   ${commonStyles}
-  background-color: dimgray;
-  border: 1px solid white;
-  border-radius: 4px;
   justify-content: center;
   align-items: center;
   width: auto;
@@ -143,9 +155,10 @@ const Button = styled.img`
   margin: 2%;
   cursor: pointer;
   transition: 0.3s;
+  animation: hoverOut 0.2s ease forwards;
 
   &:hover {
-    background-color: green;
+    animation: hoverIn 0.2s ease forwards;
   }
 `;
 

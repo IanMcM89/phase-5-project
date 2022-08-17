@@ -39,7 +39,10 @@ const Friends = () => {
     if (friends.length > 0) {
       return friends.map((friend) => (
         <Li key={friend.id}>
-          <Avatar src="/images/icons/avatar.png" alt="Avatar" />
+          <Avatar 
+            src={friend.avatar? friend.avatar : "/images/icons/avatar.png"} 
+            alt="Avatar" 
+          />
           <H2>{friend.username}</H2>
           <Button
             style={showButton ? { display: 'none' } : null}
@@ -51,8 +54,8 @@ const Friends = () => {
       ));
     } else {
       return (
-        <Li>
-          <p>No Frienships</p>
+        <Li style={{ justifyContent: 'center' }}>
+          <p>No Users</p>
         </Li>
       );
     }
@@ -98,7 +101,6 @@ const commonStyles = css`
 const Wrapper = styled.div`
   ${commonStyles}
   height: auto;
-  max-height: 50%;
   overflow-y: hidden;
 `;
 
@@ -127,6 +129,10 @@ const Ul = styled.ul`
   border-radius: 6px;
   height: auto;
   padding: 0;
+  overflow-y: scroll;
+  ::-webkit-scrollbar { 
+    display: none;
+  }
 
   li:nth-child(odd) {
     background: rgb(10,15,25,0.7);
@@ -165,10 +171,10 @@ const Button = styled.button`
   cursor: pointer;
   margin-right: 2%;
   transition: 0.3s;
-  animation: hoverOut 0.4s ease forwards;
+  animation: hoverOut 0.2s ease forwards;
 
   :hover {
-    animation: hoverIn 0.4s ease forwards;
+    animation: hoverIn 0.2s ease forwards;
   }
 `;
 

@@ -1,11 +1,13 @@
 import { combineReducers } from "redux";
-import createReducer from "./reducers/users";
+import createUserReducer from "./reducers/users";
+import showUsersReducer from "./reducers/userList";
 
 
 const rootReducer = combineReducers({
-  friends: createReducer('/api/friends'),
-  pending: createReducer('/api/pending_friends'),
-  users: createReducer('/api/users'),
+  friends: createUserReducer('/api/friends'),
+  pending: createUserReducer('/api/pending_friends'),
+  users:  createUserReducer('/api/users'),
+  showUsers: showUsersReducer,
 });
 
 export default rootReducer;
