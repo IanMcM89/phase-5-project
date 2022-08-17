@@ -13,7 +13,7 @@ const FriendsList = ({ user }) => {
       <Lists>
         <Friends />
         <Pending />
-        <Users user={user} />
+        <Users currentUser={user} />
       </Lists>
     </Wrapper>
   )
@@ -35,7 +35,7 @@ const Wrapper = styled.div`
     rgba(10,15,20,0.8) 60%
   );
   padding: 1%;
-  overflow: hidden;
+  overflow-y: hidden;
 `;
 
 const Lists = styled.div`
