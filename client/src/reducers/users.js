@@ -21,14 +21,25 @@ const filterUsers = (users, search) => {
   }
 }
 
+const initialState = {
+  entities: [], //array of users
+  status: "idle", //loading status
+};
+
 // Reducers:
 export default function createUserReducer(name = '') {
-  return function reducer(state = { entities: [] }, action) {
+  return function reducer(state = initialState, action) {
     switch (action.type) {
       case `${name}/loaded`:
         return {
           ...state,
+          status: "idle",
           entities: action.payload,
+        };
+      case `${name}/loading`:
+        return {
+          ...state,
+          status: "loading",
         };
       default:
         return state;
