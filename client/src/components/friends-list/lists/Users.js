@@ -39,7 +39,7 @@ const Users = ({ currentUser }) => {
             )
           }
           alt="Edit Icon"
-          onClick={users.length > 0 ? (toggleList) : (null)}
+          onClick={users.length ? (toggleList) : (null)}
         />
       </Label>
       <UserList
