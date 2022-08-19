@@ -6,6 +6,7 @@ import styled, { css } from "styled-components";
 
 const SearchBar = () => {
   const [searchValue, setSearchValue] = useState('');
+
   const dispatch = useDispatch();
 
   const handleSearch = (e) => {
@@ -22,6 +23,8 @@ const SearchBar = () => {
     if (searchValue.length > 0) return dispatch(showAllUsers()); 
   };
 
+  const handleChange = (e) => setSearchValue(e.target.value);
+
   const handleRefresh = () => {
     dispatch(hideAllUsers());
     return setSearchValue('');
@@ -34,7 +37,7 @@ const SearchBar = () => {
         name="search"
         placeholder="Search Username"
         value={searchValue}
-        onChange={(e) => setSearchValue(e.target.value)}
+        onChange={handleChange}
       />
       <Button>
         <Icon src="./images/icons/search.png" alt="Search Icon"/>
