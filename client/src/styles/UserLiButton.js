@@ -6,7 +6,7 @@ function UserLiButton({ props, user }) {
       case "friends":
         return (
           <RemoveButton
-            style={props.showButton ? { display: 'none' } : null}
+            style={{display: props.showButton ? 'none' : null}}
             onClick={() => props.removeFriend(user.id)}
           >
             Remove

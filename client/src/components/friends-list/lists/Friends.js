@@ -63,6 +63,7 @@ const Friends = () => {
         variant="friends"
         users={friends}
         showList={showList}
+        showButton={showButton}
         removeFriend={destroyFriendship}
       />
     </Wrapper>
