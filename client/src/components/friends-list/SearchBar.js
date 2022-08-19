@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { useDispatch } from "react-redux";
 import { fetchUsers } from "../../reducers/users";
-import { showAllUsers, hideAllUsers } from "../../reducers/userList";
+import { showUsers, hideUsers } from "../../reducers/userList";
 import styled, { css } from "styled-components";
 
 const SearchBar = () => {
@@ -20,14 +20,14 @@ const SearchBar = () => {
 
     urls.map((url) => dispatch(fetchUsers(url, searchValue)));
 
-    if (searchValue.length > 0) return dispatch(showAllUsers()); 
+    if (searchValue.length) dispatch(showUsers()); 
   };
 
   const handleChange = (e) => setSearchValue(e.target.value);
 
   const handleRefresh = () => {
-    dispatch(hideAllUsers());
-    return setSearchValue('');
+    dispatch(hideUsers());
+    setSearchValue('');
   }
 
   return (

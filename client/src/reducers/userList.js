@@ -1,11 +1,11 @@
 // Action Creators:
-export const showAllUsers = () => {
+export const showUsers = () => {
   return {
     type: 'users/shown',
   };
 }
 
-export const hideAllUsers = () => {
+export const hideUsers = () => {
   return {
     type: 'users/hidden',
   };
