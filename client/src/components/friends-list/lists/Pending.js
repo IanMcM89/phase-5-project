@@ -7,6 +7,7 @@ import styled from "styled-components";
 const Pending = () => {
   const [hidden, sethidden] = useState(false);
   const pending = useSelector((state) => state.pending.entities);
+  
   const dispatch = useDispatch();
 
   useEffect(() => {
