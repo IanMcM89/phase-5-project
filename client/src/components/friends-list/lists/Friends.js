@@ -8,6 +8,7 @@ const Friends = () => {
   const [showButton, setShowButton] = useState(true);
   const [showList, setshowList] = useState(false);
   const friends = useSelector((state) => state.friends.entities);
+  
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -25,12 +26,12 @@ const Friends = () => {
       });
   }
 
-  const toggleElement = (element) => {
-    switch (element) {
+  const toggleIcon = (icon) => {
+    switch (icon) {
       case "button":
-        return setShowButton(!showButton);;
+        return setShowButton(!showButton);
       case "list":
-        return setshowList(!showList);;
+        return setshowList(!showList);
       default:
         return null;
     }
@@ -43,8 +44,8 @@ const Friends = () => {
         <EditIcon
           src="/images/icons/edit.png"
           alt="Edit Icon"
-          onClick={() => toggleElement('button')}
-          style={showList ? { display: 'none' } : null}
+          onClick={() => toggletoggleIcon('button')}
+          style={showList ? ({ display: 'none' }) : (null)}
         />
         <ArrowIcon
           src={
@@ -55,8 +56,8 @@ const Friends = () => {
             )
           }
           alt="Edit Icon"
-          onClick={() => toggleElement('list')}
-          style={showList ? { marginLeft: 'auto' } : null}
+          onClick={() => toggletoggleIcon('list')}
+          style={showList ? ({ marginLeft: 'auto' }) : (null)}
         />
       </Label>
       <UserList 
