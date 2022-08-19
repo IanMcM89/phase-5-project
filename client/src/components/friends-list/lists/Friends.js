@@ -44,7 +44,7 @@ const Friends = () => {
         <EditIcon
           src="/images/icons/edit.png"
           alt="Edit Icon"
-          onClick={() => toggletoggleIcon('button')}
+          onClick={() => toggleIcon('button')}
           style={showList ? ({ display: 'none' }) : (null)}
         />
         <ArrowIcon
@@ -56,7 +56,7 @@ const Friends = () => {
             )
           }
           alt="Edit Icon"
-          onClick={() => toggletoggleIcon('list')}
+          onClick={() => toggleIcon('list')}
           style={showList ? ({ marginLeft: 'auto' }) : (null)}
         />
       </Label>
