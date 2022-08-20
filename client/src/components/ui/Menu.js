@@ -44,7 +44,7 @@ const commonStyles = css`
 
 const Wrapper = styled.div`
   ${commonStyles}
-  background: linear-gradient(153deg, rgba(10,15,25,0.8) 20%, rgba(30,35,45,0.7) 60%);
+  background-color: rgb(32, 36, 44);
   border-radius: 6px;
   position: absolute;
   bottom: 0;
