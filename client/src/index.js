@@ -69,7 +69,7 @@ const composedEnhancer = composeWithDevTools(applyMiddleware(thunkMiddleware));
 const store = createStore(rootReducer, composedEnhancer);
 
 const CableApp = {}
-CableApp.cable = ActionCable.createConsumer('/cable');
+CableApp.cable = ActionCable.createConsumer("/cable");
 
 ReactDOM.render(
   <BrowserRouter>
