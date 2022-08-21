@@ -8,6 +8,7 @@ import { createStore, applyMiddleware } from "redux";
 import thunkMiddleware from "redux-thunk";
 import { composeWithDevTools } from "redux-devtools-extension";
 import rootReducer from "./reducer";
+import ActionCable from 'actioncable';
 // import reportWebVitals from './reportWebVitals';
 
 const GlobalStyle = createGlobalStyle`
@@ -67,11 +68,14 @@ const composedEnhancer = composeWithDevTools(applyMiddleware(thunkMiddleware));
 
 const store = createStore(rootReducer, composedEnhancer);
 
+const CableApp = {}
+CableApp.cable = ActionCable.createConsumer('ws://localhost:3000/cable');
+
 ReactDOM.render(
   <BrowserRouter>
     <Provider store={store}>
       <GlobalStyle />
-      <App />
+      <App cable={CableApp.cable}/>
     </Provider>
   </BrowserRouter>,
   document.getElementById("root")
