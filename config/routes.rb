@@ -1,5 +1,5 @@
 Rails.application.routes.draw do
-  mount ActionCable.server => '/cable'
+  mount ActionCable.server => "/cable"
   namespace :api do
     resources :friend_requests
     resources :pending_friends, only: [:index, :show]
