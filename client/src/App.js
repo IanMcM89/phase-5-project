@@ -10,8 +10,6 @@ import styled from "styled-components";
 const App = ({ cable }) => {
   const [user, setUser] = useState(null);
 
-  console.log(user)
-
   useEffect(() => {
     // auto-login user
     fetch("/api/me").then((r) => {
