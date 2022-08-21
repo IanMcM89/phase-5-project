@@ -15,7 +15,12 @@ class Api::UsersController < ApplicationController
       end
     end
 
-    render json: users.to_json(only: [:id, :username])
+    render json: users.to_json(only: [:id, :username, :login_status])
+  end
+
+  # GET /me
+  def show
+    render json: @current_user
   end
 
   # POST /signup
@@ -23,11 +28,6 @@ class Api::UsersController < ApplicationController
     user = User.create!(user_params)
     session[:user_id] = user.id
     render json: user, status: :created
-  end
-
-  # GET /me
-  def show
-    render json: @current_user
   end
 
   private
