@@ -1,17 +1,24 @@
-import React from "react";
+import React, { useState } from "react";
+import Notifications from "./Notifications";
 import { Link } from "react-router-dom";
 import { Header, Button } from "../../styles";
 import styled, { css } from "styled-components";
 
 const NavBar = ({ setUser }) => {
+  const [showNotifications, setShowNotifications] = useState(false);
+
   const handleLogout = () => {
     fetch("/api/logout", {
       method: "DELETE"
-    }).then((response) => {
-      if (response.ok) {
+    }).then((r) => {
+      if (r.ok) {
         setUser(null);
       }
     });
+  }
+
+  const handleClick = () => {
+    setShowNotifications(!showNotifications);
   }
 
   return (
@@ -25,12 +32,17 @@ const NavBar = ({ setUser }) => {
       </LogoWrapper>
       <Nav>
         {/* <Icon src="/images/icons/profile.png" alt="Profile" /> */}
-        <Icon src="/images/icons/bell-fill.png" alt="Notifications" />
+        <Icon 
+          src="/images/icons/bell-fill.png" 
+          alt="Notifications" 
+          onClick={handleClick}
+          />
         &ensp;
         <Button variant='red' onClick={handleLogout}>
           Logout
         </Button>
       </Nav>
+      {showNotifications ? (<Notifications />) : (null)}
     </Header>
   )
 };
@@ -39,11 +51,11 @@ const commonStyles = css`
   display: flex;
   flex-direction: row;
   align-items: center;
+  height: 100%;
 `;
 
 const LogoWrapper = styled.div`
   ${commonStyles}
-  height: 100%;
 `;
 
 const Logo = styled.img`
@@ -60,7 +72,6 @@ const Title = styled.h1`
 const Nav = styled.nav`
   ${commonStyles}
   justify-content: right;
-  height: 100%;
   margin: 0 1% 0 auto;
 `;
 
