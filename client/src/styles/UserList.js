@@ -18,7 +18,7 @@ const UserList = ({ ...props }) => {
       ));
     } else {
       return (
-        <Li>No Users Found</Li>
+        <Li style={{ backgroundColor: 'transparent' }}>No Users Found</Li>
       );
     }
   }
