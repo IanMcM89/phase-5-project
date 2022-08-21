@@ -7,17 +7,32 @@ import MapPage from "./pages/MapPage";
 import FriendsList from "./components/friends-list/FriendsList";
 import styled from "styled-components";
 
-const App = () => {
+const App = ({ cable }) => {
   const [user, setUser] = useState(null);
 
   useEffect(() => {
     // auto-login user
     fetch("/api/me").then((r) => {
       if (r.ok) {
-        r.json().then((userData) => setUser(userData));
+        r.json()
+          .then((userData) => setUser(userData))
       }
     });
   }, []);
+
+  useEffect(() => {
+    if (user) cable.subscriptions.create(
+        { 
+          channel: 'UsersChannel', 
+          id: user.id 
+        }, 
+        {
+          connected:    () => { console.log(`${user.username} logged in`) },
+          disconnected: () => { console.log(`${user.username} logged off`) },
+          received: (data) => { console.log(data) }
+        }
+      );
+  }, [user, cable.subscriptions])
 
   if (!user) return (<LoginPage onLogin={setUser} />);
 
@@ -40,7 +55,7 @@ const App = () => {
             <MapPage />
           </Route>
         </Switch>
-        <Menu/>
+        <Menu />
       </Main>
     </>
   );
