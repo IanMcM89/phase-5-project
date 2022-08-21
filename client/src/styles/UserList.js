@@ -7,6 +7,7 @@ const UserList = ({ ...props }) => {
     if (props.users.length > 0) {
       return props.users.map((user) => (
         <Li key={user.id}>
+          {user.login_status ? <Status /> : null}
           <Avatar
             src={user.avatar ? user.avatar : "/images/icons/avatar.png"}
             alt="Avatar Image"
@@ -59,6 +60,20 @@ const Li = styled.li`
   background-color: rgb(10,15,25,0.5);
   height: fit-content;
   margin: 0;
+  animation: expand 0.2s ease forwards;
+`;
+
+const Status = styled.div`
+  background-color: Chartreuse;
+  border: solid rgb(10,15,25) 2px;
+  border-radius: 50%;
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  height: 12px;
+  width: 12px;
+  z-index: 1;
+  margin: 2px;
   animation: expand 0.2s ease forwards;
 `;
 
