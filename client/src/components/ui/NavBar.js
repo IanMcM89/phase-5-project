@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import Notifications from "./Notifications";
+import Notifications from "../notifications/NotificationsList";
 import { Link } from "react-router-dom";
 import { Header, Button } from "../../styles";
 import styled, { css } from "styled-components";
