@@ -1,15 +1,13 @@
 import styled from "styled-components";
 
-function Button({ variant = "tr-navy", ...props }) {
+function Button({ variant = "transparent", ...props }) {
   let Component;
-  if (variant === "tr-navy") {
-    Component = ButtonTransN;
-  } else if (variant === "tr-red") {
-    Component = ButtonTransR;
-  } else if (variant === "transparent") {
+  if (variant === "transparent") {
     Component = ButtonTransparent;
   } else if (variant === "red") {
     Component = ButtonRed;
+  } else if (variant === "green") {
+    Component = ButtonGreen;
   }
 
   return <Component {...props} />;
@@ -33,18 +31,6 @@ const ButtonBase = styled.button`
   }
 `;
 
-const ButtonTransN = styled(ButtonBase)`
-  &:hover {
-    background-color: navy;
-  }
-`;
-
-const ButtonTransR = styled(ButtonBase)`
-  &:hover {
-    background-color: rgb(186, 43, 43);
-  }
-`;
-
 const ButtonRed = styled(ButtonBase)`
   background-color: rgb(200, 55, 55);
   color: lightgray;
@@ -52,6 +38,16 @@ const ButtonRed = styled(ButtonBase)`
 
   &:hover {
     background-color: red;
+  }
+`;
+
+const ButtonGreen = styled(ButtonBase)`
+  background-color: darkgreen;
+  color: lightgray;
+  border: 2px solid transparent;
+
+  &:hover {
+    background-color: #00b300;
   }
 `;
 

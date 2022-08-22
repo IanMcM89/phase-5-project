@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { GoogleMap, LoadScript, StandaloneSearchBox, Marker } from '@react-google-maps/api';
+import Overlay from "../components/map/Overlay";
 import styled from "styled-components";
 
 const libraries = ['places'];
@@ -7,6 +8,7 @@ const libraries = ['places'];
 function Map() {
   const [currentLoc, setCurrentLoc] = useState({ lat: 42, lng: -118 });
   const [searchBox, setSearchBox] = useState(null);
+  const [overlay, setOverlay] = useState(null);
   const [places, setPlaces] = useState([]);
   const [map, setMap] = useState(null);
   const [zoom, setZoom] = useState(12);
@@ -37,6 +39,7 @@ function Map() {
     if (results) {
       const loc = results[0].geometry.location;
       setPlaces(results);
+      setOverlay(null);
       setZoom(14);
       setCurrentLoc({
         lat: loc.lat(),
@@ -78,11 +81,12 @@ function Map() {
               style={searchStyles}
             />
           </StandaloneSearchBox>
+          <Overlay overlay={overlay} setOverlay={setOverlay}/>
           {places !== [] &&
             places.map((place, i) => <Marker
               key={i}
               position={place.geometry.location}
-              onClick={() => console.log(place)}
+              onClick={() => setOverlay(place)}
             />)
           }
         </GoogleMap>
