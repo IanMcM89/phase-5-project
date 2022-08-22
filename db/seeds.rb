@@ -14,7 +14,7 @@ User.create(
   password_confirmation: "password"
 )
 
-3.times do |i|
+5.times do |i|
   User.create(
     username: "user#{i+=2}",
     password: "password",
@@ -33,7 +33,7 @@ end
 
 # Friendship Seeds
 
-5.times do |i|
+4.times do |i|
   Friendship.create(
     user_id: 1,
     friend_id: i+=2
@@ -45,6 +45,6 @@ end
 3.times do |i|
   FriendRequest.create(
     user_id: 1,
-    friend_id: i+=7
+    friend_id: i+=6
   )
 end
