@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { fetchUsers } from "../../../reducers/users";
-import { UserList } from "../../../styles";
+import UserSubList from "../styles/UserSubList";
 import styled from "styled-components";
 
 const Friends = () => {
@@ -60,7 +60,7 @@ const Friends = () => {
           style={showList ? ({ marginLeft: 'auto' }) : (null)}
         />
       </Label>
-      <UserList 
+      <UserSubList 
         variant="friends"
         users={friends}
         showList={showList}

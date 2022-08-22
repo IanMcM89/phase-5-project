@@ -1,13 +1,13 @@
 import React from "react";
-import SearchBar from "./SearchBar";
-import Friends from "./lists/Friends";
-import Pending from "./lists/Pending";
-import Users from "./lists/Users";
-import Loading from "./Loading";
 import { useSelector } from "react-redux";
+import Search from "./Search";
+import Loading from "./Loading";
+import Friends from "./sub-lists/Friends";
+import Pending from "./sub-lists/Pending";
+import Users from "./sub-lists/Users";
 import styled, { css } from "styled-components";
 
-const FriendsList = ({ user }) => {
+const UserList = ({ user }) => {
   const isLoading = useSelector((state, key) => {
     let array = [];
 
@@ -20,12 +20,12 @@ const FriendsList = ({ user }) => {
 
   return (
     <Wrapper>
-      <SearchBar />
-      <Lists style={{ display: isLoading ? ('none') : ('flex') }}>
+      <Search />
+      <SubLists style={{ display: isLoading ? ('none') : ('flex') }}>
         <Friends />
         <Pending />
         <Users currentUser={user} />
-      </Lists>
+      </SubLists>
       {isLoading ? (<Loading />) : (null)}
     </Wrapper>
   )
@@ -50,7 +50,7 @@ const Wrapper = styled.div`
   overflow-y: hidden;
 `;
 
-const Lists = styled.div`
+const SubLists = styled.div`
   ${commonStyles}
   width: 100%;
   overflow-y: scroll;
@@ -60,4 +60,4 @@ const Lists = styled.div`
   }
 `;
 
-export default FriendsList;
+export default UserList;

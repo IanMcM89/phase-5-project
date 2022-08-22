@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { useSelector } from "react-redux";
-import { UserList } from "../../../styles";
+import UserSubList from "../styles/UserSubList";
 import styled from "styled-components";
 
 const Users = ({ currentUser }) => {
@@ -42,7 +42,7 @@ const Users = ({ currentUser }) => {
           onClick={users.length ? (toggleList) : (null)}
         />
       </Label>
-      <UserList
+      <UserSubList
         variant="users"
         users={users}
         showList={hidden}

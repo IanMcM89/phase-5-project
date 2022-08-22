@@ -1,6 +1,6 @@
 import React, { useState } from "react";
-import LoginForm from "../components/login-forms/LoginForm";
-import SignUpForm from "../components/login-forms/SignUpForm";
+import LoginForm from "../components/login/LoginForm";
+import SignUpForm from "../components/login/SignUpForm";
 import { Button, Error } from ".././styles";
 import styled, { css } from "styled-components";
 

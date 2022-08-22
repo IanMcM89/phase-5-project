@@ -4,7 +4,7 @@ import NavBar from "./components/ui/NavBar";
 import Menu from "./components/ui/Menu";
 import LoginPage from "./pages/LoginPage";
 import MapPage from "./pages/MapPage";
-import FriendsList from "./components/friends-list/FriendsList";
+import UserList from "./components/users/UserList";
 import styled from "styled-components";
 
 const App = ({ cable }) => {
@@ -40,7 +40,7 @@ const App = ({ cable }) => {
     <>
       <NavBar user={user} setUser={setUser} />
       <Main>
-        <FriendsList user={user} />
+        <UserList user={user} />
         <Switch>
           <Route path="/profile">
             <></>

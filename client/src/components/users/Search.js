@@ -4,7 +4,7 @@ import { fetchUsers } from "../../reducers/users";
 import { showUsers, hideUsers } from "../../reducers/userList";
 import styled, { css } from "styled-components";
 
-const SearchBar = () => {
+const Search = () => {
   const [searchValue, setSearchValue] = useState('');
 
   const dispatch = useDispatch();
@@ -83,4 +83,4 @@ const Icon = styled.img`
   height: 100%;
 `;
 
-export default SearchBar;
+export default Search;

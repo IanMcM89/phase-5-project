@@ -5,8 +5,6 @@ import Input from "./Input";
 import Label from "./Label";
 import Error from "./Error";
 import Button from "./Button";
-import UserList from "./UserList";
-import UserLiButton from "./UserLiButton";
 
 export { 
   Header, 
@@ -15,7 +13,5 @@ export {
   Input, 
   Label, 
   Error, 
-  Button, 
-  UserList, 
-  UserLiButton 
+  Button
 };

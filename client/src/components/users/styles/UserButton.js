@@ -1,6 +1,6 @@
 import styled, { css } from "styled-components";
 
-function UserLiButton({ props, user }) {
+function UserButton({ props, user }) {
   const displayComponent = () => {
     switch (props.variant) {
       case "friends":
@@ -79,4 +79,4 @@ const AddButton = styled.img`
   margin: 2%;
 `;
 
-export default UserLiButton;
+export default UserButton;
