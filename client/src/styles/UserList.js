@@ -18,7 +18,7 @@ const UserList = ({ ...props }) => {
       ));
     } else {
       return (
-        <Li style={{ backgroundColor: 'transparent' }}>No Users Found</Li>
+        <P>No Users Found</P>
       );
     }
   }
@@ -60,6 +60,12 @@ const Li = styled.li`
   background-color: rgb(10,15,25,0.5);
   height: fit-content;
   margin: 0;
+  animation: expand 0.2s ease forwards;
+`;
+
+const P = styled.p`
+  color: gray;
+  margin: auto;
   animation: expand 0.2s ease forwards;
 `;
 
