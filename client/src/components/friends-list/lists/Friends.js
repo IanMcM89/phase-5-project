@@ -39,7 +39,7 @@ const Friends = () => {
 
   return (
     <Wrapper>
-      <Label htmlFor="friends">
+      <Label>
         My Friends
         <EditIcon
           src="/images/icons/edit.png"

@@ -20,8 +20,8 @@ const Pending = () => {
 
   return (
     <Wrapper>
-      <Label htmlFor="pending-friends">
-        Pending Requests
+      <Label>
+        Pending Friends
         <ArrowIcon
           src={
             hidden ? (
