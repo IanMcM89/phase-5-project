@@ -32,11 +32,7 @@ function UserButton({ props, user }) {
     }
   }
 
-  return (
-    <>
-      {displayComponent()}
-    </>
-  );
+  return displayComponent();
 }
 
 const commonStyles = css`
