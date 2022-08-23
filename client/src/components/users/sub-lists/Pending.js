@@ -21,7 +21,7 @@ const Pending = () => {
   return (
     <Wrapper>
       <Label>
-        Pending Friends
+        Requested Friends
         <ArrowIcon
           src={
             hidden ? (
