@@ -22,18 +22,21 @@ const Overlay = ({ overlay, setOverlay }) => {
             <Photo src={overlay.photos[0].getUrl()} alt="" />
             <h1 style={{ margin: '2%' }}>{overlay.name}</h1>
             <p style={{ margin: '2%' }}>{overlay.formatted_address}</p>
-            <p style={{ margin: '2%' }}>★{overlay.rating}</p>
+            <Rating>
+              <Star>★</Star>&nbsp;
+              <h2 style={{ margin: '2%' }}>{overlay.rating}</h2>
+            </Rating>
             {/* <h3 style={{ margin: 0 }}>★{overlay.rating}</h3> */}
             {/* {overlay.photos.map((photo, i) => {
             return (
               <Photo key={i} src={photo.getUrl()} alt=""/>
             )
           })} */}
-            <Button 
-              variant='green' 
-              onClick={() => console.log(overlay)} 
+            <Button
+              variant='green'
+              onClick={() => console.log(overlay)}
               style={{ margin: '2%' }}
-              >
+            >
               Create Event
             </Button>
           </PopUp>
@@ -99,6 +102,18 @@ const Exit = styled.button`
 const Photo = styled.img`
   ${commonStyles}
   width: 20vw;
+`;
+
+const Rating = styled.div`
+  ${commonStyles}
+  flex-direction: row;
+`;
+
+const Star = styled.div`
+  ${commonStyles}
+  color: gold;
+  margin-bottom: 10%;
+  font-size: 1.2rem;
 `;
 
 export default Overlay;
