@@ -27,7 +27,7 @@ const Users = ({ currentUser }) => {
       }),
     })
       .then((r) => r.json())
-      .then(dispatch(addUser('/api/pending_friends', user.id)))
+      .then(dispatch(addUser('/api/pending_friends', user)))
       .then(dispatch(removeUser('/api/users', user.id)));
   };
 

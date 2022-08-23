@@ -55,15 +55,19 @@ export default function createUserReducer(name = '') {
           ...state,
           status: "loading",
         };
-      case `${name}/set`:
+      case `${name}/add`:
         return {
           ...state,
-          entities: action.payload,
+          entities: [...state.entities, action.payload],
         };
       case `${name}/remove`:
-        return state.filter((user) =>
-          user.id !== action.payload
+        const newEntities = state.entities.filter(
+          (user) => user.id !== action.payload
         );
+        return {
+          ...state,
+          entities: newEntities,
+        };
       default:
         return state;
     }
