@@ -1,5 +1,6 @@
 import React from 'react';
 import { OverlayView } from '@react-google-maps/api';
+import Photos from "./Photos";
 import { Button } from "../../styles";
 import styled, { css } from "styled-components";
 
@@ -19,19 +20,13 @@ const Overlay = ({ overlay, setOverlay }) => {
         <>
           <PopUp>
             <Exit onClick={() => setOverlay(null)}>X</Exit>
-            <Photo src={overlay.photos[0].getUrl()} alt="" />
+            <Photos photos={overlay.photos} />
             <h1 style={{ margin: '2%' }}>{overlay.name}</h1>
             <p style={{ margin: '2%' }}>{overlay.formatted_address}</p>
             <Rating>
               <Star>★</Star>&nbsp;
               <h2 style={{ margin: '2%' }}>{overlay.rating}</h2>
             </Rating>
-            {/* <h3 style={{ margin: 0 }}>★{overlay.rating}</h3> */}
-            {/* {overlay.photos.map((photo, i) => {
-            return (
-              <Photo key={i} src={photo.getUrl()} alt=""/>
-            )
-          })} */}
             <Button
               variant='green'
               onClick={() => console.log(overlay)}
@@ -97,11 +92,6 @@ const Exit = styled.button`
   height: 25px;
   margin: 1%;
   cursor: pointer;
-`;
-
-const Photo = styled.img`
-  ${commonStyles}
-  width: 20vw;
 `;
 
 const Rating = styled.div`
