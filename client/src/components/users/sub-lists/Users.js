@@ -1,12 +1,15 @@
 import React, { useState } from "react";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
+import { addUser, removeUser } from "../../../reducers/users";
 import UserSubList from "../styles/UserSubList";
 import styled from "styled-components";
 
 const Users = ({ currentUser }) => {
   const [hidden, setHidden] = useState(false);
-  const users = useSelector((state) => state.users.entities);
   const showUsers = useSelector((state) => state.showUsers);
+  const users = useSelector((state) => state.users.entities);
+
+  const dispatch = useDispatch();
 
   const toggleList = () => {
     setHidden(!hidden);
@@ -23,6 +26,9 @@ const Users = ({ currentUser }) => {
         friend_id: user.id
       }),
     })
+      .then((r) => r.json())
+      .then(dispatch(addUser('/api/pending_friends', user.id)))
+      .then(dispatch(removeUser('/api/users', user.id)));
   };
 
   return showUsers ? (
@@ -30,14 +36,11 @@ const Users = ({ currentUser }) => {
       <Label>
         All Users
         <ArrowIcon
-          src={
-            hidden ? 
-            (
-              "/images/icons/arrow-close.png"
-            ) : (
-              "/images/icons/arrow-open.png"
-            )
-          }
+          src={hidden ? (
+            "/images/icons/arrow-close.png"
+          ) : (
+            "/images/icons/arrow-open.png"
+          )}
           alt="Edit Icon"
           onClick={users.length ? (toggleList) : (null)}
         />

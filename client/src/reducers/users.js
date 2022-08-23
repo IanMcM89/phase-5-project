@@ -21,6 +21,20 @@ const filterUsers = (users, search) => {
   }
 }
 
+export const addUser = (url, user) => {
+  return {
+    type: `${url}/add`,
+    payload: user
+  }
+}
+
+export const removeUser = (url, id) => {
+  return {
+    type: `${url}/remove`,
+    payload: id
+  }
+}
+
 const initialState = {
   entities: [], //array of users
   status: "idle", //loading status
@@ -41,6 +55,15 @@ export default function createUserReducer(name = '') {
           ...state,
           status: "loading",
         };
+      case `${name}/set`:
+        return {
+          ...state,
+          entities: action.payload,
+        };
+      case `${name}/remove`:
+        return state.filter((user) =>
+          user.id !== action.payload
+        );
       default:
         return state;
     }
