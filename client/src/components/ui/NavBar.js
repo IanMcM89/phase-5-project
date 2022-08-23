@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import {useHistory} from "react-router-dom";
 import Notifications from "../notifications/NotificationsList";
 import { Link } from "react-router-dom";
 import { Header, Button } from "../../styles";
@@ -6,6 +7,7 @@ import styled, { css } from "styled-components";
 
 const NavBar = ({ setUser }) => {
   const [showNotifications, setShowNotifications] = useState(false);
+  const history = useHistory();
 
   const handleLogout = () => {
     fetch("/api/logout", {
@@ -32,11 +34,21 @@ const NavBar = ({ setUser }) => {
       </LogoWrapper>
       <Nav>
         {/* <Icon src="/images/icons/profile.png" alt="Profile" /> */}
-        <Icon 
-          src="/images/icons/bell-fill.png" 
-          alt="Notifications" 
+        <Icon
+          src="/images/icons/map.png"
+          alt="GeoMapper"
+          onClick={() => history.push("/")}
+        />
+        <Icon
+          src="/images/icons/events.png"
+          alt="Events"
+          onClick={() => history.push("/events")}
+        />
+        <Icon
+          src="/images/icons/bell-fill.png"
+          alt="Notifications"
           onClick={handleClick}
-          />
+        />
         &ensp;
         <Button variant='red' onClick={handleLogout}>
           Logout

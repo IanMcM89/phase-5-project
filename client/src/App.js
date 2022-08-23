@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { Switch, Route } from 'react-router-dom';
 import NavBar from "./components/ui/NavBar";
-import Menu from "./components/ui/Menu";
 import LoginPage from "./pages/LoginPage";
 import MapPage from "./pages/MapPage";
 import UserList from "./components/users/UserList";
@@ -55,7 +54,6 @@ const App = ({ cable }) => {
             <MapPage />
           </Route>
         </Switch>
-        <Menu />
       </Main>
     </>
   );
