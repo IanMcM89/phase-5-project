@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from 'react';
-import { GoogleMap, LoadScript, StandaloneSearchBox, Marker } from '@react-google-maps/api';
+import { GoogleMap, LoadScript } from '@react-google-maps/api';
+import SearchBox from "../components/map/SearchBox";
 import Overlay from "../components/map/Overlay";
+import RosaPin from "../components/map/RosaPin";
 import styled from "styled-components";
 
 const libraries = ['places'];
@@ -24,17 +26,17 @@ function Map() {
   }, []);
 
   // Sets map ref on load:
-  const onMapLoad = (ref) => {
+  const loadMap = (ref) => {
     setMap(ref);
   }
 
   // Sets search ref on load:
-  const onSBLoad = (ref) => {
+  const loadSB = (ref) => {
     setSearchBox(ref);
   };
 
   // Fetches places from Google Places API using searchbox query:
-  const onPlacesChanged = () => {
+  const changePlaces = () => {
     const results = searchBox.getPlaces();
     if (results) {
       const loc = results[0].geometry.location;
@@ -63,32 +65,20 @@ function Map() {
           mapContainerStyle={mapStyles}
           onDragEnd={updateCenter}
           clickableIcons={false}
-          onLoad={onMapLoad}
+          onLoad={loadMap}
           zoom={zoom}
           center={{
             lat: currentLoc.lat,
             lng: currentLoc.lng
           }}
         >
-          <StandaloneSearchBox
-            bounds={map ? map.getBounds() : null}
-            onPlacesChanged={onPlacesChanged}
-            onLoad={onSBLoad}
-          >
-            <input
-              type="text"
-              placeholder="Search Places"
-              style={searchStyles}
-            />
-          </StandaloneSearchBox>
-          <Overlay overlay={overlay} setOverlay={setOverlay}/>
-          {places !== [] &&
-            places.map((place, i) => <Marker
-              key={i}
-              position={place.geometry.location}
-              onClick={() => setOverlay(place)}
-            />)
-          }
+          <SearchBox
+            map={map}
+            onPlacesChanged={changePlaces}
+            onSBLoad={loadSB}
+          />
+          <Overlay setOverlay={setOverlay} overlay={overlay} />
+          <RosaPin setOverlay={setOverlay} places={places} />
         </GoogleMap>
       </LoadScript>
     </Wrapper>
@@ -105,23 +95,6 @@ const Wrapper = styled.div`
 const mapStyles = {
   width: '100%',
   height: '100%',
-};
-
-const searchStyles = {
-  boxSizing: 'border-box',
-  border: '1px solid transparent',
-  width: '240px',
-  height: '32px',
-  padding: '0 12px',
-  borderRadius: '3px',
-  boxShadow: '0 2px 6px rgba(0, 0, 0, 0.3)',
-  fontSize: '14px',
-  outline: 'none',
-  textOverflow: 'ellipses',
-  position: 'absolute',
-  left: '50%',
-  marginLeft: '-120px',
-  marginTop: '1%'
 };
 
 export default Map;
