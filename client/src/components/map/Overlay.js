@@ -63,6 +63,7 @@ const PopUp = styled.div`
   box-shadow: 0px 2px 10px 1px rgba(0, 0, 0, 0.5);
   width: fit-content;
   height: fit-content;
+  animation: appear 0.6s ease forwards;
 `;
 
 const PopUpAnchor = styled.div`
