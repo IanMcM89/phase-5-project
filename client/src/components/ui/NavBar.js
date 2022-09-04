@@ -45,7 +45,7 @@ const NavBar = ({ setUser }) => {
           onClick={() => history.push("/events")}
         />
         <Icon
-          src="/images/icons/bell-fill.png"
+          src="/images/icons/bell-empty.png"
           alt="Notifications"
           onClick={handleClick}
         />
