@@ -1,24 +1,17 @@
 import React from "react";
 import FriendRequests from "./lists/FriendRequests";
-import styled, { css } from "styled-components";
+import styled from "styled-components";
 
 const NotificationsList = () => {
   return (
     <Wrapper>
-      <Label>Notifications:</Label>
-      <Lists>
+      <Label>Notifications</Label>
+      <List>
         <FriendRequests />
-      </Lists>
+      </List>
     </Wrapper>
   )
 }
-
-const commonStyles = css`
-  display: flex;
-  flex-direction: column;
-  width: 30%;
-  height: 100%;
-`;
 
 const Wrapper = styled.div`
   background-color: rgb(30,35,45,0.9);
@@ -26,7 +19,7 @@ const Wrapper = styled.div`
   top: 10%;
   right: 0;
   height: fit-content;
-  width: 30%;
+  width: 25%;
   z-index: 1;
   animation: expand 0.2s ease forwards;
 `;
@@ -44,11 +37,14 @@ const Label = styled.label`
   padding: 1%;
 `;
 
-const Lists = styled.div`
-  ${commonStyles}
+const List = styled.ul`
+  display: flex;
+  flex-direction: column;
   width: 100%;
+  height: 100%;
   overflow-y: scroll;
-  padding: 0 2% 2%;
+  margin: 0;
+  padding: 0;
   
   ::-webkit-scrollbar {
     display: none;
