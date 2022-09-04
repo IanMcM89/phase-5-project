@@ -4,24 +4,25 @@ import styled, { css } from "styled-components";
 const Photos = ({ photos }) => {
   const [index, setIndex] = useState(0);
 
+  const url = photos ? photos[index].getUrl() : "/images/camera.png";
+
   const incrementIndex = () => {
-    const length = (photos.length - 1);
     let i = index;
-    if (index <= length) setIndex(i++);
+    if (photos && i < (photos.length - 1)) i++;
+    return setIndex(i);
   }
 
   const decrementIndex = () => {
     let i = index;
-    i--;
-    if (index > 0) setIndex(i);
+    if (photos && i > 0) i--;
+    return setIndex(i);
   }
-
-  console.log(photos.length)
-  console.log(index)
 
   return (
     <Wrapper>
-      <Photo src={photos[index].getUrl()} alt={photos[0].getUrl()} />
+      <Photo 
+        src={url} 
+        alt={url} />
       <LeftArrow
         src="/images/icons/arrow-left.png"
         alt="Left Arrow"
@@ -45,11 +46,12 @@ const commonStyles = css`
 `;
 
 const Wrapper = styled.div`
+  background-color: gray;
   display: flex;
   justify-content: center;
   align-items: center;
-  border-radius: 6px;
-  width: 25vw;
+  border-radius: 6px 6px 0 0;
+  width: 20vw;
   height: 25vh;
   margin: 0;
   overflow: hidden;
@@ -58,8 +60,6 @@ const Wrapper = styled.div`
 const Photo = styled.img`
   display: flex;
   width: 100%;
-  height: auto;
-  margin: 0;
 `;
 
 const LeftArrow = styled.img`
