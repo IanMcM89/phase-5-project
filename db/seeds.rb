@@ -36,7 +36,7 @@ end
 4.times do |i|
   Friendship.create(
     user_id: 1,
-    friend_id: i+=2
+    friend_id: i+=4
   )
 end
 
