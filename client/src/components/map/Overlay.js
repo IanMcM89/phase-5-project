@@ -21,12 +21,18 @@ const Overlay = ({ overlay, setOverlay }) => {
           <PopUp>
             <Exit onClick={() => setOverlay(null)}>X</Exit>
             <Photos photos={overlay.photos} />
-            <h1 style={{ margin: '2%' }}>{overlay.name}</h1>
+            <Heading>
+              <H1>{overlay.name}</H1>
+              {overlay.rating ? (
+                <Rating>
+                  <Star>★</Star>&nbsp;
+                  <H2>{overlay.rating}</H2>
+                </Rating>
+              ) : (
+                null
+              )}
+            </Heading>
             <p style={{ margin: '2%' }}>{overlay.formatted_address}</p>
-            <Rating>
-              <Star>★</Star>&nbsp;
-              <h2 style={{ margin: '2%' }}>{overlay.rating}</h2>
-            </Rating>
             <Button
               variant='green'
               onClick={() => console.log(overlay)}
@@ -59,7 +65,6 @@ const PopUp = styled.div`
   position: absolute;
   transform: translate(-50%, -100%);
   background-color: white;
-  padding: 6px;
   box-shadow: 0px 2px 10px 1px rgba(0, 0, 0, 0.5);
   width: fit-content;
   height: fit-content;
@@ -95,15 +100,30 @@ const Exit = styled.button`
   cursor: pointer;
 `;
 
+const Heading = styled.div`
+  ${commonStyles}
+  width: 100%;
+  flex-direction: row;
+`;
+
 const Rating = styled.div`
   ${commonStyles}
   flex-direction: row;
 `;
 
+const H1 = styled.h1`
+  font-size: 1vw;
+  margin: 2%;
+`;
+
+const H2 = styled.h2`
+  color: dimgray;
+`;
+
 const Star = styled.div`
   ${commonStyles}
   color: gold;
-  margin-bottom: 10%;
+  margin-bottom: 8%;
   font-size: 1.2rem;
 `;
 
