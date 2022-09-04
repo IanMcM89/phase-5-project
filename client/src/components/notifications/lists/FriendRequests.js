@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from "react";
-import styled from "styled-components";
+import { Button } from "../../../styles";
+import styled, { css } from "styled-components";
 
 const FriendRequests = () => {
-  const [hidden, sethidden] = useState(false);
   const [friendRequests, setFriendRequests] = useState([]);
 
   useEffect(() => {
@@ -27,57 +27,98 @@ const FriendRequests = () => {
       });
   }
 
-  const toggleList = () => {
-    sethidden(!hidden);
-  }
-
-  // const displayFriendrequests = friendRequests.map((request) => {
-  //   return(
-  //     <FriendRequest key={request.id} request={request}/>
-  //   )
-  // });
+  const displayFriendrequests = friendRequests.map((request) => {
+    return (
+      <FriendRequest key={request.id}>
+        <Timestamp>{request.created_at}</Timestamp>
+        <Content>
+          <Avatar
+            src={request.user.avatar ? (
+              request.user.avatar
+            ) : (
+              "/images/icons/avatar.png"
+            )}
+            alt="Avatar Image"
+          />
+          <Message>{request.user.username} sent you a friend request:</Message>
+        </Content>
+        <Buttons>
+          <Button
+            style={{ margin: "0 4%", padding: "4px 8px"}} 
+            variant="green"
+            onClick={() => console.log("Request Accepted")}
+          >
+            Accept
+          </Button>
+          <Button
+            style={{ padding: "4px 8px"}}
+            variant="red" 
+            onClick={() => destroyFriendRequest(request.id)}
+          >
+            Reject
+          </Button>
+        </Buttons>
+      </FriendRequest>
+    )
+  });
 
   return (
     <Wrapper>
-      <Label htmlFor="friend-requests">
-        Friend Requests
-        <ArrowIcon
-          src={
-            hidden ? (
-              "/images/icons/arrow-close.png"
-            ) : (
-              "/images/icons/arrow-open.png"
-            )
-          }
-          alt="Edit Icon"
-          onClick={toggleList}
-        />
-      </Label>
-      {/* {displayFriendrequests} */}
+      {displayFriendrequests}
     </Wrapper>
   );
 }
 
-const Wrapper = styled.div`
+const commonStyles = css`
   display: flex;
-  flex-direction: column;
   width: 100%;
   height: fit-content;
+  justify-content: center;
+  flex-direction: column;
 `;
 
-const Label = styled.label`
-  display: flex;
+const Wrapper = styled.div`
+  ${commonStyles}
+
+  div:nth-child(odd) {
+    background: rgb(10,15,25,0.6);
+  }
+`;
+
+const FriendRequest = styled.div`
+  ${commonStyles}
+`;
+
+const Timestamp = styled.p`
+  color: gray;
+  margin: 0 0 0 2%;
+  font-size: 0.7vw;
+`;
+
+const Content = styled.div`
+  ${commonStyles}
   flex-direction: row;
-  align-items: center;
-  border-bottom: solid 1px gray;
-  color: white;
-  font-size: 1rem;
-  height: fit-content;
 `;
 
-const ArrowIcon = styled.img`
+const Avatar = styled.img`
+  ${commonStyles}
+  width: auto;
   height: 30px;
-  cursor: pointer;
+  margin: 2%;
+`;
+
+const Message = styled.p`
+  ${commonStyles}
+  color: white;
+  height: auto;
+  margin: 0;
+`;
+
+const Buttons = styled.nav`
+  ${commonStyles}
+  flex-direction: row;
+  width: fit-content;
+  margin: 0 2% 2%;
 `;
 
 export default FriendRequests;
