@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { Switch, Route } from 'react-router-dom';
 import NavBar from "./components/ui/NavBar";
+import EventsPage from "./pages/EventsPage"
 import LoginPage from "./pages/LoginPage";
 import MapPage from "./pages/MapPage";
 import UserList from "./components/users/UserList";
@@ -48,7 +49,7 @@ const App = ({ cable }) => {
             <></>
           </Route>
           <Route path="/events">
-            <></>
+            <EventsPage />
           </Route>
           <Route path="/">
             <MapPage />
