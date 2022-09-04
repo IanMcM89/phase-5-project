@@ -8,7 +8,7 @@ import styled from "styled-components";
 const libraries = ['places'];
 
 function Map() {
-  const [currentLoc, setCurrentLoc] = useState({ lat: 42, lng: -118 });
+  const [currentLoc, setCurrentLoc] = useState(null);
   const [searchBox, setSearchBox] = useState(null);
   const [overlay, setOverlay] = useState(null);
   const [places, setPlaces] = useState([]);
@@ -61,25 +61,30 @@ function Map() {
         googleMapsApiKey={`${process.env.REACT_APP_GOOGLE_MAPS_API_KEY}`}
         libraries={libraries}
       >
-        <GoogleMap
-          mapContainerStyle={mapStyles}
-          onDragEnd={updateCenter}
-          clickableIcons={false}
-          onLoad={loadMap}
-          zoom={zoom}
-          center={{
-            lat: currentLoc.lat,
-            lng: currentLoc.lng
-          }}
-        >
-          <SearchBox
-            map={map}
-            onPlacesChanged={changePlaces}
-            onSBLoad={loadSB}
-          />
-          <Overlay setOverlay={setOverlay} overlay={overlay} />
-          <RosaPin setOverlay={setOverlay} places={places} />
-        </GoogleMap>
+        {currentLoc ? (
+          <GoogleMap
+            options={{ disableDoubleClickZoom: true }}
+            mapContainerStyle={mapStyles}
+            onDragEnd={updateCenter}
+            clickableIcons={false}
+            onLoad={loadMap}
+            zoom={zoom}
+            center={{
+              lat: currentLoc.lat,
+              lng: currentLoc.lng
+            }}
+          >
+            <SearchBox
+              map={map}
+              onPlacesChanged={changePlaces}
+              onSBLoad={loadSB}
+            />
+            <Overlay setOverlay={setOverlay} overlay={overlay} />
+            <RosaPin setOverlay={setOverlay} places={places} />
+          </GoogleMap>
+        ) : (
+          null
+        )}
       </LoadScript>
     </Wrapper>
   );
