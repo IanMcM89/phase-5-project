@@ -11,4 +11,8 @@ class FriendRequest < ApplicationRecord
     user.friends << friend
     destroy
   end
+
+  def created_at
+    attributes['created_at'].strftime("%m/%d/%Y %H:%M")
+  end
 end
