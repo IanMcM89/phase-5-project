@@ -1,5 +1,5 @@
 import React from "react";
-import FriendRequests from "./lists/FriendRequests";
+import FriendRequestList from "./lists/FriendRequestList";
 import styled from "styled-components";
 
 const NotificationsList = () => {
@@ -7,7 +7,7 @@ const NotificationsList = () => {
     <Wrapper>
       <Label>Notifications</Label>
       <List>
-        <FriendRequests />
+        <FriendRequestList />
       </List>
     </Wrapper>
   )
@@ -19,7 +19,7 @@ const Wrapper = styled.div`
   top: 10%;
   right: 0;
   height: fit-content;
-  width: 25%;
+  width: 20%;
   z-index: 1;
   animation: expand 0.2s ease forwards;
 `;
