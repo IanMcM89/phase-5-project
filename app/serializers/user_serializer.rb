@@ -3,4 +3,5 @@ class UserSerializer < ActiveModel::Serializer
 
   has_many :friends
   has_many :pending_friends
+  has_many :events
 end
