@@ -40,10 +40,10 @@ const Search = () => {
         onChange={handleChange}
       />
       <Button>
-        <Icon src="./images/icons/search.png" alt="Search Icon"/>
+        <Icon src="/images/icons/search.png" alt="Search Icon"/>
       </Button>
       <Button onClick={handleRefresh}>
-        <Icon src="./images/icons/refresh.png" alt="Search Icon"/>
+        <Icon src="/images/icons/refresh.png" alt="Search Icon"/>
       </Button>
     </Form>
   );
