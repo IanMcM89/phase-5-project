@@ -28,7 +28,7 @@ const commonStyles = css`
 const Li = styled.li`
   ${commonStyles}
   flex-direction: row;
-  background-color: rgb(10,15,25,0.5);
+  background-color: rgb(10,15,25,0.6);
   height: fit-content;
   margin: 0;
   animation: expand 0.2s ease forwards;

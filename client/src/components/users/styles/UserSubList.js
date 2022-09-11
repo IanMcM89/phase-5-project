@@ -42,7 +42,7 @@ const Ul = styled.ul`
   }
 
   li:nth-child(odd) {
-    background: rgb(10,15,25,0.7);
+    background: rgb(10,15,25,0.8);
   }
 `;
 
