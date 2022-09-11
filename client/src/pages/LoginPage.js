@@ -36,7 +36,7 @@ const LoginPage = ({ onLogin }) => {
             </P>
           </Section>
         )}
-        <ErrorField style={{ hight: '20%' }}>
+        <ErrorField>
           {errors.map((error) => <Error key={error}>{error}</Error>)}
         </ErrorField>
       </Wrapper>
