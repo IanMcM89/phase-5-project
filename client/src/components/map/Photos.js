@@ -60,6 +60,8 @@ const Wrapper = styled.div`
 const Photo = styled.img`
   display: flex;
   width: 100%;
+  height: 100%;
+  object-fit: cover;
 `;
 
 const LeftArrow = styled.img`
