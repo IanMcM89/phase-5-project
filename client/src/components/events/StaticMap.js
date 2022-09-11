@@ -11,21 +11,17 @@ const StaticMap = ({ event }) => {
     <LoadScript
       googleMapsApiKey={`${process.env.REACT_APP_GOOGLE_MAPS_API_KEY}`}
     >
-      {event ? (
-        <GoogleMap
-          options={{ gestureHandling: 'none', disableDefaultUI: true }}
-          mapContainerStyle={mapStyles}
-          clickableIcons={false}
-          center={coords}
-          zoom={17}
-        >
-          <Marker
-            position={coords}
-          />
-        </GoogleMap>
-      ) : (
-        null
-      )}
+      <GoogleMap
+        options={{ gestureHandling: 'none', disableDefaultUI: true }}
+        mapContainerStyle={mapStyles}
+        clickableIcons={false}
+        center={coords}
+        zoom={17}
+      >
+        <Marker
+          position={coords}
+        />
+      </GoogleMap>
     </LoadScript>
   )
 };
