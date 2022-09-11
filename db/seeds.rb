@@ -42,10 +42,17 @@ end
 
 # Friend Request Seeds
 
+2.times do |i|
+  FriendRequest.create(
+    user_id: i+=2,
+    friend_id: 1
+  )
+end
+
 3.times do |i|
   FriendRequest.create(
     user_id: 1,
-    friend_id: i+=6
+    friend_id: i+=8
   )
 end
 
