@@ -19,7 +19,7 @@ const Wrapper = styled.div`
   top: 10%;
   right: 0;
   height: fit-content;
-  width: 20%;
+  width: 25%;
   z-index: 1;
   animation: expand 0.2s ease forwards;
 `;
