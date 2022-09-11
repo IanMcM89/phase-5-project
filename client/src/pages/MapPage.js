@@ -66,7 +66,12 @@ function Map() {
       >
         {currentLoc ? (
           <GoogleMap
-            options={{ disableDoubleClickZoom: true }}
+            options={{ 
+              disableDoubleClickZoom: true,
+              streetViewControl: false,
+              mapTypeId: 'terrain'
+            }}
+            fullscreenControl={false}
             mapContainerStyle={mapStyles}
             onDragEnd={updateCenter}
             clickableIcons={false}
