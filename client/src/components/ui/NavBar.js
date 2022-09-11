@@ -1,15 +1,12 @@
 import React, { useState } from "react";
-import { useDispatch } from "react-redux";
 import {useHistory} from "react-router-dom";
 import Notifications from "../notifications/NotificationsList";
-import { Link } from "react-router-dom";
+import Logo from "./Logo";
 import { Header, Button } from "../../styles";
-import { setPlace } from "../../reducers/places";
-import styled, { css } from "styled-components";
+import styled from "styled-components";
 
 const NavBar = ({ setUser }) => {
   const [showNotifications, setShowNotifications] = useState(false);
-  const dispatch = useDispatch();
   const history = useHistory();
 
   const handleLogout = () => {
@@ -28,13 +25,7 @@ const NavBar = ({ setUser }) => {
 
   return (
     <Header>
-      <LogoWrapper>
-        &ensp;
-        <Logo src="/images/pin.png" alt="Pin Logo" />
-        <Link to="/" style={{ textDecoration: 'none' }} onClick={() => dispatch(setPlace(null))}>
-          <Title>GeoPlanner</Title>
-        </Link>
-      </LogoWrapper>
+      <Logo />
       <Nav>
         {/* <Icon src="/images/icons/profile.png" alt="Profile" /> */}
         <Icon
@@ -62,30 +53,11 @@ const NavBar = ({ setUser }) => {
   )
 };
 
-const commonStyles = css`
+const Nav = styled.nav`
   display: flex;
   flex-direction: row;
   align-items: center;
   height: 100%;
-`;
-
-const LogoWrapper = styled.div`
-  ${commonStyles}
-`;
-
-const Logo = styled.img`
-  height: 50%;
-  margin: auto 5%;
-`;
-
-const Title = styled.h1`
-  color: white;
-  font-size: 2rem;
-  margin: auto;
-`;
-
-const Nav = styled.nav`
-  ${commonStyles}
   justify-content: right;
   margin: 0 1% 0 auto;
 `;
