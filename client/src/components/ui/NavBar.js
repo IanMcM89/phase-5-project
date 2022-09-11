@@ -1,12 +1,15 @@
 import React, { useState } from "react";
+import { useDispatch } from "react-redux";
 import {useHistory} from "react-router-dom";
 import Notifications from "../notifications/NotificationsList";
 import { Link } from "react-router-dom";
 import { Header, Button } from "../../styles";
+import { setPlace } from "../../reducers/places";
 import styled, { css } from "styled-components";
 
 const NavBar = ({ setUser }) => {
   const [showNotifications, setShowNotifications] = useState(false);
+  const dispatch = useDispatch();
   const history = useHistory();
 
   const handleLogout = () => {
@@ -28,7 +31,7 @@ const NavBar = ({ setUser }) => {
       <LogoWrapper>
         &ensp;
         <Logo src="/images/pin.png" alt="Pin Logo" />
-        <Link to="/" style={{ textDecoration: 'none' }}>
+        <Link to="/" style={{ textDecoration: 'none' }} onClick={() => dispatch(setPlace(null))}>
           <Title>GeoPlanner</Title>
         </Link>
       </LogoWrapper>

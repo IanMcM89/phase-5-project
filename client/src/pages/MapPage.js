@@ -1,8 +1,10 @@
 import React, { useEffect, useState } from 'react';
 import { GoogleMap, LoadScript } from '@react-google-maps/api';
+import { useDispatch } from "react-redux";
 import SearchBox from "../components/map/SearchBox";
 import Overlay from "../components/map/Overlay";
 import RosaPin from "../components/map/RosaPin";
+import { setPlace } from "../reducers/places";
 import styled from "styled-components";
 
 const libraries = ['places'];
@@ -10,10 +12,11 @@ const libraries = ['places'];
 function Map() {
   const [currentLoc, setCurrentLoc] = useState(null);
   const [searchBox, setSearchBox] = useState(null);
-  const [overlay, setOverlay] = useState(null);
   const [places, setPlaces] = useState([]);
   const [map, setMap] = useState(null);
   const [zoom, setZoom] = useState(12);
+
+  const dispatch = useDispatch();
 
   // Fetches current user's geolocation:
   useEffect(() => {
@@ -40,8 +43,8 @@ function Map() {
     const results = searchBox.getPlaces();
     if (results) {
       const loc = results[0].geometry.location;
+      dispatch(setPlace(null));
       setPlaces(results);
-      setOverlay(null);
       setZoom(14);
       setCurrentLoc({
         lat: loc.lat(),
@@ -79,8 +82,8 @@ function Map() {
               onPlacesChanged={changePlaces}
               onSBLoad={loadSB}
             />
-            <Overlay setOverlay={setOverlay} overlay={overlay} />
-            <RosaPin setOverlay={setOverlay} places={places} />
+            <Overlay setCurrentLoc={setCurrentLoc}/>
+            <RosaPin places={places}/>
           </GoogleMap>
         ) : (
           null

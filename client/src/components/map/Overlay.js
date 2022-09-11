@@ -1,41 +1,57 @@
-import React from 'react';
+import React, { useEffect } from 'react';
+import { useSelector, useDispatch } from "react-redux";
+import { useHistory } from "react-router-dom";
 import { OverlayView } from '@react-google-maps/api';
 import Photos from "./Photos";
+import { setPlace } from "../../reducers/places";
 import { Button } from "../../styles";
 import styled, { css } from "styled-components";
 
-const Overlay = ({ overlay, setOverlay }) => {
+const Overlay = ({ setCurrentLoc }) => {
   const getPixelPositionOffset = (width, height) => ({
     x: -(width / 2),
     y: -(height / 2)
   });
 
-  if (overlay) {
+  const place = useSelector((state) => state.place);
+
+  const dispatch = useDispatch();
+
+  const history = useHistory();
+
+  useEffect(() => {
+    if (place) setCurrentLoc({
+        lat: (place.geometry.location.lat() + 0.01),
+        lng: place.geometry.location.lng(),
+      });
+  }, [place, setCurrentLoc]);
+
+  if (place) {
     return (
       <OverlayView
-        position={overlay.geometry.location}
+        position={place.geometry.location}
         mapPaneName={OverlayView.OVERLAY_MOUSE_TARGET}
         getPixelPositionOffset={getPixelPositionOffset}
       >
         <>
           <PopUp>
-            <Exit onClick={() => setOverlay(null)}>X</Exit>
-            <Photos photos={overlay.photos} />
+            <Exit onClick={() => dispatch(setPlace(null))}>X</Exit>
+            <Photos photos={place.photos} />
             <Heading>
-              <H1>{overlay.name}</H1>
-              {overlay.rating ? (
+              <H1>{place.name}</H1>
+              {place.rating ? (
                 <Rating>
                   <Star>★</Star>&nbsp;
-                  <H2>{overlay.rating}</H2>
+                  <H2>{place.rating}</H2>
                 </Rating>
               ) : (
                 null
               )}
             </Heading>
-            <p style={{ margin: '2%' }}>{overlay.formatted_address}</p>
+            <p style={{ margin: '2%' }}>{place.formatted_address}</p>
             <Button
               variant='green'
-              onClick={() => console.log(overlay)}
+              onClick={() => history.push("/events/create")}
               style={{ margin: '2%' }}
             >
               Create Event

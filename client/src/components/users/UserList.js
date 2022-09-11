@@ -12,10 +12,10 @@ const UserList = ({ user }) => {
     let array = [];
 
     for (key in state) {
-      if (state[key].status) array.push(state[key].status);
+      if (state[key]) array.push(state[key].status);
     }
 
-    return (array).includes('loading');
+    return array.includes('loading');
   });
 
   return (
