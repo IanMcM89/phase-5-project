@@ -2,28 +2,26 @@ import React, { useEffect } from 'react';
 import { useSelector, useDispatch } from "react-redux";
 import { useHistory } from "react-router-dom";
 import { OverlayView } from '@react-google-maps/api';
-import Photos from "./Photos";
 import { setPlace } from "../../reducers/places";
 import { Button } from "../../styles";
+import Photos from "./Photos";
 import styled, { css } from "styled-components";
 
 const Overlay = ({ setCurrentLoc }) => {
+  const place = useSelector((state) => state.place);
+  const dispatch = useDispatch();
+  const history = useHistory();
+
   const getPixelPositionOffset = (width, height) => ({
     x: -(width / 2),
     y: -(height / 2)
   });
 
-  const place = useSelector((state) => state.place);
-
-  const dispatch = useDispatch();
-
-  const history = useHistory();
-
   useEffect(() => {
     if (place) setCurrentLoc({
-        lat: (place.geometry.location.lat() + 0.01),
-        lng: place.geometry.location.lng(),
-      });
+      lat: (place.geometry.location.lat() + 0.01),
+      lng: place.geometry.location.lng(),
+    });
   }, [place, setCurrentLoc]);
 
   if (place) {
@@ -37,18 +35,9 @@ const Overlay = ({ setCurrentLoc }) => {
           <PopUp>
             <Exit onClick={() => dispatch(setPlace(null))}>X</Exit>
             <Photos photos={place.photos} />
-            <Heading>
-              <H1>{place.name}</H1>
-              {place.rating ? (
-                <Rating>
-                  <Star>★</Star>&nbsp;
-                  <H2>{place.rating}</H2>
-                </Rating>
-              ) : (
-                null
-              )}
-            </Heading>
+            <h2>{place.name}</h2>
             <p style={{ margin: '2%' }}>{place.formatted_address}</p>
+            <Star>★★★★★</Star>
             <Button
               variant='green'
               onClick={() => history.push("/events/create")}
@@ -89,11 +78,10 @@ const PopUp = styled.div`
 
 const PopUpAnchor = styled.div`
   position: absolute;
-
   ::after {
     content: "";
     position: absolute;
-    transform: translate(-50%, 0);
+    transform: translate(-50%, -10%);
     border-left: solid 6px transparent;
     border-right: solid 6px transparent;
     border-top: solid 8px white;
@@ -103,9 +91,7 @@ const PopUpAnchor = styled.div`
 const Exit = styled.button`
   ${commonStyles}
   position: absolute;
-  background-color: red;
-  box-shadow: 0px 2px 10px 1px rgba(0, 0, 0, 0.4);
-  border-radius: 50%;
+  background: rgb(200, 55, 55);
   color: lightgray;
   border: none;
   top: 0;
@@ -114,33 +100,18 @@ const Exit = styled.button`
   height: 25px;
   margin: 1%;
   cursor: pointer;
-`;
-
-const Heading = styled.div`
-  ${commonStyles}
-  width: 100%;
-  flex-direction: row;
-`;
-
-const Rating = styled.div`
-  ${commonStyles}
-  flex-direction: row;
-`;
-
-const H1 = styled.h1`
-  font-size: 1vw;
-  margin: 2%;
-`;
-
-const H2 = styled.h2`
-  color: dimgray;
+  transition: 0.3s;
+  z-index: 10;
+  &:hover {
+    background-color: red;
+  }
 `;
 
 const Star = styled.div`
   ${commonStyles}
   color: gold;
-  margin-bottom: 8%;
   font-size: 1.2rem;
+  margin: 0;
 `;
 
 export default Overlay;
