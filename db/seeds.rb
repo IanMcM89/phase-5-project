@@ -48,3 +48,57 @@ end
     friend_id: i+=6
   )
 end
+
+# Event Seeds
+
+Event.create(
+  id: 1,
+  user_id: 1,
+  title: "Day at the Aquarium",
+  location: "Aquarium of the Pacific",
+  address: "100 Aquarium Way, Long Beach, CA 90802, USA",
+  date: "2022-09-12",
+  time: "2000-01-01T10:00:00.000Z",
+  description: "Who's up for a day at the Aquarium??\n\nWe'll go look at some fish and then do a picnic in the park afterwards!\n\nWhat to bring:\n\n-Snacks\n-Cooler\n-Picnic Supplies\n\n",
+  lat: "33.7619735",
+  lng: "-118.1969738"
+)
+
+Event.create(
+  id: 2,
+  user_id: 1,
+  title: "Beach Day",
+  location: "Huntington State Beach",
+  address: "21601 E Pacific Coast Hwy, Huntington Beach, CA 92646, USA",
+  date: "2022-09-13",
+  time: "2000-01-01T09:00:00.000Z",
+  description: "Let's have some fun in the sun!\n\nWhat to bring:\n\n-Snacks\n-Cooler\n-Sunscreen\n-Alcohol\n-Beach Towels\n-Umbrella",
+  lat: "33.6380444",
+  lng: "-117.9736122"
+)
+
+Event.create(
+  id: 3,
+  user_id: 1,
+  title: "Trek to the Top",
+  location: "Hollywood Sign",
+  address: "Los Angeles, CA 90068, USA",
+  date: "2022-09-14",
+  time: "2000-01-01T08:30:00.000Z",
+  description: "Hope you're ready for a hike!\n\nWe'll start at the base of the hill and hike all the way up to the Hollywood sign.\n\nWhat to bring:\n\n-Energy Bars\n-Water\n-Foul Weather Gear",
+  lat: "34.1341151",
+  lng: "-118.3215482"
+)
+
+Event.create(
+  id: 4,
+  user_id: 1,
+  title: "Day at the Museum",
+  location: "Natural History Museum of Los Angeles County",
+  address: "900 W Exposition Blvd, Los Angeles, CA 90007, United States",
+  date: "2022-09-17",
+  time: "2000-01-01T09:00:00.000Z",
+  description: "Who wants to explore the Natural History Museum with me this weekend??\n\nWhat to bring:\n\n-Yourselves\n-A sense of curiosity\n\n",
+  lat: "34.0169567",
+  lng: "-118.2887764"
+)
