@@ -1,7 +1,9 @@
 import React, { useEffect, useState } from "react";
 import { Switch, Route } from 'react-router-dom';
 import NavBar from "./components/ui/NavBar";
-import EventsPage from "./pages/EventsPage"
+import EventForm from "./components/events/EventForm";
+import EventPage from "./pages/EventPage";
+import EventsList from "./pages/EventsList";
 import LoginPage from "./pages/LoginPage";
 import MapPage from "./pages/MapPage";
 import UserList from "./components/users/UserList";
@@ -45,11 +47,14 @@ const App = ({ cable }) => {
           <Route path="/profile">
             <></>
           </Route>
+          <Route path="/events/create">
+            <EventForm user={user}/>
+          </Route>
           <Route path="/events/:id">
-            <></>
+            <EventPage/>
           </Route>
           <Route path="/events">
-            <EventsPage />
+            <EventsList />
           </Route>
           <Route path="/">
             <MapPage />
