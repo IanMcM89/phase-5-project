@@ -1,7 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 
-const EventsPage = () => {
+const EventsList = () => {
 
   return (
     <Wrapper>
@@ -17,4 +17,4 @@ const Wrapper = styled.div`
   overflow: hidden;
 `;
 
-export default EventsPage;
+export default EventsList;
