@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from 'react';
 import { GoogleMap, LoadScript } from '@react-google-maps/api';
 import { useDispatch } from "react-redux";
+import { setPlace } from "../reducers/places";
 import SearchBox from "../components/map/SearchBox";
 import Overlay from "../components/map/Overlay";
 import RosaPin from "../components/map/RosaPin";
-import { setPlace } from "../reducers/places";
 import styled from "styled-components";
 
 const libraries = ['places'];
