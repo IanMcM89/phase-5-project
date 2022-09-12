@@ -19,7 +19,7 @@ const Wrapper = styled.div`
 
 const Title = styled.h1`
   color: red;
-  font-size: 3rem;
+  font-size: 2.8rem;
   width: 100%;
   margin: auto;
   ::after {

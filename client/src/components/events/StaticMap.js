@@ -16,7 +16,7 @@ const StaticMap = ({ event }) => {
         mapContainerStyle={mapStyles}
         clickableIcons={false}
         center={coords}
-        zoom={17}
+        zoom={12}
       >
         <Marker
           position={coords}
@@ -27,9 +27,9 @@ const StaticMap = ({ event }) => {
 };
 
 const mapStyles = {
-  width: '50%',
+  width: '100%',
   height: '100%',
-  marginLeft: '1.5%',
+  margin: '2%'
 };
 
 export default StaticMap;

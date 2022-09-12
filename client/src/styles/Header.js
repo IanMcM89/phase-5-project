@@ -8,6 +8,7 @@ const Header = styled.header`
   width: 100vw;
   height: 10vh;
   margin: 0;
+  padding-left: 1%;
   top: 0;
 `;
 

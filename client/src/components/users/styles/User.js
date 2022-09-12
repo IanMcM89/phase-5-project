@@ -28,14 +28,14 @@ const commonStyles = css`
 const Li = styled.li`
   ${commonStyles}
   flex-direction: row;
-  background-color: rgb(10,15,25,0.6);
+  background: rgb(10,15,25,0.6);
   height: fit-content;
   margin: 0;
   animation: expand 0.2s ease forwards;
 `;
 
 const Status = styled.div`
-  background-color: Chartreuse;
+  background: Chartreuse;
   border: solid rgb(10,15,25) 2px;
   border-radius: 50%;
   position: absolute;
