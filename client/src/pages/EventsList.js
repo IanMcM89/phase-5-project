@@ -1,9 +1,12 @@
 import React, { useState, useEffect } from "react";
+import Search from "../components/events/Search";
+import Loading from "../components/events/Loading";
 import EventDiv from "../components/events/EventDiv";
 import styled from "styled-components";
 
 const EventsList = () => {
   const [events, setEvents] = useState([]);
+  const [isLoading, setIsLoading] = useState(false);
 
   useEffect(() => {
     fetch("/api/events").then((r) => {
@@ -22,21 +25,11 @@ const EventsList = () => {
 
   return (
     <Wrapper>
+      <Search />
       <Section>
-        <Label>My Events</Label>
         <EventsWrapper>
+          {!isLoading ? displayEvents : <Loading />}
           {displayEvents}
-          <Div />
-        </EventsWrapper>
-      </Section>
-      <Section>
-        <Label>Friends' Events</Label>
-        <EventsWrapper>
-          <Div />
-          <Div />
-          <Div />
-          <Div />
-          <Div />
         </EventsWrapper>
       </Section>
     </Wrapper>
@@ -54,35 +47,28 @@ const Wrapper = styled.div`
 const Section = styled.section`
   display: flex;
   flex-direction: column;
-  height: 50%;
-  overflow-x: hidden;
-`;
-
-const Label = styled.label`
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  background: white;
-  color: gray;
-  font-size: 1rem;
-  font-weight: 500;
-  border-radius: 4px;
-  box-shadow: 0 0 5px darkgray;
-  height: 8%;
-  margin: 0 1%;
-  padding: 4px;
+  height: 95%;
 `;
 
 const EventsWrapper = styled.div`
   display: flex;
-  height: 92%;
+  flex-wrap: wrap;
+  justify-content: flex-start;
+  align-items: center;
+  align-content: flex-start;
+  height: 100%;
+  overflow-y: scroll;
+  ::-webkit-scrollbar {
+    display: none;
+  }
 `;
 
 const Div = styled.div`
   display: flex;
   background: darkgray;
   box-shadow: 5px 5px 5px gray;
-  width: 18%;
+  width: 25%;
   margin: 1%;
 `;
+
 export default EventsList;
