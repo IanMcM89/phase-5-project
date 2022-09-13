@@ -15,7 +15,7 @@ const Event = ({ event, user }) => {
 
   return (
     <Wrapper>
-      <FormWrapper>
+      <EventWrapper>
         <Section>
           <h1>{event.title}</h1>
           <Label>Location:</Label>
@@ -42,7 +42,7 @@ const Event = ({ event, user }) => {
           </Button>
         </Section>
         <StaticMap event={event}/>
-      </FormWrapper>
+      </EventWrapper>
     </Wrapper>
   )
 };
@@ -59,7 +59,7 @@ const Wrapper = styled.div`
   padding: 1%;
 `;
 
-const FormWrapper = styled.div`
+const EventWrapper = styled.div`
   ${commonStyles}
   background-color: white;
   box-shadow: 5px 5px 5px gray;

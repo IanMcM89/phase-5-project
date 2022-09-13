@@ -54,12 +54,12 @@ const EventForm = ({ user }) => {
     });
   }
 
-  if (!place) return (<Redirect to="/" />);
+  if (!place) return (<Redirect to="/events" />);
 
   return (
     <Wrapper>
-      <FormWrapper>
-        <Form onSubmit={handleSubmit} style={{ margin: 0 }}>
+      <ContentWrapper>
+        <Form onSubmit={handleSubmit} style={{ margin: '2%', width: '96%' }}>
           <Section>
             <Input
               type="text"
@@ -115,8 +115,10 @@ const EventForm = ({ user }) => {
             </Button>
           </Section>
         </Form>
-        <StaticMap event={formData}/>
-      </FormWrapper>
+      </ContentWrapper>
+      <ContentWrapper>
+        <StaticMap event={formData} />
+      </ContentWrapper>
     </Wrapper>
   )
 };
@@ -133,12 +135,11 @@ const Wrapper = styled.div`
   padding: 1%;
 `;
 
-const FormWrapper = styled.div`
+const ContentWrapper = styled.div`
   ${commonStyles}
   background-color: white;
   box-shadow: 5px 5px 5px gray;
-  padding: 1%;
-  overflow: hidden;
+  width: 50%;
 `;
 
 const Label = styled.label`
@@ -151,6 +152,7 @@ const Input = styled.input`
   ${commonStyles}
   background: lightgray;
   border: solid 1px gray;
+  border-radius: 4px;
   font-size: 1.8rem;
   margin-bottom: 2%;
   padding: 1%;

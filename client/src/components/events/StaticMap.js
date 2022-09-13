@@ -27,9 +27,10 @@ const StaticMap = ({ event }) => {
 };
 
 const mapStyles = {
-  width: '100%',
-  height: '100%',
-  margin: '2%'
+  background: 'beige',
+  width: '96%',
+  height: '96%',
+  margin: '2%',
 };
 
 export default StaticMap;

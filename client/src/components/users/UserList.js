@@ -54,7 +54,6 @@ const SubLists = styled.div`
   ${commonStyles}
   width: 100%;
   overflow-y: scroll;
-  
   ::-webkit-scrollbar {
     display: none;
   }

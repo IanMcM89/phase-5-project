@@ -6,26 +6,12 @@ import styled, { css } from "styled-components";
 const EventDiv = ({ event }) => {
   const history = useHistory();
 
-  console.log(event.user)
-
   return (
     <Border>
-      <Wrapper>
-        <UserWrapper>
-          <Avatar
-            src={event.user.avatar ? event.user.avatar : "/images/icons/avatar.png"}
-            alt="Avatar Image"
-          />
-          <H2>{event.user.username}</H2>
-        </UserWrapper>
-        <MapWrapper onClick={() => history.push(`/events/${event.id}`)}>
-          <StaticMap event={event} />
-        </MapWrapper>
-        <InfoWrapper>
-          <h4>{event.title}</h4>
-          <p>{event.date}</p>
-          <p>{event.time}</p>
-        </InfoWrapper>
+      <Wrapper onClick={() => history.push(`/events/${event.id}`)}>
+        <Title>{event.title}</Title>
+        {/* <Date>📅&nbsp;{event.date}</Date> */}
+        <StaticMap event={event} />
       </Wrapper>
     </Border>
   )
@@ -33,12 +19,14 @@ const EventDiv = ({ event }) => {
 
 const commonStyles = css`
   display: flex;
+  justify-content: center;
   width: 100%;
 `;
 
 const Border = styled.div`
   ${commonStyles}
-  width: 20%;
+  width: 24%;
+  height: 48%;
   margin: 0.5%;
   &:hover {
     background: red;
@@ -48,48 +36,33 @@ const Border = styled.div`
 const Wrapper = styled.div`
   ${commonStyles}
   flex-direction: column;
-  margin: 4px;
+  justify-content: flex-start;
   background: white;
   box-shadow: 5px 5px 5px gray;
+  margin: 4px;
   &:hover {
     box-shadow: none;
   }
 `;
 
-const UserWrapper = styled.div`
+const Title = styled.h2`
   ${commonStyles}
   background: rgb(50,55,65);
-  overflow: hidden;
-`;
-
-const MapWrapper = styled.div`
-  ${commonStyles}
-  height: 60%;
-`;
-
-const InfoWrapper = styled.div`
-  ${commonStyles}
-  display: flex;
-  flex-direction: column;
-  height: 25%;
-  overflow: hidden;
-`;
-
-const Avatar = styled.img`
-  ${commonStyles}
-  flex-direction: column;
-  justify-content: center;
-  width: auto;
-  height: 30px;
-  margin: 2%;
-`;
-
-const H2 = styled.h2`
-  ${commonStyles}
-  justify-content: flex-start;
   color: white;
   font-size: 1rem;
-  margin: auto;
+  height: 12%;
+  margin: 0;
+  padding: 1%;
+`;
+
+const Date = styled.p`
+  background: rgb(50,55,65,0.6);
+  position: absolute;
+  color: white;
+  font-weight: 500;
+  top: 17.5%;
+  padding: 4px;
+  z-index: 1;
 `;
 
 export default EventDiv;
