@@ -4,7 +4,7 @@ import { useDispatch } from "react-redux";
 import { setPlace } from "../reducers/places";
 import SearchBox from "../components/map/SearchBox";
 import Overlay from "../components/map/Overlay";
-import RosaPin from "../components/map/RosaPin";
+import Pin from "../components/map/Pin";
 import styled from "styled-components";
 
 const libraries = ['places'];
@@ -12,6 +12,7 @@ const libraries = ['places'];
 function Map() {
   const [currentLoc, setCurrentLoc] = useState(null);
   const [searchBox, setSearchBox] = useState(null);
+  const [events, setEvents] = useState([]);
   const [places, setPlaces] = useState([]);
   const [map, setMap] = useState(null);
   const [zoom, setZoom] = useState(12);
@@ -25,6 +26,15 @@ function Map() {
         lat: pos.coords.latitude,
         lng: pos.coords.longitude,
       });
+    });
+  }, []);
+
+  useEffect(() => {
+    fetch("/api/events").then((r) => {
+      if (r.ok) {
+        r.json()
+          .then((eventData) => setEvents(eventData));
+      }
     });
   }, []);
 
@@ -88,7 +98,8 @@ function Map() {
               onSBLoad={loadSB}
             />
             <Overlay setCurrentLoc={setCurrentLoc}/>
-            <RosaPin places={places}/>
+            <Pin places={places} />
+            <Pin events={events} />
           </GoogleMap>
         ) : (
           null
