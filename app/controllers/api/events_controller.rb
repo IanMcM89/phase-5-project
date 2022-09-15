@@ -1,9 +1,23 @@
 class Api::EventsController < ApplicationController
   skip_before_action :authorize, only: :create
-  before_action :find_event, except: [:index, :create]
+  before_action :find_event, except: [:index, :index_friends, :create]
 
   def index
-    render json: @current_user.events
+    events = []
+
+    @current_user.events.each do |event|
+      events << event
+    end
+
+    @current_user.friends.each do |friend|
+      if friend.events != []
+        Event.where(user_id: friend.id).each do |event|
+          events << event
+        end
+      end
+    end
+
+    render json: events
   end
 
   def show
