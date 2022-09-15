@@ -1,7 +1,7 @@
 class Event < ApplicationRecord
   belongs_to :user
   
-  validates :title, :description, :date, :time, presence: true
+  validates :title, :date, :time, :description, presence: true
 
   def date
     attributes['date'].strftime("%m/%d/%Y")
