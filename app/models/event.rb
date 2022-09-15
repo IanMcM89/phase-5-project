@@ -4,10 +4,12 @@ class Event < ApplicationRecord
   validates :title, :date, :time, :description, presence: true
 
   def date
-    attributes['date'].strftime("%m/%d/%Y")
+    if attributes['date'] then attributes['date'].strftime("%m/%d/%Y")
+    end
   end
 
   def time
-    attributes['time'].strftime("%H:%M")
+    if attributes['time'] then attributes['time'].strftime("%H:%M")
+    end
   end
 end
