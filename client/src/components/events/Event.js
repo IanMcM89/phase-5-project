@@ -70,7 +70,7 @@ const EventWrapper = styled.div`
   ${commonStyles}
   background-color: white;
   box-shadow: 5px 5px 5px gray;
-  border-radius: 10px;
+  border-radius: 8px;
   padding: 1%;
   overflow: hidden;
   animation: appear 0.6s ease forwards;
