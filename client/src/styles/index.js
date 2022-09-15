@@ -1,4 +1,4 @@
-import Header from "./Header";
+import Logo from "./Logo";
 import Form from "./Form";
 import FormField from "./FormField";
 import Input from "./Input";
@@ -7,7 +7,7 @@ import Error from "./Error";
 import Button from "./Button";
 
 export { 
-  Header, 
+  Logo,
   Form, 
   FormField, 
   Input, 

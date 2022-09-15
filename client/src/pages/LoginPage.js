@@ -1,8 +1,7 @@
 import React, { useState } from "react";
-import Logo from "../components/ui/Logo";
 import LoginForm from "../components/login/LoginForm";
 import SignUpForm from "../components/login/SignUpForm";
-import { Button, Error } from ".././styles";
+import { Logo, Button, Error } from ".././styles";
 import styled, { css } from "styled-components";
 
 const LoginPage = ({ onLogin }) => {

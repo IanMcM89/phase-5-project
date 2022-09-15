@@ -1,9 +1,8 @@
 import React, { useState } from "react";
 import {useHistory} from "react-router-dom";
 import Notifications from "../notifications/NotificationsList";
-import Logo from "./Logo";
-import { Header, Button } from "../../styles";
-import styled from "styled-components";
+import { Logo, Button } from "../../styles";
+import styled, { css } from "styled-components";
 
 const NavBar = ({ setUser }) => {
   const [showNotifications, setShowNotifications] = useState(false);
@@ -19,7 +18,7 @@ const NavBar = ({ setUser }) => {
     });
   }
 
-  const handleClick = () => {
+  const handleBellClick = () => {
     setShowNotifications(!showNotifications);
   }
 
@@ -41,7 +40,7 @@ const NavBar = ({ setUser }) => {
         <Icon
           src="/images/icons/bell-empty.png"
           alt="Notifications"
-          onClick={handleClick}
+          onClick={handleBellClick}
         />
         &ensp;
         <Button variant='red' onClick={handleLogout}>
@@ -53,12 +52,27 @@ const NavBar = ({ setUser }) => {
   )
 };
 
-const Nav = styled.nav`
+const commonStyles = css`
   display: flex;
-  flex-direction: row;
   align-items: center;
-  height: 100%;
+`;
+
+const Header = styled.header`
+  ${commonStyles}
+  background: rgba(20,25,30);
+  justify-content: left;
+  width: 100vw;
+  height: 10vh;
+  margin: 0;
+  padding-left: 1%;
+  top: 0;
+`;
+
+const Nav = styled.nav`
+  ${commonStyles}
+  flex-direction: row;
   justify-content: right;
+  height: 100%;
   margin: 0 1% 0 auto;
 `;
 
