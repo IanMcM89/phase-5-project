@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import { GoogleMap, LoadScript } from '@react-google-maps/api';
 import { useDispatch } from "react-redux";
-import { setPlace } from "../reducers/places";
-import { setEvent } from "../reducers/events";
+import { setPlace } from "../reducers/placeSlice";
+import { setEvent } from "../reducers/eventSlice";
 import SearchBox from "../components/map/SearchBox";
 import Overlay from "../components/map/Overlay";
 import Markers from "../components/map/Markers";

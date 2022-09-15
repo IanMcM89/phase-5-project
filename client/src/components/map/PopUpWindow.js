@@ -1,8 +1,8 @@
 import React from 'react';
 import { useSelector, useDispatch } from "react-redux";
 import { useHistory } from "react-router-dom";
-import { setPlace } from "../../reducers/places";
-import { setEvent } from "../../reducers/events";
+import { setPlace } from "../../reducers/placeSlice";
+import { setEvent } from "../../reducers/eventSlice";
 import { Button } from "../../styles";
 import Photos from "./Photos";
 import styled, { css } from "styled-components";

@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { Redirect } from 'react-router'
 import { useHistory } from "react-router-dom";
-import { setPlace } from "../../reducers/places";
+import { setPlace } from "../../reducers/placeSlice";
 import { useSelector, useDispatch } from "react-redux";
 import StaticMap from "../events/StaticMap";
 import { Button, Form, Error } from "../../styles";

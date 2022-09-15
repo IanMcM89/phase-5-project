@@ -7,7 +7,7 @@ export const setPlace = (place) => {
 }
 
 // Reducers:
-export default function placesReducer(state = null, action) {
+export default function placeReducer(state = null, action) {
   switch (action.type) {
     case 'place/set':
       return state = action.payload

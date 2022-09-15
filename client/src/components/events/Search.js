@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { useDispatch } from "react-redux";
-import { fetchEvents } from "../../reducers/eventList";
+import { fetchEvents } from "../../reducers/eventsSlice";
 import styled, { css } from "styled-components";
 
 const Search = () => {

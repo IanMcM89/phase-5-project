@@ -7,7 +7,7 @@ export const setEvent = (event) => {
 }
 
 // Reducers:
-export default function eventsReducer(state = null, action) {
+export default function eventReducer(state = null, action) {
   switch (action.type) {
     case 'event/set':
       return state = action.payload

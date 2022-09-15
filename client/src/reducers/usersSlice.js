@@ -1,12 +1,12 @@
 // Action Creators:
 export const fetchUsers = (url, search) => {
   return (dispatch) => {
-    dispatch({ type: `${url}/loading` });
+    dispatch({ type: `${url}/usersLoading` });
     fetch(url)
       .then((r) => r.json())
       .then((users) => {
         dispatch({
-          type: `${url}/loaded`,
+          type: `${url}/usersLoaded`,
           payload: filterUsers(users, search)
         });
       });
@@ -15,7 +15,8 @@ export const fetchUsers = (url, search) => {
 
 const filterUsers = (users, search) => {
   if (search) {
-    return users.filter((user) => user.username.includes(search));
+    search = search.toLowerCase();
+    return users.filter((user) => user.username.toLowerCase().includes(search));
   } else {
     return users;
   }
@@ -41,19 +42,19 @@ const initialState = {
 };
 
 // Reducers:
-export default function createUserReducer(name = '') {
+export default function createUsersReducer(name = '') {
   return function reducer(state = initialState, action) {
     switch (action.type) {
-      case `${name}/loaded`:
+      case `${name}/usersLoaded`:
         return {
           ...state,
           status: "idle",
           entities: action.payload,
         };
-      case `${name}/loading`:
+      case `${name}/usersLoading`:
         return {
           ...state,
-          status: "loading",
+          status: "users loading",
         };
       case `${name}/add`:
         return {

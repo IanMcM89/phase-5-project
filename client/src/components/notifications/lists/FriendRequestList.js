@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import FriendRequest from "./FriendRequest";
 import { useDispatch } from "react-redux";
-import { addUser } from "../../../reducers/users";
+import { addUser } from "../../../reducers/usersSlice";
 import styled, { css } from "styled-components";
 
 const FriendRequestList = () => {

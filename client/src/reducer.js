@@ -1,19 +1,19 @@
 import { combineReducers } from "redux";
-import createUserReducer from "./reducers/users";
-import showUsersReducer from "./reducers/userList";
-import placesReducer from "./reducers/places";
-import eventsReducer from "./reducers/events";
-import createEventsReducer from "./reducers/eventList";
+import createEventsReducer from "./reducers/eventsSlice";
+import createUsersReducer from "./reducers/usersSlice";
+import showUsersReducer from "./reducers/showUsersSlice";
+import placeReducer from "./reducers/placeSlice";
+import eventReducer from "./reducers/eventSlice";
 
 
 const rootReducer = combineReducers({
-  friends: createUserReducer('/api/friends'),
-  pending: createUserReducer('/api/pending_friends'),
-  users: createUserReducer('/api/users'),
-  showUsers: showUsersReducer,
   events: createEventsReducer('/api/events'),
-  place: placesReducer,
-  event: eventsReducer
+  friends: createUsersReducer('/api/friends'),
+  pending: createUsersReducer('/api/pending_friends'),
+  users: createUsersReducer('/api/users'),
+  showUsers: showUsersReducer,
+  place: placeReducer,
+  event: eventReducer
 });
 
 export default rootReducer;

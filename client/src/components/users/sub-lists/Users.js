@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { addUser, removeUser } from "../../../reducers/users";
+import { addUser, removeUser } from "../../../reducers/usersSlice";
 import UserSubList from "../styles/UserSubList";
 import styled from "styled-components";
 

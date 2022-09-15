@@ -1,7 +1,7 @@
 import React from 'react';
 import { useDispatch } from "react-redux";
-import { setPlace } from "../../reducers/places";
-import { setEvent } from "../../reducers/events";
+import { setPlace } from "../../reducers/placeSlice";
+import { setEvent } from "../../reducers/eventSlice";
 import { Marker } from '@react-google-maps/api';
 
 const Markers = ({ map, user, places, events }) => {

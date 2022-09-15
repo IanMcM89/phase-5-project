@@ -12,7 +12,7 @@ export const hideUsers = () => {
 }
 
 // Reducers:
-export default function showUsersReducer(state = false, action) {
+export default function showUserReducer(state = false, action) {
   switch (action.type) {
     case 'users/shown':
       return state = true;

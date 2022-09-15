@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { fetchEvents } from "../reducers/eventList";
+import { fetchEvents } from "../reducers/eventsSlice";
 import Search from "../components/events/Search";
 import Loading from "../components/events/Loading";
 import EventDiv from "../components/events/EventDiv";
