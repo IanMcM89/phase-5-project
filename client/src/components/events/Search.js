@@ -1,34 +1,16 @@
 import React, { useState } from "react";
 import { useDispatch } from "react-redux";
-import { fetchUsers } from "../../reducers/users";
-import { showUsers, hideUsers } from "../../reducers/userList";
+import { fetchEvents } from "../../reducers/eventList";
 import styled, { css } from "styled-components";
 
 const Search = () => {
   const [searchValue, setSearchValue] = useState('');
-
   const dispatch = useDispatch();
 
   const handleSearch = (e) => {
     e.preventDefault();
-
-    const urls = [
-      '/api/pending_friends',
-      '/api/friends',
-      '/api/users'
-    ];
-
-    urls.map((url) => dispatch(fetchUsers(url, searchValue)));
-
-    if (searchValue.length) dispatch(showUsers()); 
+    dispatch(fetchEvents('/api/events', searchValue));
   };
-
-  const handleChange = (e) => setSearchValue(e.target.value);
-
-  const handleRefresh = () => {
-    dispatch(hideUsers());
-    setSearchValue('');
-  }
 
   return (
     <Form onSubmit={handleSearch}>
@@ -37,12 +19,12 @@ const Search = () => {
         name="search"
         placeholder="Search Events"
         value={searchValue}
-        onChange={handleChange}
+        onChange={(e) => setSearchValue(e.target.value)}
       />
       <Button>
         <Icon src="/images/icons/search.png" alt="Search Icon"/>
       </Button>
-      <Button onClick={handleRefresh}>
+      <Button onClick={() => setSearchValue('')}>
         <Icon src="/images/icons/refresh.png" alt="Search Icon"/>
       </Button>
     </Form>
@@ -65,7 +47,6 @@ const Form = styled.form`
 const Input = styled.input`
   ${commonStyles}
   width: 43%;
-  height: 100%;
 `;
 
 const Button = styled.button`
