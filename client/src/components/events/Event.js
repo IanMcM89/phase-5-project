@@ -1,16 +1,21 @@
 import React from "react";
 import { useHistory } from "react-router";
+import { useDispatch } from "react-redux";
+import { fetchEvents } from "../../reducers/eventsSlice";
 import StaticMap from "../events/StaticMap";
 import { Button } from "../../styles";
 import styled, { css } from "styled-components";
 
 const Event = ({ event, user }) => {
   const history = useHistory();
+  const dispatch = useDispatch();
 
   const handleDelete = () => {
     fetch(`/api/events/${event.id}`, {
       method: "DELETE"
-    }).then(history.push("/events"));
+    })
+    .then(dispatch(fetchEvents('/api/events')))
+    .then(history.push("/events"));
   };
 
   return (
