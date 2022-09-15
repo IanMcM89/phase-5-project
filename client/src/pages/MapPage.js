@@ -2,14 +2,15 @@ import React, { useEffect, useState } from 'react';
 import { GoogleMap, LoadScript } from '@react-google-maps/api';
 import { useDispatch } from "react-redux";
 import { setPlace } from "../reducers/places";
+import { setEvent } from "../reducers/events";
 import SearchBox from "../components/map/SearchBox";
 import Overlay from "../components/map/Overlay";
-import Pin from "../components/map/Pin";
+import Markers from "../components/map/Markers";
 import styled from "styled-components";
 
 const libraries = ['places'];
 
-function Map() {
+function Map({ user }) {
   const [currentLoc, setCurrentLoc] = useState(null);
   const [searchBox, setSearchBox] = useState(null);
   const [events, setEvents] = useState([]);
@@ -30,23 +31,15 @@ function Map() {
   }, []);
 
   useEffect(() => {
+    dispatch(setPlace(null));
+    dispatch(setEvent(null));
     fetch("/api/events").then((r) => {
       if (r.ok) {
         r.json()
           .then((eventData) => setEvents(eventData));
       }
     });
-  }, []);
-
-  // Sets map ref on load:
-  const loadMap = (ref) => {
-    setMap(ref);
-  }
-
-  // Sets search ref on load:
-  const loadSB = (ref) => {
-    setSearchBox(ref);
-  };
+  }, [dispatch]);
 
   // Fetches places from Google Places API using searchbox query:
   const changePlaces = () => {
@@ -76,7 +69,7 @@ function Map() {
       >
         {currentLoc ? (
           <GoogleMap
-            options={{ 
+            options={{
               disableDoubleClickZoom: true,
               streetViewControl: false,
               mapTypeId: 'terrain'
@@ -85,7 +78,7 @@ function Map() {
             mapContainerStyle={mapStyles}
             onDragEnd={updateCenter}
             clickableIcons={false}
-            onLoad={loadMap}
+            onLoad={(ref) => setMap(ref)}
             zoom={zoom}
             center={{
               lat: currentLoc.lat,
@@ -95,11 +88,11 @@ function Map() {
             <SearchBox
               map={map}
               onPlacesChanged={changePlaces}
-              onSBLoad={loadSB}
+              onSBLoad={(ref) => setSearchBox(ref)}
             />
-            <Overlay setCurrentLoc={setCurrentLoc}/>
-            <Pin places={places} />
-            <Pin events={events} />
+            <Overlay setCurrentLoc={setCurrentLoc} />
+            <Markers map={map} user={user} places={places} />
+            <Markers map={map} user={user} events={events} />
           </GoogleMap>
         ) : (
           null
