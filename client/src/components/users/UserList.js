@@ -10,11 +10,9 @@ import styled, { css } from "styled-components";
 const UserList = ({ user }) => {
   const isLoading = useSelector((state, key) => {
     let array = [];
-
     for (key in state) {
-      if (state[key]) array.push(state[key].status);
+      if (state[key] && key !== "events") array.push(state[key].status);
     }
-
     return array.includes('loading');
   });
 
