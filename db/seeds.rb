@@ -59,7 +59,6 @@ end
 # My Event Seeds
 
 Event.create(
-  id: 1,
   user_id: 1,
   title: "Day at the Aquarium",
   location: "Aquarium of the Pacific",
@@ -72,7 +71,6 @@ Event.create(
 )
 
 Event.create(
-  id: 2,
   user_id: 1,
   title: "Trek to the Top",
   location: "Hollywood Sign",
@@ -85,7 +83,6 @@ Event.create(
 )
 
 Event.create(
-  id: 3,
   user_id: 1,
   title: "Day at the Museum",
   location: "Natural History Museum of Los Angeles County",
@@ -100,7 +97,6 @@ Event.create(
 # Friend Event Seeds
 
 Event.create(
-  id: 4,
   user_id: 4,
   title: "Beach Day",
   location: "Huntington State Beach",
@@ -113,7 +109,6 @@ Event.create(
 )
 
 Event.create(
-  id: 5,
   user_id: 5,
   title: "Venice Beach Day",
   location: "Venice Beach",
@@ -126,7 +121,6 @@ Event.create(
 )
 
 Event.create(
-  id: 6,
   user_id: 5,
   title: "Movie Night",
   location: "Regency Commerce",
