@@ -54,10 +54,10 @@ const App = ({ cable }) => {
             <EventPage/>
           </Route>
           <Route path="/events">
-            <EventsList />
+            <EventsList user={user}/>
           </Route>
           <Route path="/">
-            <MapPage />
+            <MapPage user={user}/>
           </Route>
         </Switch>
       </Main>
