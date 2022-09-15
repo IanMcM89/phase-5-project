@@ -56,7 +56,7 @@ end
   )
 end
 
-# Event Seeds
+# My Event Seeds
 
 Event.create(
   id: 1,
@@ -74,19 +74,6 @@ Event.create(
 Event.create(
   id: 2,
   user_id: 1,
-  title: "Beach Day",
-  location: "Huntington State Beach",
-  address: "21601 E Pacific Coast Hwy, Huntington Beach, CA 92646, USA",
-  date: "2022-09-13",
-  time: "2000-01-01T09:00:00.000Z",
-  description: "Let's have some fun in the sun!\n\nWhat to bring:\n\n-Snacks\n-Cooler\n-Sunscreen\n-Alcohol\n-Beach Towels\n-Umbrella",
-  lat: "33.6380444",
-  lng: "-117.9736122"
-)
-
-Event.create(
-  id: 3,
-  user_id: 1,
   title: "Trek to the Top",
   location: "Hollywood Sign",
   address: "Los Angeles, CA 90068, USA",
@@ -98,7 +85,7 @@ Event.create(
 )
 
 Event.create(
-  id: 4,
+  id: 3,
   user_id: 1,
   title: "Day at the Museum",
   location: "Natural History Museum of Los Angeles County",
@@ -108,4 +95,45 @@ Event.create(
   description: "Who wants to explore the Natural History Museum with me this weekend??\n\nWhat to bring:\n\n-Yourselves\n-A sense of curiosity\n\n",
   lat: "34.0169567",
   lng: "-118.2887764"
+)
+
+# Friend Event Seeds
+
+Event.create(
+  id: 4,
+  user_id: 4,
+  title: "Beach Day",
+  location: "Huntington State Beach",
+  address: "21601 E Pacific Coast Hwy, Huntington Beach, CA 92646, USA",
+  date: "2022-09-13",
+  time: "2000-01-01T09:00:00.000Z",
+  description: "Let's have some fun in the sun!\n\nWhat to bring:\n\n-Snacks\n-Cooler\n-Sunscreen\n-Alcohol\n-Beach Towels\n-Umbrella",
+  lat: "33.6380444",
+  lng: "-117.9736122"
+)
+
+Event.create(
+  id: 5,
+  user_id: 5,
+  title: "Venice Beach Day",
+  location: "Venice Beach",
+  address: "Venice Beach, Los Angeles, CA, USA",
+  date: "2022-09-13",
+  time: "2000-01-01T09:00:00.000Z",
+  description: "Description...",
+  lat: "33.9932584",
+  lng: "-118.480598"
+)
+
+Event.create(
+  id: 6,
+  user_id: 5,
+  title: "Movie Night",
+  location: "Regency Commerce",
+  address: "950 Goodrich Blvd, Commerce, CA 90022, United States",
+  date: "2022-09-20",
+  time: "2000-01-01T19:00:00.000Z",
+  description: "Description...",
+  lat: "34.0183787",
+  lng: "-118.1537692"
 )
