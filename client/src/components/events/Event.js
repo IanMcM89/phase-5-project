@@ -36,17 +36,19 @@ const Event = ({ event, user }) => {
               <p>{event.time}</p>
             </FlexColumn>
           </FlexRow>
+          <Section>
+            <Label htmlFor="description">Description:</Label>
+            <p>{event.description}</p>
+          </Section>
+          <Section>
+            <Button variant="red" style={{ margin: 0 }} onClick={handleDelete}>
+              Delete Event
+            </Button>
+          </Section>
         </Section>
         <Section>
-          <Label htmlFor="description">Description:</Label>
-          <p>{event.description}</p>
+          <StaticMap event={event} />
         </Section>
-        <Section>
-          <Button variant="red" style={{ margin: 0 }} onClick={handleDelete}>
-            Delete Event
-          </Button>
-        </Section>
-        <StaticMap event={event}/>
       </EventWrapper>
     </Wrapper>
   )
@@ -61,15 +63,24 @@ const Wrapper = styled.div`
   ${commonStyles}
   background-color: lightgray;
   height: 90vh;
-  padding: 1%;
+  padding: 3%;
 `;
 
 const EventWrapper = styled.div`
   ${commonStyles}
   background-color: white;
   box-shadow: 5px 5px 5px gray;
+  border-radius: 10px;
   padding: 1%;
   overflow: hidden;
+  animation: appear 0.6s ease forwards;
+`;
+
+const Section = styled.section`
+  ${commonStyles}
+  flex-direction: column;
+  width: 50%;
+  height: 100%;
 `;
 
 const Label = styled.label`
@@ -87,12 +98,6 @@ const FlexColumn = styled.div`
   ${commonStyles}
   width: 48%;
   flex-direction: column;
-`;
-
-const Section = styled.section`
-  ${commonStyles}
-  flex-direction: column;
-  height: 33.33%;
 `;
 
 export default Event;
