@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useLocation } from "react-router";
 import Event from "../components/events/Event";
-import NotFound from "../components/ui/NotFound";
+import Response from "../components/ui/Response";
 import styled from "styled-components";
 
 function EventPage({ user }) {
@@ -23,7 +23,7 @@ function EventPage({ user }) {
     if (event) {
       return <Event event={event} user={user} />
     } else if (response) {
-      return <NotFound response={response} />
+      return <Response response={response} />
     } else {
       return <Wrapper />
     }

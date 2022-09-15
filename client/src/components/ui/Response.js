@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import { Button } from "../../styles";
 import styled from "styled-components";
 
-function NotFound({ response }) {
+function Response({ response }) {
   return (
     <Wrapper>
       <H1>⚠️</H1>
@@ -37,4 +37,4 @@ const H2 = styled(H1)`
   margin: 0;
 `;
 
-export default NotFound;
+export default Response;
