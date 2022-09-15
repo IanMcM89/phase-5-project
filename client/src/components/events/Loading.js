@@ -18,9 +18,9 @@ const Wrapper = styled.div`
   background: gray;
   box-shadow: 5px 5px 5px gray;
   border-radius: 6px;
-  width: 24%;
-  height: 48%;
-  margin: 0.5%;
+  width: 23%;
+  height: 46%;
+  margin: 1%;
   animation: flicker 0.6s infinite;
 `;
 

@@ -10,7 +10,7 @@ const EventDiv = ({ event }) => {
     <Border>
       <Wrapper onClick={() => history.push(`/events/${event.id}`)}>
         <Title>{event.title}</Title>
-        {/* <Date>📅&nbsp;{event.date}</Date> */}
+        <Date>📅&nbsp;{event.date}</Date>
         <StaticMap event={event} />
       </Wrapper>
     </Border>
@@ -35,11 +35,15 @@ const Border = styled.div`
 
 const Wrapper = styled.div`
   ${commonStyles}
+  position: relative;
   flex-direction: column;
   justify-content: flex-start;
   background: white;
   box-shadow: 5px 5px 5px gray;
+  border: solid 4px rgb(50,55,65);
+  width: 97%;
   margin: 4px;
+  animation: expand 0.4s ease forwards;
   &:hover {
     box-shadow: none;
   }
@@ -56,11 +60,11 @@ const Title = styled.h2`
 `;
 
 const Date = styled.p`
-  background: rgb(50,55,65,0.6);
   position: absolute;
+  top: 4%;
+  background: rgb(50,55,65,0.7);
+  border-radius: 0 0 10px;
   color: white;
-  font-weight: 500;
-  top: 17.5%;
   padding: 4px;
   z-index: 1;
 `;
