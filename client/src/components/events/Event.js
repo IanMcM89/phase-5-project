@@ -10,6 +10,8 @@ const Event = ({ event, user }) => {
   const history = useHistory();
   const dispatch = useDispatch();
 
+
+  
   const handleDelete = () => {
     fetch(`/api/events/${event.id}`, {
       method: "DELETE"
