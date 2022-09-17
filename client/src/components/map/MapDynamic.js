@@ -60,23 +60,22 @@ function DynamicMap({ user }) {
 
   return (
     <>
-      {currentLoc ? (
         <GoogleMap
           options={{
             disableDoubleClickZoom: true,
+            fullscreenControl: false,
             streetViewControl: false,
+            clickableIcons: false,
             mapTypeId: 'terrain'
           }}
-          fullscreenControl={false}
           mapContainerStyle={mapStyles}
           onDragEnd={updateCenter}
-          clickableIcons={false}
           onLoad={(ref) => setMap(ref)}
           zoom={zoom}
-          center={{
+          center={currentLoc ? ({
             lat: currentLoc.lat,
             lng: currentLoc.lng
-          }}
+          }) : null}
         >
           <SearchBox
             map={map}
@@ -87,9 +86,6 @@ function DynamicMap({ user }) {
           <Markers map={map} user={user} places={places} />
           <Markers map={map} user={user} events={events} />
         </GoogleMap>
-      ) : (
-        null
-      )}
     </>
   );
 }

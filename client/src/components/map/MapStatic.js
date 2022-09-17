@@ -1,7 +1,7 @@
 import React from "react";
 import { GoogleMap, Marker } from '@react-google-maps/api'
 
-const StaticMap = ({ event }) => {
+const MapStatic = ({ event }) => {
   const position = {
     lat: Number(event.lat),
     lng: Number(event.lng)
@@ -12,6 +12,7 @@ const StaticMap = ({ event }) => {
       options={{
         disableDoubleClickZoom: true,
         disableDefaultUI: true,
+        clickableIcons: false,
         scrollwheel: false,
         draggable: false,
         mapTypeId: 'terrain'
@@ -37,4 +38,4 @@ const mapStyles = {
   height: '100%',
 };
 
-export default StaticMap;
+export default MapStatic;
