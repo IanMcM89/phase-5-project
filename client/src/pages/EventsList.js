@@ -1,10 +1,13 @@
 import React, { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { fetchEvents } from "../reducers/eventsSlice";
-import Search from "../components/events/Search";
-import Loading from "../components/events/Loading";
+import { LoadScript } from '@react-google-maps/api';
 import EventDiv from "../components/events/EventDiv";
+import Loading from "../components/events/Loading";
+import Search from "../components/events/Search";
 import styled from "styled-components";
+
+const libraries = ['places'];
 
 const EventsList = ({ user }) => {
   const events = useSelector((state) => state.events.entities);
@@ -17,10 +20,8 @@ const EventsList = ({ user }) => {
     dispatch(fetchEvents('/api/events'));
   }, [dispatch]);
 
-  const filterEvents = events.filter((event) => {
-    return event.user.id === user.id;
-  }).map((event) => {
-    return <EventDiv key={event.id} event={event} />
+  const filterEvents = events.filter((e) => e.user.id === user.id).map((e) => {
+    return <EventDiv key={e.id} event={e} />
   });
 
   const displayEvents = () => {
@@ -38,26 +39,31 @@ const EventsList = ({ user }) => {
 
   return (
     <Wrapper>
-      <Search />
-      <EventsWrapper>
-        {!isLoading ? displayEvents() : <Loading />}
-      </EventsWrapper>
+      <LoadScript
+        googleMapsApiKey={`${process.env.REACT_APP_GOOGLE_MAPS_API_KEY}`}
+        libraries={libraries}
+      >
+        <Search />
+        <EventsWrapper>
+          {!isLoading ? displayEvents() : <Loading />}
+        </EventsWrapper>
+      </LoadScript>
     </Wrapper>
   )
 };
 
 const Wrapper = styled.div`
+  display: flex;
+  flex-direction: column;
   background: lightgray;
-  width: 100%;
-  height: 90vh;
-  padding: 1% 0.5%;
+  width: 75%;
+  height: 100%;
+  padding: 1%;
 `;
 
 const EventsWrapper = styled.div`
   display: flex;
   flex-wrap: wrap;
-  justify-content: flex-start;
-  align-content: flex-start;
   align-items: center;
   height: 95%;
   overflow-y: scroll;

@@ -37,10 +37,11 @@ function EventPage({ user }) {
 }
 
 const Wrapper = styled.div`
-  background-color: lightgray;
   display: flex;
-  width: 100%;
+  background: lightgray;
+  width: 75%;
   height: 100%;
+  padding: 2%;
 `;
 
 export default EventPage;

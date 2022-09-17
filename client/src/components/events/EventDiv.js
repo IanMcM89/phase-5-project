@@ -1,36 +1,24 @@
 import React from "react";
 import { useHistory } from "react-router-dom";
-import StaticMap from "./StaticMap";
+import MapStatic from "../map/MapStatic";
 import styled, { css } from "styled-components";
 
 const EventDiv = ({ event }) => {
   const history = useHistory();
 
   return (
-    <Border>
-      <Wrapper onClick={() => history.push(`/events/${event.id}`)}>
-        <Title>{event.title}</Title>
-        <Date>📅&nbsp;{event.date}</Date>
-        <StaticMap event={event} />
-      </Wrapper>
-    </Border>
+    <Wrapper onClick={() => history.push(`/events/${event.id}`)}>
+      <Title>{event.title}</Title>
+      <Date>📅&nbsp;{event.date}</Date>
+      <MapStatic event={event} />
+    </Wrapper>
   )
 };
 
 const commonStyles = css`
   display: flex;
   justify-content: center;
-  width: 100%;
-`;
-
-const Border = styled.div`
-  ${commonStyles}
-  width: 24%;
-  height: 48%;
-  margin: 0.5%;
-  &:hover {
-    background: red;
-  }
+  background: rgb(50,55,65);
 `;
 
 const Wrapper = styled.div`
@@ -41,17 +29,18 @@ const Wrapper = styled.div`
   background: white;
   box-shadow: 5px 5px 5px gray;
   border: solid 4px rgb(50,55,65);
-  width: 97%;
-  margin: 4px;
+  width: 23%;
+  height: 46%;
+  margin: 1%;
   animation: expand 0.4s ease forwards;
+  
   &:hover {
-    box-shadow: none;
+    border: solid 4px red;
   }
 `;
 
 const Title = styled.h2`
   ${commonStyles}
-  background: rgb(50,55,65);
   color: white;
   font-size: 1rem;
   height: 12%;
@@ -60,11 +49,12 @@ const Title = styled.h2`
 `;
 
 const Date = styled.p`
+  ${commonStyles}
   position: absolute;
-  top: 4%;
-  background: rgb(50,55,65,0.7);
-  border-radius: 0 0 10px;
+  bottom: 0;
+  border-radius: 0 10px 0 0;
   color: white;
+  margin: 0;
   padding: 4px;
   z-index: 1;
 `;

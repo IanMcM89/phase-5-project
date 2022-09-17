@@ -91,9 +91,9 @@ const PopUpAnchor = styled.div`
     content: "";
     position: absolute;
     transform: translate(-50%, -10%);
-    border-left: solid 6px transparent;
-    border-right: solid 6px transparent;
-    border-top: solid 8px rgb(50,55,65);
+    border-left: solid 10px transparent;
+    border-right: solid 10px transparent;
+    border-top: solid 15px rgb(50,55,65);
   }
 `;
 

@@ -43,7 +43,7 @@ const Wrapper = styled.div`
     rgba(30,35,50,0.7) 20%, 
     rgba(10,15,20,0.8) 60%
   );
-  width: 30%;
+  width: 25%;
   padding: 1%;
   overflow-y: hidden;
 `;

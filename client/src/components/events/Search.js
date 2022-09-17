@@ -41,18 +41,20 @@ const Form = styled.form`
   ${commonStyles}
   justify-content: right;
   height: 5%;
-  margin-right: 1%;
+  margin: 0 1%;
 `;
 
 const Input = styled.input`
   ${commonStyles}
-  width: 43%;
+  width: 42%;
 `;
 
 const Button = styled.button`
+  ${commonStyles}
   background-color: rgb(186, 43, 43);
   border: solid 1px darkred;
   transition: 0.3s;
+  width: 3.5%;
   padding: 0;
 
   &:hover {
