@@ -1,5 +1,17 @@
 // Action Creators:
-export const setPlace = (place) => {
+export const setPlace = (placeData) => {
+  const place = placeData ? (
+    {
+      name: placeData.name,
+      formatted_address: placeData.formatted_address,
+      photos: placeData.photos,
+      lat: placeData.geometry.location.lat(),
+      lng: placeData.geometry.location.lng()
+    }
+  ) : (
+    null
+  );
+
   return {
     type: 'place/set',
     payload: place
