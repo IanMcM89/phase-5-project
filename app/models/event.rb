@@ -9,7 +9,7 @@ class Event < ApplicationRecord
   end
 
   def time
-    if attributes['time'] then attributes['time'].strftime("%H:%M")
+    if attributes['time'] then attributes['time'].strftime("%I:%M %p")
     end
   end
 end
