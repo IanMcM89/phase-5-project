@@ -8,7 +8,7 @@ import Overlay from "../map/Overlay";
 import Markers from "../map/Markers";
 
 function DynamicMap({ user }) {
-  const [currentLoc, setCurrentLoc] = useState(null);
+  const [position, setPosition] = useState(null);
   const [searchBox, setSearchBox] = useState(null);
   const [events, setEvents] = useState([]);
   const [places, setPlaces] = useState([]);
@@ -20,7 +20,7 @@ function DynamicMap({ user }) {
   // Fetches current user's geolocation:
   useEffect(() => {
     navigator.geolocation.getCurrentPosition((pos) => {
-      setCurrentLoc({
+      setPosition({
         lat: pos.coords.latitude,
         lng: pos.coords.longitude,
       });
@@ -46,16 +46,16 @@ function DynamicMap({ user }) {
       dispatch(setPlace(null));
       setPlaces(results);
       setZoom(14);
-      setCurrentLoc({
+      setPosition({
         lat: loc.lat(),
         lng: loc.lng()
       });
     }
   }
 
-  // Sets currentLoc to new center coords after map drag:
+  // Sets position to new center coords after map drag:
   const updateCenter = () => {
-    if (map) setCurrentLoc(map.getCenter().toJSON());
+    if (map) setPosition(map.getCenter().toJSON());
   }
 
   return (
@@ -72,9 +72,9 @@ function DynamicMap({ user }) {
           onDragEnd={updateCenter}
           onLoad={(ref) => setMap(ref)}
           zoom={zoom}
-          center={currentLoc ? ({
-            lat: currentLoc.lat,
-            lng: currentLoc.lng
+          center={position ? ({
+            lat: position.lat,
+            lng: position.lng
           }) : null}
         >
           <SearchBox
@@ -82,7 +82,7 @@ function DynamicMap({ user }) {
             onPlacesChanged={changePlaces}
             onSBLoad={(ref) => setSearchBox(ref)}
           />
-          <Overlay setCurrentLoc={setCurrentLoc} />
+          <Overlay setPosition={setPosition} />
           <Markers map={map} user={user} places={places} />
           <Markers map={map} user={user} events={events} />
         </GoogleMap>

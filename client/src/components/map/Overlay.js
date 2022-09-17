@@ -3,23 +3,23 @@ import { useSelector } from "react-redux";
 import { OverlayView } from '@react-google-maps/api';
 import PopUpWindow from './PopUpWindow';
 
-const Overlay = ({ setCurrentLoc }) => {
+const Overlay = ({ setPosition }) => {
   const place = useSelector((state) => state.place);
   const event = useSelector((state) => state.event);
 
   useEffect(() => {
     if (place) {
-      setCurrentLoc({
-        lat: (place.geometry.location.lat() + 0.01),
-        lng: place.geometry.location.lng(),
+      setPosition({
+        lat: (Number(place.lat + 0.01)),
+        lng: (Number(place.lng)),
       });
     } else if (event) {
-      setCurrentLoc({
+      setPosition({
         lat: (Number(event.lat) + 0.01),
         lng: (Number(event.lng)),
       });
     }
-  }, [place, event, setCurrentLoc]);
+  }, [place, event, setPosition]);
 
   const getPixelPositionOffset = (width, height) => ({
     x: -(width / 2),
@@ -28,7 +28,10 @@ const Overlay = ({ setCurrentLoc }) => {
 
   const getCoords = () => {
     if (place) {
-      return place.geometry.location;
+      return {
+        lat: (Number(place.lat)),
+        lng: (Number(place.lng)),
+      }
     } else if (event) {
       return {
         lat: (Number(event.lat)),
