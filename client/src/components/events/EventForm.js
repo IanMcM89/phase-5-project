@@ -5,8 +5,11 @@ import { LoadScript } from '@react-google-maps/api';
 import { useHistory } from "react-router-dom";
 import { Redirect } from 'react-router';
 import MapStatic from "../map/MapStatic";
-import { Button, Error } from "../../styles";
-import styled, { css } from "styled-components";
+import styled from "styled-components";
+import {
+  ContentDiv, MapDiv, InfoDiv, FlexColumn,
+  FlexRow, GoldStar, Button, Label, Error
+} from "../../styles";
 
 const libraries = ['places'];
 
@@ -24,8 +27,8 @@ const EventForm = ({ user }) => {
     date: "",
     time: "",
     description: "",
-    lat: place.geometry.location.lat(),
-    lng: place.geometry.location.lng()
+    lat: place.lat,
+    lng: place.lng
   } : null);
 
   async function handleSubmit(e) {
@@ -44,7 +47,7 @@ const EventForm = ({ user }) => {
     setLoading(false);
     if (r.ok) {
       dispatch(setPlace(null));
-      history.push(`/events/${newEvent.id}`);
+      history.push(`/events`);
     } else {
       setErrors(newEvent.errors);
     }
@@ -61,25 +64,24 @@ const EventForm = ({ user }) => {
 
   return (
     <Wrapper>
-        <Form onSubmit={handleSubmit} style={{ margin: 0, width: '100%' }}>
-          <Title>
-            <Input
-              type="text"
-              id="title"
-              placeholder="Title:"
-              autoComplete="off"
-              value={formData.title}
-              onChange={handleChange}
-            />
-          </Title>
-          <Info>
-            <Label>Location:</Label>
+      <ContentDiv>
+        <Form onSubmit={handleSubmit}>
+          <Title
+            type="text"
+            id="title"
+            placeholder="Title:"
+            autoComplete="off"
+            value={formData.title}
+            onChange={handleChange}
+          />
+          <InfoDiv>
+            <Label variant="red" >Location:</Label>
             <h2 style={{ margin: '1% 0' }}>{formData.location}</h2>
             <p style={{ margin: '1% 0' }}>{formData.address}</p>
-            <Star>★★★★★</Star>
+            <GoldStar>★★★★★</GoldStar>
             <FlexRow>
               <FlexColumn>
-                <Label htmlFor="date">Date:</Label>
+                <Label variant="red" htmlFor="date">Date:</Label>
                 <DateTime
                   type="date"
                   id="date"
@@ -89,7 +91,7 @@ const EventForm = ({ user }) => {
                 />
               </FlexColumn>
               <FlexColumn>
-                <Label htmlFor="time">Time:</Label>
+                <Label variant="red" htmlFor="time">Time:</Label>
                 <DateTime
                   type="time"
                   id="time"
@@ -99,7 +101,7 @@ const EventForm = ({ user }) => {
                 />
               </FlexColumn>
             </FlexRow>
-            <Label htmlFor="description">Description:</Label>
+            <Label variant="red" htmlFor="description">Description:</Label>
             <TextArea
               id="description"
               autoComplete="off"
@@ -114,23 +116,20 @@ const EventForm = ({ user }) => {
             <Button type="submit" variant="green" style={{ margin: 0 }}>
               {loading ? "Loading..." : "Create Event"}
             </Button>
-          </Info>
+          </InfoDiv>
         </Form>
-      <Map>
+      </ContentDiv>
+      <MapDiv>
         <LoadScript
           googleMapsApiKey={`${process.env.REACT_APP_GOOGLE_MAPS_API_KEY}`}
           libraries={libraries}
         >
+          <MapStatic event={place}/>
         </LoadScript>
-      </Map>
+      </MapDiv>
     </Wrapper>
   )
 };
-
-const commonStyles = css`
-  display: flex;
-  flex-direction: column;
-`;
 
 const Wrapper = styled.div`
   display: flex;
@@ -140,76 +139,34 @@ const Wrapper = styled.div`
   padding: 2%;
 `;
 
-const Map = styled(Form)`
+const Form = styled.form`
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+`;
+
+const Title = styled.input`
+  display: flex;
+  background: rgb(50,55,65);
+  text-align: center;
   border: none;
-  width: 60%;
+  color: lightgray;
+  font-size: 1.8rem;
+  width: 100;
+  height: 10%;
+  margin: 0;
   padding: 1%;
 `;
 
-const Form = styled.form`
-  ${commonStyles}
-  background: white;
-  box-shadow: 5px 5px 5px gray;
-  border: solid 4px rgb(50,55,65);
-  border-radius: 10px;
-  width: 36%;
-  margin: 1%;
-  animation: appear 0.6s ease forwards;
-`;
-
-const Title = styled.h1`
+const DateTime = styled.input`
   display: flex;
-  justify-content: center;
-  align-items: center;
-  background: rgb(50,55,65);
-  color: white;
-  font-size: 1.8rem;
-  height: 10%;
-  margin: 0;
-`;
-
-const Info = styled.div`
-  ${commonStyles}
-  width: 100%;
-  height: 100%;
-  padding: 3%;
-`;
-
-const Label = styled.label`
-  color: red;
-  font-weight: bold;
-`;
-
-const Star = styled.div`
-  color: gold;
-  font-size: 1.2rem;
-  margin: 1% 0 3% 0;
-`;
-
-const Input = styled.input`
-  ${commonStyles}
+  flex-direction: row;
   background: rgb(217, 217, 217);
   border: solid 1px gray;
   border-radius: 10px;
-  font-size: 1.8rem;
+  font-size: 1rem;
   margin: 2% 0 6%;
   padding: 2%;
-`;
-
-const FlexRow = styled.div`
-  display: flex;
-  justify-content: space-between;
-`;
-
-const FlexColumn = styled.div`
-  ${commonStyles}
-  width: 48%;
-`;
-
-const DateTime = styled(Input)`
-  display: flex;
-  flex-direction: row;
-  font-size: 1rem;
 `;
 
 const TextArea = styled.textarea`
@@ -217,14 +174,14 @@ const TextArea = styled.textarea`
   border: solid 1px gray;
   border-radius: 10px;
   font-size: 1rem;
-  height: 90%;
+  height: 20%;
   margin: 2% 0 6%;
   padding: 2%;
   overflow-y: hidden;
 `;
 
 const ErrorField = styled.div`
-  ${commonStyles}
+  display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
