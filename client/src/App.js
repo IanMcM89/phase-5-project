@@ -51,7 +51,7 @@ const App = ({ cable }) => {
             <EventForm user={user}/>
           </Route>
           <Route path="/events/:id">
-            <EventPage/>
+            <EventPage user={user}/>
           </Route>
           <Route path="/events">
             <EventsList user={user}/>
