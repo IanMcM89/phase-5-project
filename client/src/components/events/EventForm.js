@@ -1,11 +1,14 @@
 import React, { useState } from "react";
-import { Redirect } from 'react-router'
-import { useHistory } from "react-router-dom";
-import { setPlace } from "../../reducers/placeSlice";
 import { useSelector, useDispatch } from "react-redux";
-import StaticMap from "../events/StaticMap";
-import { Button, Form, Error } from "../../styles";
+import { setPlace } from "../../reducers/placeSlice";
+import { LoadScript } from '@react-google-maps/api';
+import { useHistory } from "react-router-dom";
+import { Redirect } from 'react-router';
+import MapStatic from "../map/MapStatic";
+import { Button, Error } from "../../styles";
 import styled, { css } from "styled-components";
+
+const libraries = ['places'];
 
 const EventForm = ({ user }) => {
   const place = useSelector((state) => state.place);
@@ -58,9 +61,8 @@ const EventForm = ({ user }) => {
 
   return (
     <Wrapper>
-      <ContentWrapper>
-        <Form onSubmit={handleSubmit} style={{ margin: '2%', width: '96%' }}>
-          <Section>
+        <Form onSubmit={handleSubmit} style={{ margin: 0, width: '100%' }}>
+          <Title>
             <Input
               type="text"
               id="title"
@@ -69,9 +71,12 @@ const EventForm = ({ user }) => {
               value={formData.title}
               onChange={handleChange}
             />
+          </Title>
+          <Info>
             <Label>Location:</Label>
-            <h2 style={{ margin: 'auto 0' }}>{formData.location}</h2>
-            <h3 style={{ margin: 'auto 0', color: 'dimgray' }}>{formData.address}</h3>
+            <h2 style={{ margin: '1% 0' }}>{formData.location}</h2>
+            <p style={{ margin: '1% 0' }}>{formData.address}</p>
+            <Star>★★★★★</Star>
             <FlexRow>
               <FlexColumn>
                 <Label htmlFor="date">Date:</Label>
@@ -94,8 +99,6 @@ const EventForm = ({ user }) => {
                 />
               </FlexColumn>
             </FlexRow>
-          </Section>
-          <Section>
             <Label htmlFor="description">Description:</Label>
             <TextArea
               id="description"
@@ -103,8 +106,6 @@ const EventForm = ({ user }) => {
               value={formData.description}
               onChange={handleChange}
             />
-          </Section>
-          <Section>
             <ErrorField>
               {errors.map((error) =>
                 <Error key={error}>{error}</Error>
@@ -113,82 +114,113 @@ const EventForm = ({ user }) => {
             <Button type="submit" variant="green" style={{ margin: 0 }}>
               {loading ? "Loading..." : "Create Event"}
             </Button>
-          </Section>
+          </Info>
         </Form>
-      </ContentWrapper>
-      <ContentWrapper>
-        <StaticMap event={formData} />
-      </ContentWrapper>
+      <Map>
+        <LoadScript
+          googleMapsApiKey={`${process.env.REACT_APP_GOOGLE_MAPS_API_KEY}`}
+          libraries={libraries}
+        >
+        </LoadScript>
+      </Map>
     </Wrapper>
   )
 };
 
 const commonStyles = css`
   display: flex;
-  width: 100%;
+  flex-direction: column;
 `;
 
 const Wrapper = styled.div`
-  ${commonStyles}
-  background-color: lightgray;
-  height: 90vh;
+  display: flex;
+  background: lightgray;
+  width: 75%;
+  height: 100%;
+  padding: 2%;
+`;
+
+const Map = styled(Form)`
+  border: none;
+  width: 60%;
   padding: 1%;
 `;
 
-const ContentWrapper = styled.div`
+const Form = styled.form`
   ${commonStyles}
-  background-color: white;
+  background: white;
   box-shadow: 5px 5px 5px gray;
-  width: 50%;
+  border: solid 4px rgb(50,55,65);
+  border-radius: 10px;
+  width: 36%;
+  margin: 1%;
+  animation: appear 0.6s ease forwards;
+`;
+
+const Title = styled.h1`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: rgb(50,55,65);
+  color: white;
+  font-size: 1.8rem;
+  height: 10%;
+  margin: 0;
+`;
+
+const Info = styled.div`
+  ${commonStyles}
+  width: 100%;
+  height: 100%;
+  padding: 3%;
 `;
 
 const Label = styled.label`
-  ${commonStyles}
-  font-size: 1rem;
-  font-weight: 500;
+  color: red;
+  font-weight: bold;
+`;
+
+const Star = styled.div`
+  color: gold;
+  font-size: 1.2rem;
+  margin: 1% 0 3% 0;
 `;
 
 const Input = styled.input`
   ${commonStyles}
-  background: lightgray;
+  background: rgb(217, 217, 217);
   border: solid 1px gray;
-  border-radius: 4px;
+  border-radius: 10px;
   font-size: 1.8rem;
-  margin-bottom: 2%;
-  padding: 1%;
+  margin: 2% 0 6%;
+  padding: 2%;
 `;
 
 const FlexRow = styled.div`
-  ${commonStyles}
+  display: flex;
   justify-content: space-between;
 `;
 
 const FlexColumn = styled.div`
   ${commonStyles}
   width: 48%;
-  flex-direction: column;
 `;
 
 const DateTime = styled(Input)`
-  ${commonStyles}
+  display: flex;
+  flex-direction: row;
   font-size: 1rem;
-  height: 50%;
 `;
 
 const TextArea = styled.textarea`
-  ${commonStyles}
-  background: lightgray;
+  background: rgb(217, 217, 217);
   border: solid 1px gray;
+  border-radius: 10px;
   font-size: 1rem;
   height: 90%;
-  padding: 1%;
+  margin: 2% 0 6%;
+  padding: 2%;
   overflow-y: hidden;
-`;
-
-const Section = styled.section`
-  ${commonStyles}
-  flex-direction: column;
-  height: 33.33%;
 `;
 
 const ErrorField = styled.div`
