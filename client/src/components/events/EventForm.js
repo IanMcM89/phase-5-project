@@ -8,7 +8,7 @@ import MapStatic from "../map/MapStatic";
 import styled from "styled-components";
 import {
   ContentDiv, MapDiv, InfoDiv, FlexColumn,
-  FlexRow, GoldStar, Button, Label, Error
+  FlexRow, Rating, Button, Label, Error
 } from "../../styles";
 
 const libraries = ['places'];
@@ -47,7 +47,7 @@ const EventForm = ({ user }) => {
     setLoading(false);
     if (r.ok) {
       dispatch(setPlace(null));
-      history.push(`/events`);
+      history.push(`/events/${newEvent.id}`);
     } else {
       setErrors(newEvent.errors);
     }
@@ -78,7 +78,7 @@ const EventForm = ({ user }) => {
             <Label variant="red" >Location:</Label>
             <h2 style={{ margin: '1% 0' }}>{formData.location}</h2>
             <p style={{ margin: '1% 0' }}>{formData.address}</p>
-            <GoldStar>★★★★★</GoldStar>
+            <Rating rating={place.rating} />
             <FlexRow>
               <FlexColumn>
                 <Label variant="red" htmlFor="date">Date:</Label>
@@ -113,7 +113,11 @@ const EventForm = ({ user }) => {
                 <Error key={error}>{error}</Error>
               )}
             </ErrorField>
-            <Button type="submit" variant="green" style={{ margin: 0 }}>
+            <Button
+              type="submit"
+              variant="green"
+              style={{ margin: 'auto 0 0', borderRadius: '6px' }}
+            >
               {loading ? "Loading..." : "Create Event"}
             </Button>
           </InfoDiv>
@@ -124,7 +128,7 @@ const EventForm = ({ user }) => {
           googleMapsApiKey={`${process.env.REACT_APP_GOOGLE_MAPS_API_KEY}`}
           libraries={libraries}
         >
-          <MapStatic event={place}/>
+          <MapStatic event={place} />
         </LoadScript>
       </MapDiv>
     </Wrapper>
@@ -177,7 +181,10 @@ const TextArea = styled.textarea`
   height: 20%;
   margin: 2% 0 6%;
   padding: 2%;
-  overflow-y: hidden;
+  overflow-y: scroll;
+  ::-webkit-scrollbar {
+    display: none;
+  }
 `;
 
 const ErrorField = styled.div`

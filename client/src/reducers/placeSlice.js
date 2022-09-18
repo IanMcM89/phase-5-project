@@ -4,6 +4,7 @@ export const setPlace = (placeData) => {
     {
       name: placeData.name,
       formatted_address: placeData.formatted_address,
+      rating: placeData.rating,
       photos: placeData.photos,
       lat: placeData.geometry.location.lat(),
       lng: placeData.geometry.location.lng()

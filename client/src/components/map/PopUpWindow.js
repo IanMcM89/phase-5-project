@@ -3,7 +3,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { useHistory } from "react-router-dom";
 import { setPlace } from "../../reducers/placeSlice";
 import { setEvent } from "../../reducers/eventSlice";
-import { Button } from "../../styles";
+import { Button, Rating } from "../../styles";
 import Photos from "./Photos";
 import styled, { css } from "styled-components";
 
@@ -21,7 +21,7 @@ const PopUpWindow = () => {
           <Photos photos={place.photos} />
           <h2>{place.name}</h2>
           <p style={{ margin: '1%' }}>{place.formatted_address}</p>
-          <Star>★★★★★</Star>
+          <Rating rating={place.rating} />
           <Button
             variant='green'
             onClick={() => history.push("/events/create")}
@@ -144,13 +144,6 @@ const Username = styled.p`
   height: fit-content;
   margin: 1%;
   z-index: 9;
-`;
-
-const Star = styled.div`
-  ${commonStyles}
-  color: gold;
-  font-size: 1.2rem;
-  margin: 0;
 `;
 
 export default PopUpWindow;

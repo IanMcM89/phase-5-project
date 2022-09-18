@@ -10,7 +10,7 @@ import InfoDiv from "./InfoDiv";
 import MapDiv from "./MapDiv";
 import FlexRow from "./FlexRow";
 import FlexColumn from "./FlexColumn";
-import GoldStar from "./GoldStar";
+import Rating from "./Rating";
 
 export { 
   Logo,
@@ -25,5 +25,5 @@ export {
   MapDiv,
   FlexRow,
   FlexColumn,
-  GoldStar
+  Rating
 };
