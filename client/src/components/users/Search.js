@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { useDispatch } from "react-redux";
 import { fetchUsers } from "../../reducers/usersSlice";
-import { showUsers, hideUsers } from "../../reducers/showUsersSlice";
+import { showUsers, hideUsers } from "../../reducers/visibilitySlice";
 import styled, { css } from "styled-components";
 
 const Search = () => {
