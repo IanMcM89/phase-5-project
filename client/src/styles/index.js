@@ -11,6 +11,8 @@ import MapDiv from "./MapDiv";
 import FlexRow from "./FlexRow";
 import FlexColumn from "./FlexColumn";
 import Rating from "./Rating";
+import Username from "./Username";
+import Avatar from "./Avatar";
 
 export { 
   Logo,
@@ -25,5 +27,7 @@ export {
   MapDiv,
   FlexRow,
   FlexColumn,
-  Rating
+  Rating,
+  Username,
+  Avatar
 };

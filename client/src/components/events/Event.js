@@ -6,8 +6,8 @@ import { useDispatch } from "react-redux";
 import MapStatic from "../map/MapStatic";
 import styled from "styled-components";
 import {
-  ContentDiv, MapDiv, InfoDiv, FlexColumn,
-  FlexRow, Rating, Button, Label
+  ContentDiv, Avatar, Username, MapDiv, InfoDiv, 
+  FlexColumn, FlexRow, Rating, Button, Label
 } from "../../styles";
 
 const libraries = ['places'];
@@ -27,8 +27,15 @@ const Event = ({ event, user }) => {
   return (
     <Wrapper>
       <ContentDiv>
+        <Avatar
+          src={
+            event.user.avatar ? event.user.avatar : "/images/icons/avatar.png"
+          }
+          alt={event.user.username}
+        />
         <Title>{event.title}</Title>
         <InfoDiv>
+          <Username>{event.user.username}</Username>
           <Label variant="red">Location:</Label>
           <h2 style={{ margin: '1% 0' }}>{event.location}</h2>
           <p style={{ margin: '1% 0' }}>{event.address}</p>
@@ -74,42 +81,6 @@ const Wrapper = styled.div`
   display: flex;
   width: 100%;
   height: 100%;
-`;
-
-const Avatar = styled.img`
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  text-align: center;
-  background: gray;
-  border-radius: 50%;
-  border: solid 3px rgb(50,55,65);
-  top: -5%;
-  left: -7%;
-  width: 80px;
-  height: 80px;
-  margin: 1%;
-  z-index: 2;
-`;
-
-const Username = styled.p`
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  text-align: center;
-  background: rgb(50,55,65);
-  color: white;
-  font-size: 0.8rem;
-  font-weight: bold;
-  border-radius: 6px;
-  top: -2%;
-  left: 0;
-  width: 10vw;
-  height: fit-content;
-  margin: 1%;
-  z-index: 1;
 `;
 
 const Title = styled.h1`

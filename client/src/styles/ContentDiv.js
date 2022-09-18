@@ -1,6 +1,7 @@
 import styled from "styled-components";
 
 const ContentDiv = styled.div`
+  position: relative;
   display: flex;
   flex-direction: column;
   background: white;

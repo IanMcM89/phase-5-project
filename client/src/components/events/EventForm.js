@@ -7,8 +7,8 @@ import { Redirect } from 'react-router';
 import MapStatic from "../map/MapStatic";
 import styled from "styled-components";
 import {
-  ContentDiv, MapDiv, InfoDiv, FlexColumn,
-  FlexRow, Rating, Button, Label, Error
+  ContentDiv, Avatar, Username, MapDiv, InfoDiv,
+  FlexColumn, FlexRow, Rating, Button, Label, Error
 } from "../../styles";
 
 const libraries = ['places'];
@@ -65,6 +65,12 @@ const EventForm = ({ user }) => {
   return (
     <Wrapper>
       <ContentDiv>
+        <Avatar
+          src={
+            user.avatar ? user.avatar : "/images/icons/avatar.png"
+          }
+          alt={user.username}
+        />
         <Form onSubmit={handleSubmit}>
           <Title
             type="text"
@@ -75,6 +81,7 @@ const EventForm = ({ user }) => {
             onChange={handleChange}
           />
           <InfoDiv>
+            <Username>{user.username}</Username>
             <Label variant="red" >Location:</Label>
             <h2 style={{ margin: '1% 0' }}>{formData.location}</h2>
             <p style={{ margin: '1% 0' }}>{formData.address}</p>
