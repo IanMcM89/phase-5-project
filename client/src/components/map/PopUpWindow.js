@@ -1,19 +1,16 @@
 import React from 'react';
-import { useSelector, useDispatch } from "react-redux";
+import { useDispatch } from "react-redux";
 import { useHistory } from "react-router-dom";
 import { setPlace } from "../../reducers/placeSlice";
-import { setEvent } from "../../reducers/eventSlice";
 import { Button, Rating } from "../../styles";
 import Photos from "./Photos";
 import styled, { css } from "styled-components";
 
-const PopUpWindow = () => {
-  const place = useSelector((state) => state.place);
-  const event = useSelector((state) => state.event);
+const PopUpWindow = ({ place }) => {
   const dispatch = useDispatch();
   const history = useHistory();
 
-  if (place) {
+  if (place.type.includes("place")) {
     return (
       <>
         <PopUp>
@@ -33,22 +30,22 @@ const PopUpWindow = () => {
         <PopUpAnchor />
       </>
     )
-  } else if (event) {
+  } else if (place.type.includes("event")) {
     return (
       <>
         <PopUp>
-          <Exit onClick={() => dispatch(setEvent(null))}>X</Exit>
+          <Exit onClick={() => dispatch(setPlace(null))}>X</Exit>
           <Avatar
             src={
-              event.user.avatar ? event.user.avatar : "/images/icons/avatar.png"
+              place.user.avatar ? place.user.avatar : "/images/icons/avatar.png"
             }
             alt=""
           />
-          <Username>{event.user.username}</Username>
-          <h2 style={{ width: '16vw' }}>{event.title}</h2>
+          <Username>{place.user.username}</Username>
+          <h2 style={{ width: '16vw' }}>{place.title}</h2>
           <Button
             variant='green'
-            onClick={() => history.push(`/events/${event.id}`)}
+            onClick={() => history.push(`/events/${place.id}`)}
             style={{ marginBottom: '5%' }}
           >
             See Event

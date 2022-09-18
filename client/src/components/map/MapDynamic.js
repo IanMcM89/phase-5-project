@@ -2,10 +2,9 @@ import React, { useEffect, useState } from 'react';
 import { GoogleMap } from '@react-google-maps/api';
 import { useDispatch } from "react-redux";
 import { setPlace } from "../../reducers/placeSlice";
-import { setEvent } from "../../reducers/eventSlice";
 import SearchBox from "../map/SearchBox";
 import Overlay from "../map/Overlay";
-import Markers from "../map/Markers";
+import Markers from "./Markers";
 
 function DynamicMap({ user }) {
   const [position, setPosition] = useState(null);
@@ -14,7 +13,6 @@ function DynamicMap({ user }) {
   const [places, setPlaces] = useState([]);
   const [map, setMap] = useState(null);
   const [zoom, setZoom] = useState(12);
-
   const dispatch = useDispatch();
 
   // Fetches current user's geolocation:
@@ -29,7 +27,6 @@ function DynamicMap({ user }) {
 
   useEffect(() => {
     dispatch(setPlace(null));
-    dispatch(setEvent(null));
     fetch("/api/events").then((r) => {
       if (r.ok) {
         r.json()
@@ -60,32 +57,39 @@ function DynamicMap({ user }) {
 
   return (
     <>
-        <GoogleMap
-          options={{
-            disableDoubleClickZoom: true,
-            fullscreenControl: false,
-            streetViewControl: false,
-            clickableIcons: false,
-            mapTypeId: 'terrain'
-          }}
-          mapContainerStyle={mapStyles}
-          onDragEnd={updateCenter}
-          onLoad={(ref) => setMap(ref)}
-          zoom={zoom}
-          center={position ? ({
-            lat: position.lat,
-            lng: position.lng
-          }) : null}
-        >
-          <SearchBox
-            map={map}
-            onPlacesChanged={changePlaces}
-            onSBLoad={(ref) => setSearchBox(ref)}
-          />
-          <Overlay setPosition={setPosition} />
-          <Markers map={map} user={user} places={places} />
-          <Markers map={map} user={user} events={events} />
-        </GoogleMap>
+      <GoogleMap
+        options={{
+          disableDoubleClickZoom: true,
+          fullscreenControl: false,
+          streetViewControl: false,
+          clickableIcons: false,
+          mapTypeId: 'terrain'
+        }}
+        mapContainerStyle={mapStyles}
+        onDragEnd={updateCenter}
+        onLoad={(ref) => setMap(ref)}
+        zoom={zoom}
+        center={position ? ({
+          lat: position.lat,
+          lng: position.lng
+        }) : null}
+      >
+        <SearchBox
+          map={map}
+          onPlacesChanged={changePlaces}
+          onSBLoad={(ref) => setSearchBox(ref)}
+        />
+        <Overlay
+          position={position}
+          setPosition={setPosition}
+        />
+        <Markers
+          map={map}
+          user={user}
+          places={places}
+          events={events}
+        />
+      </GoogleMap>
     </>
   );
 }

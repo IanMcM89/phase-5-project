@@ -1,13 +1,19 @@
 // Action Creators:
-export const setPlace = (placeData) => {
-  const place = placeData ? (
+export const setPlace = (place, type) => {
+  const PlaceData = place ? (
     {
-      name: placeData.name,
-      formatted_address: placeData.formatted_address,
-      rating: placeData.rating,
-      photos: placeData.photos,
-      lat: placeData.geometry.location.lat(),
-      lng: placeData.geometry.location.lng()
+      id: place.id,
+      type: type,
+      user: place.user,
+      title: place.title,
+      name: place.name,
+      formatted_address: place.formatted_address,
+      rating: place.rating,
+      photos: place.photos,
+      lat: type.includes("place") ?
+        (place.geometry.location.lat()) : (Number(place.lat)),
+      lng: type.includes("place") ?
+        (place.geometry.location.lng()) : (Number(place.lng))
     }
   ) : (
     null
@@ -15,7 +21,7 @@ export const setPlace = (placeData) => {
 
   return {
     type: 'place/set',
-    payload: place
+    payload: PlaceData
   };
 }
 

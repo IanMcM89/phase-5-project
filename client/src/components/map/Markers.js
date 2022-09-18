@@ -1,44 +1,44 @@
 import React from 'react';
 import { useDispatch } from "react-redux";
 import { setPlace } from "../../reducers/placeSlice";
-import { setEvent } from "../../reducers/eventSlice";
 import { Marker } from '@react-google-maps/api';
 
 const Markers = ({ map, user, places, events }) => {
   const dispatch = useDispatch();
 
-  const handleClick = (place, event) => {
-    dispatch(setPlace(place));
-    dispatch(setEvent(event));
-    
-    if (place) {
-      return map.panTo(place.geometry.location);
+  const getColor = (e) => {
+    if (e.user && e.user.id === user.id) {
+      return "grn"
+    } else if (e.user) {
+      return "blu"
     } else {
-      return map.panTo({
-        lat: Number(event.lat),
-        lng: Number(event.lng)
-      });
+      return "red"
     }
   }
 
-  const displayMarkers = () => {
-    if (places && places !== []) {
-      return places.map((place, i) =>
-        <Marker
-          key={i}
-          animation={2}
-          icon={{
-            url: "http://maps.google.com/mapfiles/kml/paddle/red-circle.png",
-            scaledSize: new window.google.maps.Size(40, 40)
-          }}
-          position={place.geometry.location}
-          onClick={() => handleClick(place, null)}
-        />
-      );
-    } else if (events && events !== []) {
-      return events.map((event, i) => {
-        const color = event.user.id === user.id ? "grn" : "blu";
+  const getCoords = (e, type) => {
+    switch (type) {
+      case "place":
+        return e.geometry.location;
+      case "event":
+        return {
+          lat: Number(e.lat),
+          lng: Number(e.lng)
+        }
+      default:
+        return null;
+    }
+  }
 
+  const handleClick = (e, type) => {
+    dispatch(setPlace(e, type));
+    map.panTo(getCoords(e, type));
+  }
+
+  const displayPins = (arr, type) => {
+    if (arr && arr !== []) {
+      return arr.map((e, i) => {
+        const color = getColor(e);
         return (
           <Marker
             key={i}
@@ -47,18 +47,21 @@ const Markers = ({ map, user, places, events }) => {
               url: `http://maps.google.com/mapfiles/kml/paddle/${color}-circle.png`,
               scaledSize: new window.google.maps.Size(40, 40)
             }}
-            position={{
-              lat: Number(event.lat),
-              lng: Number(event.lng)
-            }}
-            onClick={() => handleClick(null, event)}
+            position={getCoords(e, type)}
+            onClick={() => handleClick(e, type)}
           />
         )
       });
     }
   }
 
-  return displayMarkers();
+  return (
+    <>
+      {displayPins(places, "place")}
+      {displayPins(events, "event")}
+    </>
+  )
+
 }
 
 export default Markers;

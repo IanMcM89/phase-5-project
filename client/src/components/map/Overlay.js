@@ -5,50 +5,33 @@ import PopUpWindow from './PopUpWindow';
 
 const Overlay = ({ setPosition }) => {
   const place = useSelector((state) => state.place);
-  const event = useSelector((state) => state.event);
 
   useEffect(() => {
     if (place) {
       setPosition({
-        lat: (Number(place.lat + 0.01)),
-        lng: (Number(place.lng)),
-      });
-    } else if (event) {
-      setPosition({
-        lat: (Number(event.lat) + 0.01),
-        lng: (Number(event.lng)),
+        lat: place.lat,
+        lng: place.lng,
       });
     }
-  }, [place, event, setPosition]);
+  }, [place, setPosition]);
 
   const getPixelPositionOffset = (width, height) => ({
     x: -(width / 2),
     y: -(height / 2)
   });
 
-  const getCoords = () => {
-    if (place) {
-      return {
-        lat: (Number(place.lat)),
-        lng: (Number(place.lng)),
-      }
-    } else if (event) {
-      return {
-        lat: (Number(event.lat)),
-        lng: (Number(event.lng)),
-      }
-    }
-  }
-
   return (
     <>
-      {(place || event) ? (
+      {(place) ? (
         <OverlayView
-          position={getCoords()}
+          position={{
+            lat: place.lat,
+            lng: place.lng,
+          }}
           mapPaneName={OverlayView.OVERLAY_MOUSE_TARGET}
           getPixelPositionOffset={getPixelPositionOffset}
         >
-          <PopUpWindow />
+          <PopUpWindow place={place} />
         </OverlayView>
       ) : (
         null
