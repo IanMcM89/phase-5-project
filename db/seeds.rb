@@ -63,35 +63,64 @@ Event.create(
   title: "Day at the Aquarium",
   location: "Aquarium of the Pacific",
   address: "100 Aquarium Way, Long Beach, CA 90802, USA",
+  rating: 4.6,
   date: "2022-09-12",
   time: "2000-01-01T10:00:00.000Z",
-  description: "Who's up for a day at the Aquarium??\n\nWe'll go look at some fish and then do a picnic in the park afterwards!\n\nWhat to bring:\n\n-Snacks\n-Cooler\n-Picnic Supplies\n\n",
-  lat: "33.7619735",
-  lng: "-118.1969738"
+  description: "Sit amet volutpat consequat mauris nunc congue nisi vitae. Pretium viverra suspendisse potenti nullam ac. Amet facilisis magna etiam tempor. Tincidunt ornare massa eget egestas purus.",
+  lat: 33.7619735,
+  lng: -118.1969738
 )
 
 Event.create(
   user_id: 1,
-  title: "Trek to the Top",
+  title: "Hollywood Sign Hike",
   location: "Hollywood Sign",
   address: "Los Angeles, CA 90068, USA",
+  rating: 4.6,
   date: "2022-09-14",
   time: "2000-01-01T08:30:00.000Z",
-  description: "Hope you're ready for a hike!\n\nWe'll start at the base of the hill and hike all the way up to the Hollywood sign.\n\nWhat to bring:\n\n-Energy Bars\n-Water\n-Foul Weather Gear",
-  lat: "34.1341151",
-  lng: "-118.3215482"
+  description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Fames ac turpis egestas integer eget aliquet nibh praesent tristique.",
+  lat: 34.1341151,
+  lng: -118.3215482
 )
 
 Event.create(
   user_id: 1,
-  title: "Day at the Museum",
+  title: "Museum Day",
   location: "Natural History Museum of Los Angeles County",
   address: "900 W Exposition Blvd, Los Angeles, CA 90007, United States",
+  rating: 4.8,
   date: "2022-09-17",
   time: "2000-01-01T09:00:00.000Z",
-  description: "Who wants to explore the Natural History Museum with me this weekend??\n\nWhat to bring:\n\n-Yourselves\n-A sense of curiosity\n\n",
-  lat: "34.0169567",
-  lng: "-118.2887764"
+  description: "Habitant morbi tristique senectus et netus et malesuada. Ultrices sagittis orci a scelerisque purus semper eget duis at. Placerat duis ultricies lacus sed turpis. Nibh ipsum consequat nisl vel pretium lectus quam id leo. ",
+  lat: 34.0169567,
+  lng: -118.2887764
+)
+
+Event.create(
+  user_id: 1,
+  title: "Dinner on The Queen",
+  location: "The Queen Mary",
+  address: "1126 Queens Hwy, Long Beach, CA 90802, USA",
+  rating: 4.3,
+  date: "2022-09-17",
+  time: "2000-01-01T18:00:00.000Z",
+  description: "Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
+  lat: 33.7526356,
+  lng: -118.1903235
+)
+
+Event.create(
+  user_id: 1,
+  title: "Coastal Cliff Hike",
+  location: "Flat Rock Beach",
+  address: "Flat Rock Beach, California 90274, United States",
+  rating: 4.2,
+  date: "2022-09-24",
+  time: "2000-01-01T09:00:00.000Z",
+  description: "A pellentesque sit amet porttitor eget dolor morbi. Orci nulla pellentesque dignissim enim sit. Facilisi etiam dignissim diam quis enim lobortis scelerisque fermentum. Urna et pharetra pharetra massa massa ultricies mi.",
+  lat: 33.7960505,
+  lng: -118.4076387
 )
 
 # Friend Event Seeds
@@ -101,11 +130,12 @@ Event.create(
   title: "Beach Day",
   location: "Huntington State Beach",
   address: "21601 E Pacific Coast Hwy, Huntington Beach, CA 92646, USA",
+  rating: 4.2,
   date: "2022-09-13",
   time: "2000-01-01T09:00:00.000Z",
-  description: "Let's have some fun in the sun!\n\nWhat to bring:\n\n-Snacks\n-Cooler\n-Sunscreen\n-Alcohol\n-Beach Towels\n-Umbrella",
-  lat: "33.6380444",
-  lng: "-117.9736122"
+  description: "Habitant morbi tristique senectus et netus et malesuada. Ultrices sagittis orci a scelerisque purus semper eget duis at. Placerat duis ultricies lacus sed turpis. Nibh ipsum consequat nisl vel pretium lectus quam id leo.",
+  lat: 33.6380444,
+  lng: -117.9736122
 )
 
 Event.create(
@@ -113,11 +143,12 @@ Event.create(
   title: "Venice Beach Day",
   location: "Venice Beach",
   address: "Venice Beach, Los Angeles, CA, USA",
+  rating: 4.5,
   date: "2022-09-13",
   time: "2000-01-01T09:00:00.000Z",
-  description: "Description...",
-  lat: "33.9932584",
-  lng: "-118.480598"
+  description: "A pellentesque sit amet porttitor eget dolor morbi. Orci nulla pellentesque dignissim enim sit. Facilisi etiam dignissim diam quis enim lobortis scelerisque fermentum. Urna et pharetra pharetra massa massa ultricies mi.",
+  lat: 33.9932584,
+  lng: -118.480598
 )
 
 Event.create(
@@ -125,9 +156,36 @@ Event.create(
   title: "Movie Night",
   location: "Regency Commerce",
   address: "950 Goodrich Blvd, Commerce, CA 90022, United States",
+  rating: 4.5,
   date: "2022-09-20",
   time: "2000-01-01T19:00:00.000Z",
-  description: "Description...",
-  lat: "34.0183787",
-  lng: "-118.1537692"
+  description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Fames ac turpis egestas integer eget aliquet nibh praesent tristique.",
+  lat: 34.0183787,
+  lng: -118.1537692
+)
+
+Event.create(
+  user_id: 6,
+  title: "Picnic on the Point",
+  location: "Korean Friendship Bell",
+  address: "3601 S Gaffey St, San Pedro, CA 90731, USA",
+  rating: 0,
+  date: "2022-09-25",
+  time: "2000-01-01T10:00:00.000Z",
+  description: "Habitant morbi tristique senectus et netus et malesuada. Ultrices sagittis orci a scelerisque purus semper eget duis at. Placerat duis ultricies lacus sed turpis. Nibh ipsum consequat nisl vel pretium lectus quam id leo.",
+  lat: 33.7097361,
+  lng: -118.2938
+)
+
+Event.create(
+  user_id: 7,
+  title: "Mountain Hike",
+  location: "Mount San Antonio",
+  address: "Mt San Antonio, California 91759, USA",
+  rating: 0,
+  date: "2022-09-22",
+  time: "2000-01-01T09:00:00.000Z",
+  description: "Gravida arcu ac tortor dignissim convallis aenean et tortor. Sodales ut etiam sit amet nisl. Elementum nisi quis eleifend quam adipiscing. A erat nam at lectus.",
+  lat: 34.2888927,
+  lng: -117.6467218
 )
