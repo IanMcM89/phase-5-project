@@ -10,7 +10,7 @@ const Avatar = styled.img`
   background: gray;
   border: solid 3px rgb(50,55,65);
   border-radius: 50%;
-  top: -5%;
+  top: -6%;
   left: -8%;
   width: 70px;
   height: 70px;

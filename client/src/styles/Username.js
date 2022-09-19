@@ -5,8 +5,9 @@ const Username = styled.p`
   justify-content: center;
   align-items: center;
   text-align: center;
-  border: solid 1px gray;
-  border-radius: 10px;
+  background: rgb(200, 55, 55);
+  border-radius: 6px;
+  color: white;
   font-size: 1rem;
   font-weight: bold;
   height: fit-content;

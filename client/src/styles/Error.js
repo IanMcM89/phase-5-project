@@ -13,6 +13,7 @@ const Wrapper = styled.div`
   display: flex;
   color: #ff3333;
   font-weight: bold;
+  font-style: italic;
   width: 100%;
   margin: 2px;
   animation: expand 0.4s ease forwards;
