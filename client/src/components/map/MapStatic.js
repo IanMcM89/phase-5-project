@@ -3,8 +3,8 @@ import { GoogleMap, Marker } from '@react-google-maps/api'
 
 const MapStatic = ({ event }) => {
   const position = {
-    lat: Number(event.lat),
-    lng: Number(event.lng)
+    lat: event.lat,
+    lng: event.lng
   };
 
   return (

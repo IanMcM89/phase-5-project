@@ -11,9 +11,9 @@ export const setPlace = (place, type) => {
       rating: place.rating,
       photos: place.photos,
       lat: type.includes("place") ?
-        (place.geometry.location.lat()) : (Number(place.lat)),
+        (place.geometry.location.lat()) : (place.lat),
       lng: type.includes("place") ?
-        (place.geometry.location.lng()) : (Number(place.lng))
+        (place.geometry.location.lng()) : (place.lng)
     }
   ) : (
     null

@@ -22,8 +22,8 @@ const Markers = ({ map, user, places, events }) => {
         return e.geometry.location;
       case "event":
         return {
-          lat: Number(e.lat),
-          lng: Number(e.lng)
+          lat: e.lat,
+          lng: e.lng
         }
       default:
         return null;
