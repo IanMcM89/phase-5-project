@@ -25,7 +25,7 @@ const Search = () => {
         <Icon src="/images/icons/search.png" alt="Search Icon"/>
       </Button>
       <Button onClick={() => setSearchValue('')}>
-        <Icon src="/images/icons/refresh.png" alt="Search Icon"/>
+        <Icon src="/images/icons/refresh.png" alt="Refresh Icon"/>
       </Button>
     </Form>
   );
