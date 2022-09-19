@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { GoogleMap } from '@react-google-maps/api';
+import { GoogleMap, StandaloneSearchBox } from '@react-google-maps/api';
 import { useDispatch } from "react-redux";
 import { setPlace } from "../../reducers/placeSlice";
 import SearchBox from "../map/SearchBox";
@@ -74,13 +74,15 @@ function DynamicMap({ user }) {
           lng: position.lng
         }) : null}
       >
-        <SearchBox
-          map={map}
+        <StandaloneSearchBox
+          bounds={map ? map.getBounds() : null}
           onPlacesChanged={changePlaces}
-          onSBLoad={(ref) => setSearchBox(ref)}
-        />
+          onLoad={(ref) => setSearchBox(ref)}
+        >
+          <SearchBox searchBox={searchBox} setPlaces={setPlaces}/>
+        </StandaloneSearchBox>
         <Overlay
-          position={position}
+          map={map}
           setPosition={setPosition}
         />
         <Markers
