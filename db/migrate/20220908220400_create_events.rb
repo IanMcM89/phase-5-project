@@ -4,6 +4,7 @@ class CreateEvents < ActiveRecord::Migration[6.1]
       t.integer :user_id
       t.string :title
       t.string :location
+      t.decimal :rating, precision: 2, scale: 1
       t.date :date
       t.time :time
       t.string :address
