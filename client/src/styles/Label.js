@@ -4,8 +4,10 @@ function Label({ variant = "base", ...props }) {
   let Component;
   if (variant === "base") {
     Component = LabelBase;
-  } else if (variant === "red") {
-    Component = LabelRed;
+  } else if (variant === "blue") {
+    Component = LabelBlue;
+  } else if (variant === "required") {
+    Component = LabelRequired;
   }
 
   return <Component {...props} />;
@@ -19,10 +21,17 @@ const LabelBase = styled.label`
   margin-bottom: 5px;
 `;
 
-const LabelRed = styled(LabelBase)`
-  color: red;
+const LabelBlue = styled(LabelBase)`
+  color: rgb(50,55,65);
   font-weight: bold;
   margin-bottom: 0;
+`;
+
+const LabelRequired = styled(LabelBlue)`
+  ::before {
+    content:'*';
+    color: red;
+  }
 `;
 
 export default Label;

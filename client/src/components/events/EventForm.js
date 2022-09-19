@@ -18,7 +18,7 @@ const EventForm = ({ user }) => {
   const dispatch = useDispatch();
   const history = useHistory();
   const [loading, setLoading] = useState(false);
-  const [errors, setErrors] = useState([]);
+  const [error, setError] = useState(null);
   const [formData, setFormData] = useState(place ? {
     user_id: user.id,
     title: "",
@@ -47,9 +47,9 @@ const EventForm = ({ user }) => {
     setLoading(false);
     if (r.ok) {
       dispatch(setPlace(null));
-      history.push(`/events/${newEvent.id}`);
+      history.push(`/events`);
     } else {
-      setErrors(newEvent.errors);
+      setError("* Required Field");
     }
   }
 
@@ -75,20 +75,20 @@ const EventForm = ({ user }) => {
           <Title
             type="text"
             id="title"
-            placeholder="Title:"
+            placeholder="*Title"
             autoComplete="off"
             value={formData.title}
             onChange={handleChange}
           />
           <InfoDiv>
             <Username>{user.username}</Username>
-            <Label variant="red" >Location:</Label>
+            <Label variant="blue" >Location:</Label>
             <h2 style={{ margin: '1% 0' }}>{formData.location}</h2>
             <p style={{ margin: '1% 0' }}>{formData.address}</p>
             <Rating rating={place.rating} />
             <FlexRow>
               <FlexColumn>
-                <Label variant="red" htmlFor="date">Date:</Label>
+                <Label variant="required" htmlFor="date">Date:</Label>
                 <DateTime
                   type="date"
                   id="date"
@@ -98,7 +98,7 @@ const EventForm = ({ user }) => {
                 />
               </FlexColumn>
               <FlexColumn>
-                <Label variant="red" htmlFor="time">Time:</Label>
+                <Label variant="required" htmlFor="time">Time:</Label>
                 <DateTime
                   type="time"
                   id="time"
@@ -108,7 +108,7 @@ const EventForm = ({ user }) => {
                 />
               </FlexColumn>
             </FlexRow>
-            <Label variant="red" htmlFor="description">Description:</Label>
+            <Label variant="required" htmlFor="description">Description:</Label>
             <TextArea
               id="description"
               autoComplete="off"
@@ -116,9 +116,7 @@ const EventForm = ({ user }) => {
               onChange={handleChange}
             />
             <ErrorField>
-              {errors.map((error) =>
-                <Error key={error}>{error}</Error>
-              )}
+              {error ? (<Error>{error}</Error>) : (null)}
             </ErrorField>
             <Button
               type="submit"
@@ -163,10 +161,10 @@ const Title = styled.input`
   border: none;
   color: lightgray;
   font-size: 1.8rem;
-  width: 100;
   height: 10%;
   margin: 0;
   padding: 1%;
+}
 `;
 
 const DateTime = styled.input`
@@ -175,6 +173,7 @@ const DateTime = styled.input`
   background: rgb(217, 217, 217);
   border: solid 1px gray;
   border-radius: 10px;
+  font-family: Arial, Helvetica, sans-serif;
   font-size: 1rem;
   margin: 2% 0 6%;
   padding: 2%;
@@ -184,9 +183,10 @@ const TextArea = styled.textarea`
   background: rgb(217, 217, 217);
   border: solid 1px gray;
   border-radius: 10px;
+  font-family: Arial, Helvetica, sans-serif;
   font-size: 1rem;
-  height: 20%;
-  margin: 2% 0 6%;
+  height: 30%;
+  margin: 2% 0 2%;
   padding: 2%;
   overflow-y: scroll;
   ::-webkit-scrollbar {

@@ -36,21 +36,21 @@ const Event = ({ event, user }) => {
         <Title>{event.title}</Title>
         <InfoDiv>
           <Username>{event.user.username}</Username>
-          <Label variant="red">Location:</Label>
+          <Label variant="blue">Location:</Label>
           <h2 style={{ margin: '1% 0' }}>{event.location}</h2>
           <p style={{ margin: '1% 0' }}>{event.address}</p>
           <Rating rating={event.rating} />
           <FlexRow>
             <FlexColumn>
-              <Label variant="red" htmlFor="date">Date:</Label>
+              <Label variant="blue" htmlFor="date">Date:</Label>
               <P>📅&nbsp;{event.date}</P>
             </FlexColumn>
             <FlexColumn>
-              <Label variant="red" htmlFor="time">Time:</Label>
+              <Label variant="blue" htmlFor="time">Time:</Label>
               <P>🕑&nbsp;{event.time}</P>
             </FlexColumn>
           </FlexRow>
-          <Label variant="red" htmlFor="description">Description:</Label>
+          <Label variant="blue" htmlFor="description">Description:</Label>
           <P>{event.description}</P>
           {event.user.id === user.id ? (
             <Button
