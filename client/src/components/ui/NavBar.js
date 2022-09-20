@@ -1,12 +1,20 @@
-import React, { useState } from "react";
-import {useHistory} from "react-router-dom";
+import React, { useState, useEffect } from "react";
+import { useHistory } from "react-router-dom";
+import { useSelector, useDispatch } from "react-redux";
+import { fetchRequests } from "../../reducers/requestsSlice";
 import Notifications from "../notifications/NotificationsList";
 import { Logo, Button } from "../../styles";
 import styled, { css } from "styled-components";
 
 const NavBar = ({ setUser }) => {
+  const friendRequests = useSelector((state) => state.requests.entities);
   const [showNotifications, setShowNotifications] = useState(false);
+  const dispatch = useDispatch();
   const history = useHistory();
+
+  useEffect(() => {
+    dispatch(fetchRequests());
+  }, [dispatch]);
 
   const handleLogout = () => {
     fetch("/api/logout", {
@@ -26,7 +34,6 @@ const NavBar = ({ setUser }) => {
     <Header>
       <Logo />
       <Nav>
-        {/* <Icon src="/images/icons/profile.png" alt="Profile" /> */}
         <Icon
           src="/images/icons/map.png"
           alt="GeoMapper"
@@ -37,8 +44,12 @@ const NavBar = ({ setUser }) => {
           alt="Events"
           onClick={() => history.push("/events")}
         />
+        <Icon src="/images/icons/profile.png" alt="Profile" />
         <Icon
-          src="/images/icons/bell-empty.png"
+          src={`/images/icons/${friendRequests.length > 0 ?
+            "bell-fill.png" : "bell-empty.png"
+            }`
+          }
           alt="Notifications"
           onClick={handleBellClick}
         />
@@ -80,6 +91,10 @@ const Icon = styled.img`
   height: 60%;
   margin: auto 0;
   cursor: pointer;
+  animation: hoverOut 0.2s ease forwards;
+  &:hover {
+    animation: hoverIn 0.2s ease forwards;
+  }
 `;
 
 export default NavBar;
