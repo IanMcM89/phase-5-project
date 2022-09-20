@@ -6,11 +6,13 @@ class Event < ApplicationRecord
   too_long: "500 characters maximum" }
 
   def date
-    attributes['date'].strftime("%m/%d/%Y")
+    if attributes['date'] then attributes['date'].strftime("%m/%d/%Y")
+    end
   end
 
   def time
-    attributes['time'].strftime("%I:%M %p")
+    if attributes['time'] then attributes['time'].strftime("%I:%M %p")
+    end
   end
 
   def rating
