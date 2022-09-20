@@ -56,43 +56,41 @@ function DynamicMap({ user }) {
   }
 
   return (
-    <>
-      <GoogleMap
-        options={{
-          disableDoubleClickZoom: true,
-          fullscreenControl: false,
-          streetViewControl: false,
-          clickableIcons: false,
-          mapTypeId: 'terrain'
-        }}
-        mapContainerStyle={mapStyles}
-        onDragEnd={updateCenter}
-        onLoad={(ref) => setMap(ref)}
-        zoom={zoom}
-        center={position ? ({
-          lat: position.lat,
-          lng: position.lng
-        }) : null}
+    <GoogleMap
+      options={{
+        disableDoubleClickZoom: true,
+        fullscreenControl: false,
+        streetViewControl: false,
+        clickableIcons: false,
+        mapTypeId: 'terrain'
+      }}
+      mapContainerStyle={mapStyles}
+      onDragEnd={updateCenter}
+      onLoad={(ref) => setMap(ref)}
+      zoom={zoom}
+      center={position ? ({
+        lat: position.lat,
+        lng: position.lng
+      }) : null}
+    >
+      <StandaloneSearchBox
+        bounds={map ? map.getBounds() : null}
+        onPlacesChanged={changePlaces}
+        onLoad={(ref) => setSearchBox(ref)}
       >
-        <StandaloneSearchBox
-          bounds={map ? map.getBounds() : null}
-          onPlacesChanged={changePlaces}
-          onLoad={(ref) => setSearchBox(ref)}
-        >
-          <SearchBox searchBox={searchBox} setPlaces={setPlaces}/>
-        </StandaloneSearchBox>
-        <Overlay
-          map={map}
-          setPosition={setPosition}
-        />
-        <Markers
-          map={map}
-          user={user}
-          places={places}
-          events={events}
-        />
-      </GoogleMap>
-    </>
+        <SearchBox searchBox={searchBox} setPlaces={setPlaces} />
+      </StandaloneSearchBox>
+      <Overlay
+        map={map}
+        setPosition={setPosition}
+      />
+      <Markers
+        map={map}
+        user={user}
+        places={places}
+        events={events}
+      />
+    </GoogleMap>
   );
 }
 
