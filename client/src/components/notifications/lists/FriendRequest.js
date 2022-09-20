@@ -45,10 +45,11 @@ const commonStyles = css`
 
 const Wrapper = styled.div`
   ${commonStyles}
+  border: solid 2px rgb(20,25,35,0.8);
 `;
 
 const Timestamp = styled.p`
-  color: gray;
+  color: lightgray;
   margin: 0 0 0 2%;
   font-size: 0.7vw;
 `;
