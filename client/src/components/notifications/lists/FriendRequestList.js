@@ -6,7 +6,6 @@ import styled, { css } from "styled-components";
 
 const FriendRequestList = () => {
   const [friendRequests, setFriendRequests] = useState([]);
-
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -71,7 +70,6 @@ const commonStyles = css`
 
 const Wrapper = styled.div`
   ${commonStyles}
-
   div:nth-child(odd) {
     background: rgb(10,15,25,0.6);
   }
