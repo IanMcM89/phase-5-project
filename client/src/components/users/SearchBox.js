@@ -64,6 +64,7 @@ const Input = styled.input`
   ${commonStyles}
   width: 90%;
   height: 100%;
+  padding: 2%;
 `;
 
 const Button = styled.button`

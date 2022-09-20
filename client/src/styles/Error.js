@@ -10,17 +10,24 @@ function Error({ children }) {
 }
 
 const Wrapper = styled.div`
+  color: red;
+  background-color: rgb(255,204,204,0.8);
+  border: solid 1px red;
+  border-radius: 6px;
   display: flex;
-  color: #ff3333;
-  font-weight: bold;
-  font-style: italic;
-  width: 100%;
-  margin: 2px;
+  padding: 8px;
+  align-items: center;
+  gap: 8px;
+  margin: 8px 0;
   animation: expand 0.4s ease forwards;
 `;
 
 const Alert = styled.span`
-  width: 30px;
+  background-color: white;
+  height: 25px;
+  width: 25px;
+  border-radius: 50%;
+  font-weight: bold;
   display: grid;
   place-content: center;
 `;

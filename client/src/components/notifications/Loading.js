@@ -18,7 +18,7 @@ const Loading = () => {
 
 const commonStyles = css`
   display: flex;
-  background-color: rgb(70, 75, 85, 0.8);
+  background-color: rgb(100, 105, 115, 0.9);
   border-radius: 6px;
   margin: 1%;
   animation: flicker 0.6s infinite;
