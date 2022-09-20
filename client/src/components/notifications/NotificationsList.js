@@ -1,7 +1,8 @@
 import React from "react";
-import FriendRequest from "../notifications/lists/FriendRequest";
+import FriendRequest from "../notifications/entities/FriendRequest";
 import { useSelector, useDispatch } from "react-redux";
 import { fetchRequests } from "../../reducers/requestsSlice";
+import { fetchEvents } from "../../reducers/eventsSlice";
 import { addUser } from "../../reducers/usersSlice";
 import Loading from "./Loading";
 import styled from "styled-components";
@@ -23,6 +24,7 @@ const NotificationsList = () => {
         }
       })
       .then(dispatch(addUser('/api/friends', currentRequest.user)))
+      .then(dispatch(fetchEvents()));
   }
 
   const destroyRequest = (id) => {
@@ -54,7 +56,7 @@ const NotificationsList = () => {
   };
 
   return (
-    <Wrapper>
+    <Wrapper id="notifications">
       <Label>Notifications</Label>
       {!isLoading ? (
         <List>
@@ -75,11 +77,12 @@ const Wrapper = styled.div`
   height: fit-content;
   width: 25%;
   z-index: 1;
-  animation: expand 0.2s ease forwards;
+  animation: slideRight 0.2s ease forwards;
 `;
 
 const Label = styled.label`
-  background-color: rgb(10, 15, 25);
+  background: rgb(10, 15, 25);
+  border-bottom: solid 1px gray;
   display: flex;
   flex-direction: row;
   justify-content: center;
@@ -99,6 +102,7 @@ const List = styled.ul`
   overflow-y: scroll;
   margin: 0;
   padding: 0;
+  padding-top: 2%;
   
   ::-webkit-scrollbar {
     display: none;

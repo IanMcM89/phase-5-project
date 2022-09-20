@@ -16,6 +16,17 @@ const NavBar = ({ setUser }) => {
     dispatch(fetchRequests());
   }, [dispatch]);
 
+  useEffect(() => {
+    const list = document.getElementById('notifications');
+
+    return list.style.animation = (
+      showNotifications ?
+        "slideLeft 0.2s ease forwards" :
+        "slideRight 0.2s ease forwards"
+    )
+
+  }, [showNotifications])
+
   const handleLogout = () => {
     fetch("/api/logout", {
       method: "DELETE"
@@ -28,6 +39,7 @@ const NavBar = ({ setUser }) => {
 
   const handleBellClick = () => {
     setShowNotifications(!showNotifications);
+    dispatch(fetchRequests());
   }
 
   return (
@@ -58,7 +70,7 @@ const NavBar = ({ setUser }) => {
           Logout
         </Button>
       </Nav>
-      {showNotifications ? (<Notifications />) : (null)}
+      <Notifications />
     </Header>
   )
 };
