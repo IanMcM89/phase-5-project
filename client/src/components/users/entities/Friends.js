@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { fetchUsers } from "../../../reducers/usersSlice";
+import { fetchEvents } from "../../../reducers/eventsSlice";
 import UserSubList from "../styles/UserSubList";
 import styled from "styled-components";
 
@@ -22,6 +23,7 @@ const Friends = () => {
       .then((r) => {
         if (r.ok) {
           dispatch(fetchUsers('/api/friends'));
+          dispatch(fetchEvents());
         }
       });
   }

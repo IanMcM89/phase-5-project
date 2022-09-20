@@ -1,8 +1,8 @@
 import React from "react";
 import { useSelector } from "react-redux";
-import Friends from "./sub-lists/Friends";
-import Pending from "./sub-lists/Pending";
-import Users from "./sub-lists/Users";
+import Friends from "./entities/Friends";
+import Pending from "./entities/Pending";
+import Users from "./entities/Users";
 import Loading from "./Loading";
 import SearchBox from "./SearchBox";
 import styled, { css } from "styled-components";

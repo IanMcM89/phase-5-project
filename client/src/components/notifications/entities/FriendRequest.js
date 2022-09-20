@@ -45,7 +45,11 @@ const commonStyles = css`
 
 const Wrapper = styled.div`
   ${commonStyles}
-  border: solid 2px rgb(20,25,35,0.8);
+  background: rgb(10,15,25,0.7);
+  border-radius: 6px;
+  width: 96%;
+  margin: 0 2% 2%;
+  padding: 1%;
 `;
 
 const Timestamp = styled.p`
