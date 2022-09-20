@@ -13,6 +13,6 @@ class FriendRequest < ApplicationRecord
   end
 
   def created_at
-    attributes['created_at'].strftime("%m/%d/%Y %H:%M")
+    attributes['created_at'].strftime("%m/%d/%Y %I:%M %p")
   end
 end
