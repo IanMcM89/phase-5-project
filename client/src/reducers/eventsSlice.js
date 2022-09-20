@@ -1,5 +1,5 @@
 // Action Creators:
-export const fetchEvents = (url, search) => {
+export const fetchEvents = (url, text, date) => {
   return (dispatch) => {
     dispatch({ type: `${url}/eventsLoading` });
     fetch(url)
@@ -7,20 +7,32 @@ export const fetchEvents = (url, search) => {
       .then((events) => {
         dispatch({
           type: `${url}/eventsLoaded`,
-          payload: filterEvents(events, search)
+          payload: filterEvents(events, text, date)
         });
       });
   };
 }
 
-const filterEvents = (events, search) => {
-  if (search) {
-    search = search.toLowerCase();
-    return events.filter((event) => {
-      if (event.location.toLowerCase().includes(search)) {
-        return event;
-      } else if (event.title.toLowerCase().includes(search)) {
-        return event;
+const formatDate = (date) => {
+  const arr = date.split("-");
+  date = arr[1] + '/' + arr[2] + '/' + arr[0];
+  return date;
+}
+
+const filterEvents = (events, text, date) => {
+  events = (date && date !== '') ? (
+    events.filter((e) => e.date === formatDate(date))
+  ) : (
+    events
+  );
+
+  if (text && text !== '') {
+    text = text.toLowerCase();
+    return events.filter((e) => {
+      if (e.location.toLowerCase().includes(text)) {
+        return e;
+      } else if (e.title.toLowerCase().includes(text)) {
+        return e;
       } else {
         return null;
       }
