@@ -43,11 +43,11 @@ const EventForm = ({ user }) => {
       body: JSON.stringify(formData),
     });
 
-    const newEvent = await r.json();
+    await r.json();
     setLoading(false);
     if (r.ok) {
       dispatch(setPlace(null));
-      history.push(`/events`);
+      history.push('/events');
     } else {
       setError("* Required Field");
     }
