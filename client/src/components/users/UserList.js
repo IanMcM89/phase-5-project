@@ -4,7 +4,7 @@ import Friends from "./sub-lists/Friends";
 import Pending from "./sub-lists/Pending";
 import Users from "./sub-lists/Users";
 import Loading from "./Loading";
-import Search from "./Search";
+import SearchBox from "./SearchBox";
 import styled, { css } from "styled-components";
 
 const UserList = ({ user }) => {
@@ -18,7 +18,7 @@ const UserList = ({ user }) => {
 
   return (
     <Wrapper>
-      <Search />
+      <SearchBox />
       <SubLists style={{ display: isLoading ? 'none' : 'flex' }}>
         <Friends />
         <Pending />

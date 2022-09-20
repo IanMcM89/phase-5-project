@@ -3,28 +3,41 @@ import { useDispatch } from "react-redux";
 import { fetchEvents } from "../../reducers/eventsSlice";
 import styled, { css } from "styled-components";
 
-const Search = () => {
-  const [searchValue, setSearchValue] = useState('');
+const SearchBox = () => {
+  const [text, setText] = useState('');
+  const [date, setDate] = useState('');
   const dispatch = useDispatch();
 
   const handleSearch = (e) => {
     e.preventDefault();
-    dispatch(fetchEvents('/api/events', searchValue));
+    dispatch(fetchEvents('/api/events', text, date));
   };
+
+  const handleRefresh = () => {
+    setText('');
+    setDate('');
+  }
 
   return (
     <Form onSubmit={handleSearch}>
-      <Input
+      <Date
+        type="date"
+        id="date"
+        autoComplete="off"
+        value={date}
+        onChange={(e) => setDate(e.target.value)}
+      />
+      <Text
         type="text"
         name="search"
         placeholder="Search Events"
-        value={searchValue}
-        onChange={(e) => setSearchValue(e.target.value)}
+        value={text}
+        onChange={(e) => setText(e.target.value)}
       />
       <Button>
         <Icon src="/images/icons/search.png" alt="Search Icon"/>
       </Button>
-      <Button onClick={() => setSearchValue('')}>
+      <Button onClick={handleRefresh}>
         <Icon src="/images/icons/refresh.png" alt="Refresh Icon"/>
       </Button>
     </Form>
@@ -34,19 +47,31 @@ const Search = () => {
 const commonStyles = css`
   display: flex;
   justify-content: center;
+  height: 100%;
   margin: 0;
 `;
 
 const Form = styled.form`
-  ${commonStyles}
-  justify-content: right;
-  height: 5%;
+  display: flex;
+  justify-content: space-between;
   margin: 0 1%;
+  height: 5%;
+  width: 98%;
 `;
 
-const Input = styled.input`
+const Date = styled.input`
   ${commonStyles}
-  width: 42%;
+  font-family: Arial, Helvetica, sans-serif;
+  color: gray;
+  width: 23.5%;
+  padding: 1%;
+  margin-right: auto;
+`;
+
+const Text = styled.input`
+  ${commonStyles}
+  width: 41%;
+  padding: 1%;
 `;
 
 const Button = styled.button`
@@ -54,9 +79,8 @@ const Button = styled.button`
   background-color: rgb(186, 43, 43);
   border: solid 1px darkred;
   transition: 0.3s;
-  width: 3.5%;
+  width: 4%;
   padding: 0;
-
   &:hover {
     background-color: red;
   }
@@ -64,7 +88,6 @@ const Button = styled.button`
 
 const Icon = styled.img`
   ${commonStyles}
-  height: 100%;
 `;
 
-export default Search;
+export default SearchBox;

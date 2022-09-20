@@ -2,16 +2,16 @@ import React, { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { fetchEvents } from "../reducers/eventsSlice";
 import { LoadScript } from '@react-google-maps/api';
+import SearchBox from "../components/events/SearchBox";
 import EventDiv from "../components/events/EventDiv";
 import Loading from "../components/events/Loading";
-import Search from "../components/events/Search";
 import styled from "styled-components";
 
 const libraries = ['places'];
 
 const EventsList = ({ user }) => {
-  const events = useSelector((state) => state.events.entities);
   const dispatch = useDispatch();
+  const events = useSelector((state) => state.events.entities);
   const isLoading = useSelector((state) => {
     return state.events.status.includes('loading');
   });
@@ -43,7 +43,7 @@ const EventsList = ({ user }) => {
         googleMapsApiKey={`${process.env.REACT_APP_GOOGLE_MAPS_API_KEY}`}
         libraries={libraries}
       >
-        <Search />
+        <SearchBox />
         <EventsWrapper>
           {!isLoading ? displayEvents() : <Loading />}
         </EventsWrapper>
