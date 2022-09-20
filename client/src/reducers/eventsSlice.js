@@ -1,24 +1,26 @@
 // Action Creators:
-export const fetchEvents = (url, text, date) => {
+export const fetchEvents = (text, date) => {
   return (dispatch) => {
-    dispatch({ type: `${url}/eventsLoading` });
-    fetch(url)
+    dispatch({ type: 'events/loading' });
+    fetch('/api/events')
       .then((r) => r.json())
       .then((events) => {
         dispatch({
-          type: `${url}/eventsLoaded`,
+          type: 'events/loaded',
           payload: filterEvents(events, text, date)
         });
       });
   };
 }
 
+//change default date format to mm/dd/yyyy:
 const formatDate = (date) => {
   const arr = date.split("-");
   date = arr[1] + '/' + arr[2] + '/' + arr[0];
   return date;
 }
 
+//first filters events by date, then by title/name if text provided:
 const filterEvents = (events, text, date) => {
   events = (date && date !== '') ? (
     events.filter((e) => e.date === formatDate(date))
@@ -48,22 +50,20 @@ const initialState = {
 };
 
 // Reducers:
-export default function createEventsReducer(url = '') {
-  return function reducer(state = initialState, action) {
-    switch (action.type) {
-      case `${url}/eventsLoaded`:
-        return {
-          ...state,
-          status: "idle",
-          entities: action.payload,
-        };
-      case `${url}/eventsLoading`:
-        return {
-          ...state,
-          status: "events loading",
-        };
-      default:
-        return state;
-    }
+export default function eventsReducer(state = initialState, action) {
+  switch (action.type) {
+    case 'events/loaded':
+      return {
+        ...state,
+        status: 'idle',
+        entities: action.payload,
+      };
+    case 'events/loading':
+      return {
+        ...state,
+        status: 'loading',
+      };
+    default:
+      return state;
   }
 }

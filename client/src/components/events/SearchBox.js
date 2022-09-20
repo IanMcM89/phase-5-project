@@ -10,7 +10,7 @@ const SearchBox = () => {
 
   const handleSearch = (e) => {
     e.preventDefault();
-    dispatch(fetchEvents('/api/events', text, date));
+    dispatch(fetchEvents(text, date));
   };
 
   const handleRefresh = () => {

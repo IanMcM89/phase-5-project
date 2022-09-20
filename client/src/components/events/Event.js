@@ -17,7 +17,7 @@ const Event = ({ event, user }) => {
     fetch(`/api/events/${event.id}`, {
       method: "DELETE"
     })
-      .then(dispatch(fetchEvents('/api/events')))
+      .then(dispatch(fetchEvents()))
       .then(history.push("/events"));
   };
 

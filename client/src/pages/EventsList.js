@@ -17,7 +17,7 @@ const EventsList = ({ user }) => {
   });
 
   useEffect(() => {
-    dispatch(fetchEvents('/api/events'));
+    dispatch(fetchEvents());
   }, [dispatch]);
 
   const filterEvents = events.filter((e) => e.user.id === user.id).map((e) => {
