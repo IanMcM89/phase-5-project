@@ -19,14 +19,13 @@ const FriendRequest = ({ request, onUpdate, onDelete }) => {
       </Content>
       <Buttons>
         <Button
-          style={{ margin: "0 4%" }} 
-          variant="green"
+          style={{ margin: "0 4%" }}
+          variant="red"
           onClick={() => onUpdate(request)}
         >
           Accept
         </Button>
         <Button
-          variant="red" 
           onClick={() => onDelete(request.id)}
         >
           Reject
