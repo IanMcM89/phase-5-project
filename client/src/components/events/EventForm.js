@@ -24,6 +24,7 @@ const EventForm = ({ user }) => {
     title: "",
     location: place.name,
     address: place.formatted_address,
+    rating: place.rating,
     date: "",
     time: "",
     description: "",
@@ -43,13 +44,13 @@ const EventForm = ({ user }) => {
       body: JSON.stringify(formData),
     });
 
-    await r.json();
+    const newEvent = await r.json();
     setLoading(false);
     if (r.ok) {
       dispatch(setPlace(null));
       history.push('/events');
     } else {
-      setError("* Required Field");
+      setError(newEvent.errors[0]);
     }
   }
 
@@ -72,14 +73,16 @@ const EventForm = ({ user }) => {
           alt={user.username}
         />
         <Form onSubmit={handleSubmit}>
-          <Title
-            type="text"
-            id="title"
-            placeholder="*Title"
-            autoComplete="off"
-            value={formData.title}
-            onChange={handleChange}
-          />
+          <TitleWrapper>
+            <Title
+              type="text"
+              id="title"
+              placeholder="Title"
+              autoComplete="off"
+              value={formData.title}
+              onChange={handleChange}
+            />
+          </TitleWrapper>
           <InfoDiv>
             <Username>{user.username}</Username>
             <Label variant="blue" >Location:</Label>
@@ -154,17 +157,25 @@ const Form = styled.form`
   height: 100%;
 `;
 
+const TitleWrapper = styled.div`
+  display: flex;
+  background: rgb(50,55,65);
+  height: 10%;
+  margin: 0;
+  padding: 2%;
+`;
+
 const Title = styled.input`
   display: flex;
   background: rgb(50,55,65);
+  border: solid 1px gray;
+  border-radius: 10px;
   text-align: center;
-  border: none;
   color: lightgray;
   font-size: 1.8rem;
-  height: 10%;
-  margin: 0;
+  width: 100%;
+  margin: 0 0 1% 0;
   padding: 1%;
-}
 `;
 
 const DateTime = styled.input`
@@ -185,7 +196,7 @@ const TextArea = styled.textarea`
   border-radius: 10px;
   font-family: Arial, Helvetica, sans-serif;
   font-size: 1rem;
-  height: 30%;
+  height: 25%;
   margin: 2% 0 2%;
   padding: 2%;
   overflow-y: scroll;
