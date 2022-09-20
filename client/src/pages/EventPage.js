@@ -1,8 +1,11 @@
 import React, { useState, useEffect } from "react";
+import { LoadScript } from '@react-google-maps/api';
 import { useLocation } from "react-router";
 import Event from "../components/events/Event";
 import Response from "../components/ui/Response";
 import styled from "styled-components";
+
+const libraries = ['places'];
 
 function EventPage({ user }) {
   const [event, setEvent] = useState(null);
@@ -31,7 +34,12 @@ function EventPage({ user }) {
 
   return (
     <Wrapper>
-      {renderPage()}
+      <LoadScript
+        googleMapsApiKey={`${process.env.REACT_APP_GOOGLE_MAPS_API_KEY}`}
+        libraries={libraries}
+      >
+        {renderPage()}
+      </LoadScript>
     </Wrapper>
   )
 }

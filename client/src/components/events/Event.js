@@ -1,16 +1,13 @@
 import React from "react";
 import { fetchEvents } from "../../reducers/eventsSlice";
-import { LoadScript } from '@react-google-maps/api';
 import { useHistory } from "react-router";
 import { useDispatch } from "react-redux";
 import MapStatic from "../map/MapStatic";
 import styled from "styled-components";
 import {
-  ContentDiv, Avatar, Username, MapDiv, InfoDiv, 
+  ContentDiv, Avatar, Username, MapDiv, InfoDiv,
   FlexColumn, FlexRow, Rating, Button, Label
 } from "../../styles";
-
-const libraries = ['places'];
 
 const Event = ({ event, user }) => {
   const history = useHistory();
@@ -66,12 +63,7 @@ const Event = ({ event, user }) => {
         </InfoDiv>
       </ContentDiv>
       <MapDiv>
-        <LoadScript
-          googleMapsApiKey={`${process.env.REACT_APP_GOOGLE_MAPS_API_KEY}`}
-          libraries={libraries}
-        >
-          <MapStatic event={event} />
-        </LoadScript>
+        <MapStatic event={event} />
       </MapDiv>
     </Wrapper>
   )
