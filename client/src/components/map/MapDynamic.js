@@ -1,15 +1,17 @@
 import React, { useEffect, useState } from 'react';
 import { GoogleMap, StandaloneSearchBox } from '@react-google-maps/api';
-import { useDispatch } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import { setPlace } from "../../reducers/placeSlice";
+import { fetchEvents } from "../../reducers/eventsSlice";
 import SearchBox from "../map/SearchBox";
 import Overlay from "../map/Overlay";
 import Markers from "./Markers";
 
 function DynamicMap({ user }) {
+  const events = useSelector((state) => state.events.entities);
+  const friends = useSelector((state) => state.friends.entities);
   const [position, setPosition] = useState(null);
   const [searchBox, setSearchBox] = useState(null);
-  const [events, setEvents] = useState([]);
   const [places, setPlaces] = useState([]);
   const [map, setMap] = useState(null);
   const [zoom, setZoom] = useState(12);
@@ -27,13 +29,8 @@ function DynamicMap({ user }) {
 
   useEffect(() => {
     dispatch(setPlace(null));
-    fetch("/api/events").then((r) => {
-      if (r.ok) {
-        r.json()
-          .then((eventData) => setEvents(eventData));
-      }
-    });
-  }, [dispatch]);
+    dispatch(fetchEvents());
+  }, [friends, dispatch]);
 
   // Fetches places from Google Places API using searchbox query:
   const changePlaces = () => {
@@ -59,6 +56,7 @@ function DynamicMap({ user }) {
     <GoogleMap
       options={{
         disableDoubleClickZoom: true,
+        gestureHandling: 'greedy',
         fullscreenControl: false,
         streetViewControl: false,
         clickableIcons: false,
