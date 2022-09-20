@@ -1,14 +1,68 @@
 import React from "react";
-import FriendRequestList from "./lists/FriendRequestList";
+import FriendRequest from "../notifications/lists/FriendRequest";
+import { useSelector, useDispatch } from "react-redux";
+import { fetchRequests } from "../../reducers/requestsSlice";
+import { addUser } from "../../reducers/usersSlice";
+import Loading from "./Loading";
 import styled from "styled-components";
 
 const NotificationsList = () => {
+  const dispatch = useDispatch();
+  const friendRequests = useSelector((state) => state.requests.entities);
+  const isLoading = useSelector((state) => {
+    return state.requests.status.includes('loading');
+  });
+
+  const updateRequest = (currentRequest) => {
+    fetch(`/api/friend_requests/${currentRequest.id}`, {
+      method: "PATCH"
+    })
+      .then((r) => {
+        if (r.ok) {
+          dispatch(fetchRequests());
+        }
+      })
+      .then(dispatch(addUser('/api/friends', currentRequest.user)))
+  }
+
+  const destroyRequest = (id) => {
+    fetch(`/api/friend_requests/${id}`, {
+      method: "DELETE"
+    })
+      .then((r) => {
+        if (r.ok) {
+          dispatch(fetchRequests());
+        }
+      })
+  }
+
+  const displayFriendrequests = () => {
+    if (friendRequests.length > 0) {
+      return friendRequests.map((request) =>
+        <FriendRequest
+          key={request.id}
+          request={request}
+          onUpdate={() => updateRequest(request)}
+          onDelete={() => destroyRequest(request.id)}
+        />
+      );
+    } else {
+      return (
+        <Message>No Notifications</Message>
+      )
+    }
+  };
+
   return (
     <Wrapper>
       <Label>Notifications</Label>
-      <List>
-        <FriendRequestList />
-      </List>
+      {!isLoading ? (
+        <List>
+          {displayFriendrequests()}
+        </List>
+      ) : (
+        <Loading />
+      )}
     </Wrapper>
   )
 }
@@ -49,6 +103,11 @@ const List = styled.ul`
   ::-webkit-scrollbar {
     display: none;
   }
+`;
+
+const Message = styled.p`
+  color: white;
+  text-align: center;
 `;
 
 export default NotificationsList;
