@@ -126,6 +126,32 @@ Event.create(
 # Friend Event Seeds
 
 Event.create(
+  user_id: 2,
+  title: "Shopping Day",
+  location: "Los Cerritos Center",
+  address: "239 Los Cerritos Center, Cerritos, CA 90703, United States",
+  rating: 4.5,
+  date: "2022-09-24",
+  time: "2000-01-01T11:00:00.000Z",
+  description: "Tincidunt lobortis feugiat vivamus at augue eget arcu. Lectus quam id leo in vitae. Amet mattis vulputate enim nulla aliquet porttitor lacus luctus accumsan.",
+  lat: 33.8622442,
+  lng: -118.0939625
+)
+
+Event.create(
+  user_id: 2,
+  title: "Let's Get Swole Bro!",
+  location: "LA Fitness",
+  address: "1914 S Bundy Dr, Los Angeles, CA 90025, United States",
+  rating: 3.3,
+  date: "2022-09-23",
+  time: "2000-01-01T17:00:00.000Z",
+  description: "Commodo viverra maecenas accumsan lacus vel facilisis volutpat. Sed egestas egestas fringilla phasellus faucibus scelerisque. Est sit amet facilisis magna etiam.",
+  lat: 34.0348269,
+  lng: -118.4560567
+)
+
+Event.create(
   user_id: 4,
   title: "Beach Day",
   location: "Huntington State Beach",
