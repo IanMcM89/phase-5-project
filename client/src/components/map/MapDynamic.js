@@ -1,17 +1,18 @@
 import React, { useEffect, useState } from 'react';
 import { GoogleMap, StandaloneSearchBox } from '@react-google-maps/api';
 import { useSelector, useDispatch } from "react-redux";
-import { setPlace } from "../../reducers/placeSlice";
 import { fetchEvents } from "../../reducers/eventsSlice";
+import { setPlace } from "../../reducers/placeSlice";
+import EventOverlays from "../map/EventOverlays";
+import PlaceOverlay from "../map/PlaceOverlay";
 import SearchBox from "../map/SearchBox";
-import Overlay from "../map/Overlay";
 import Markers from "./Markers";
 
 function DynamicMap({ user }) {
   const events = useSelector((state) => state.events.entities);
   const friends = useSelector((state) => state.friends.entities);
-  const [position, setPosition] = useState(null);
   const [searchBox, setSearchBox] = useState(null);
+  const [position, setPosition] = useState(null);
   const [places, setPlaces] = useState([]);
   const [map, setMap] = useState(null);
   const [zoom, setZoom] = useState(12);
@@ -78,10 +79,8 @@ function DynamicMap({ user }) {
       >
         <SearchBox searchBox={searchBox} setPlaces={setPlaces} />
       </StandaloneSearchBox>
-      <Overlay
-        map={map}
-        setPosition={setPosition}
-      />
+      <EventOverlays user={user} events={events}/>
+      <PlaceOverlay setPosition={setPosition}/>
       <Markers
         map={map}
         user={user}
