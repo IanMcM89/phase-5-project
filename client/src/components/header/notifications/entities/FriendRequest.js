@@ -1,5 +1,5 @@
 import React from "react";
-import { Button } from "../../../styles";
+import { Button } from "../../../../styles";
 import styled, { css } from "styled-components";
 
 const FriendRequest = ({ request, onUpdate, onDelete }) => {

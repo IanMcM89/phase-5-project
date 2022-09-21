@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { Switch, Route } from 'react-router-dom';
-import NavBar from "./components/ui/NavBar";
+import NavBar from "./components/header/NavBar";
 import EventForm from "./components/events/EventForm";
 import EventPage from "./pages/EventPage";
 import EventsList from "./pages/EventsList";

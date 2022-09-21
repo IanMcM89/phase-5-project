@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { useHistory } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import { fetchRequests } from "../../reducers/requestsSlice";
-import Notifications from "../notifications/NotificationsList";
+import Notifications from "./notifications/Notifications";
 import { Logo, Button } from "../../styles";
 import styled, { css } from "styled-components";
 

@@ -1,13 +1,13 @@
 import React from "react";
-import FriendRequest from "../notifications/entities/FriendRequest";
+import FriendRequest from "./entities/FriendRequest";
 import { useSelector, useDispatch } from "react-redux";
-import { fetchRequests } from "../../reducers/requestsSlice";
-import { fetchEvents } from "../../reducers/eventsSlice";
-import { addUser } from "../../reducers/usersSlice";
+import { fetchRequests } from "../../../reducers/requestsSlice";
+import { fetchEvents } from "../../../reducers/eventsSlice";
+import { addUser } from "../../../reducers/usersSlice";
 import Loading from "./Loading";
 import styled from "styled-components";
 
-const NotificationsList = () => {
+const Notifications = () => {
   const dispatch = useDispatch();
   const friendRequests = useSelector((state) => state.requests.entities);
   const isLoading = useSelector((state) => {
@@ -115,4 +115,4 @@ const Message = styled.p`
   margin-top: 0;
 `;
 
-export default NotificationsList;
+export default Notifications;
