@@ -7,7 +7,7 @@ const LoginForm = ({ onLogin, setErrors }) => {
   const [loading, setLoading] = useState(false);
 
   useEffect(() => {
-    setErrors([]);
+    setErrors(null);
   }, [setErrors]);
 
   async function handleSubmit(e) {

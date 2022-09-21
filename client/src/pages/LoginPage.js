@@ -6,7 +6,7 @@ import styled, { css } from "styled-components";
 
 const LoginPage = ({ onLogin }) => {
   const [showLogin, setShowLogin] = useState(true);
-  const [errors, setErrors] = useState([]);
+  const [errors, setErrors] = useState(null);
 
   return (
     <Main>
@@ -34,7 +34,7 @@ const LoginPage = ({ onLogin }) => {
           </Section>
         )}
         <ErrorField>
-          {errors.map((error) => <Error key={error}>{error}</Error>)}
+          {errors ? <Error>{errors[0]}</Error> : null}
         </ErrorField>
       </Wrapper>
     </Main>
