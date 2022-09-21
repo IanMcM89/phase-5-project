@@ -112,6 +112,7 @@ const List = styled.ul`
 const Message = styled.p`
   color: white;
   text-align: center;
+  margin-top: 0;
 `;
 
 export default NotificationsList;
