@@ -12,7 +12,8 @@ function DynamicMap({ user }) {
   const events = useSelector((state) => state.events.entities);
   const friends = useSelector((state) => state.friends.entities);
   const [searchBox, setSearchBox] = useState(null);
-  const [position, setPosition] = useState(null);
+  const [center, setCenter] = useState(null);
+  const [location, setLocation] = useState(null);
   const [places, setPlaces] = useState([]);
   const [map, setMap] = useState(null);
   const [zoom, setZoom] = useState(12);
@@ -21,7 +22,7 @@ function DynamicMap({ user }) {
   // Fetches current user's geolocation:
   useEffect(() => {
     navigator.geolocation.getCurrentPosition((pos) => {
-      setPosition({
+      setCenter({
         lat: pos.coords.latitude,
         lng: pos.coords.longitude,
       });
@@ -41,16 +42,16 @@ function DynamicMap({ user }) {
       dispatch(setPlace(null));
       setPlaces(results);
       setZoom(14);
-      setPosition({
+      map.panTo({
         lat: loc.lat(),
         lng: loc.lng()
-      });
+      })
     }
   }
 
-  // Sets position to new center coords after map drag:
+  // Sets location to new center coords after map drag:
   const updateCenter = () => {
-    if (map) setPosition(map.getCenter().toJSON());
+    if (map) setLocation(map.getCenter().toJSON());
   }
 
   return (
@@ -67,10 +68,8 @@ function DynamicMap({ user }) {
       onDragEnd={updateCenter}
       onLoad={(ref) => setMap(ref)}
       zoom={zoom}
-      center={position ? ({
-        lat: position.lat,
-        lng: position.lng
-      }) : null}
+      location={location}
+      center={center}
     >
       <StandaloneSearchBox
         bounds={map ? map.getBounds() : null}
@@ -80,7 +79,7 @@ function DynamicMap({ user }) {
         <SearchBox searchBox={searchBox} setPlaces={setPlaces} />
       </StandaloneSearchBox>
       <EventOverlays user={user} events={events}/>
-      <PlaceOverlay setPosition={setPosition}/>
+      <PlaceOverlay setLocation={setLocation}/>
       <Markers
         map={map}
         user={user}

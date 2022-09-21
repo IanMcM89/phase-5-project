@@ -3,17 +3,17 @@ import { useSelector } from "react-redux";
 import { OverlayView } from '@react-google-maps/api';
 import PlacePopUp from './PlacePopUp';
 
-const Overlay = ({ setPosition }) => {
+const Overlay = ({ setLocation }) => {
   const place = useSelector((state) => state.place);
 
   useEffect(() => {
     if (place) {
-      // setPosition({
-      //   lat: place.lat,
-      //   lng: place.lng,
-      // });
+      setLocation({
+        lat: place.lat,
+        lng: place.lng,
+      });
     }
-  }, [place, setPosition]);
+  }, [place, setLocation]);
 
   return (
     <>
