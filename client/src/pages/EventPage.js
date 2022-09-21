@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { LoadScript } from '@react-google-maps/api';
 import { useLocation } from "react-router";
 import Event from "../components/events/Event";
-import Response from "../components/ui/Response";
+import Response from "../components/events/Response";
 import styled from "styled-components";
 
 const libraries = ['places'];
