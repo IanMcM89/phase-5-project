@@ -3,8 +3,8 @@ import styled, { css } from "styled-components";
 
 const Photos = ({ photos }) => {
   const [index, setIndex] = useState(0);
-
   const url = photos ? photos[index].getUrl() : "/images/camera.png";
+  const arrowStyle = {display: photos.length > 1 ? "flex" : "none"};
 
   const incrementIndex = () => {
     let i = index;
@@ -27,11 +27,13 @@ const Photos = ({ photos }) => {
         src="/images/icons/arrow-left.png"
         alt="Left Arrow"
         onClick={decrementIndex}
+        style={arrowStyle}
       />
       <RightArrow
         src="/images/icons/arrow-right.png"
         alt="Right Arrow"
         onClick={incrementIndex}
+        style={arrowStyle}
       />
     </Wrapper>
   )
