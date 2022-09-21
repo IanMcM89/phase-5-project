@@ -1,19 +1,14 @@
 // Action Creators:
-export const setPlace = (place, type) => {
+export const setPlace = (place) => {
   const PlaceData = place ? (
     {
       id: place.id,
-      type: type,
-      user: place.user,
-      title: place.title,
       name: place.name,
       formatted_address: place.formatted_address,
       rating: place.rating,
       photos: place.photos,
-      lat: type.includes("place") ?
-        (place.geometry.location.lat()) : (place.lat),
-      lng: type.includes("place") ?
-        (place.geometry.location.lng()) : (place.lng)
+      lat: place.geometry.location.lat(),
+      lng: place.geometry.location.lng()
     }
   ) : (
     null

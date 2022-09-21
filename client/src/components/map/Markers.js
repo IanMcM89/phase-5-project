@@ -31,9 +31,11 @@ const Markers = ({ map, user, places, events }) => {
   }
 
   const handleClick = (e, type) => {
-    dispatch(setPlace(e, type));
     map.panTo(getCoords(e, type));
-    if (type === "place") map.panBy(0, -200);
+    if (type === "place") {
+      dispatch(setPlace(e));
+      map.panBy(0, -200);
+    }
   }
 
   const displayPins = (arr, type) => {
