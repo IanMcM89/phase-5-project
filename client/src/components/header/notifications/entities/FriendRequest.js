@@ -9,7 +9,7 @@ const FriendRequest = ({ request, onUpdate, onDelete }) => {
       <Content>
         <Avatar
           src={request.user.avatar ? (
-            request.user.avatar
+            request.user.avatar.url
           ) : (
             "/images/icons/avatar.png"
           )}
