@@ -26,7 +26,7 @@ const Event = ({ event, user }) => {
       <ContentDiv>
         <Avatar
           src={
-            event.user.avatar ? event.user.avatar : "/images/icons/avatar.png"
+            event.user.avatar ? event.user.avatar.url : "/images/icons/avatar.png"
           }
           alt={event.user.username}
         />
@@ -87,11 +87,13 @@ const Title = styled.h1`
 `;
 
 const P = styled.p`
-  background: rgb(217, 217, 217);
-  border: solid 1px black;
-  border-radius: 10px;
-  margin: 2% 0 6%;
+  border: solid 2px #bfbfbf;
+  border-radius: 6px;
+  max-width: 100%;
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 1rem;
   max-height: 50%;
+  margin: 2% 0 6%;
   padding: 2%;
   overflow-y: scroll;
   ::-webkit-scrollbar {

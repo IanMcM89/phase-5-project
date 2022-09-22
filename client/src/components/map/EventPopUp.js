@@ -31,7 +31,7 @@ const EventPopUp = ({ user, event }) => {
           <Avatar
             style={{ border: `solid 2px ${getColor()}` }}
             src={
-              event.user.avatar ? event.user.avatar : "/images/icons/avatar.png"
+              event.user.avatar ? event.user.avatar.url : "/images/icons/avatar.png"
             }
             alt=""
           />
