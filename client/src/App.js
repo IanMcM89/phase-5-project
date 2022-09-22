@@ -46,7 +46,7 @@ const App = ({ cable }) => {
         <UserList user={user} />
         <Switch>
           <Route path="/account">
-            <AccountPage user={user}/>
+            <AccountPage user={user} setUser={setUser}/>
           </Route>
           <Route path="/events/create">
             <EventForm user={user} />
