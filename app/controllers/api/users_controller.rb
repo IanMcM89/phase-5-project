@@ -15,7 +15,7 @@ class Api::UsersController < ApplicationController
       end
     end
 
-    render json: users.to_json(only: [:id, :username, :login_status])
+    render json: users, include: [:id, :username, :avatar, :login_status]
   end
 
   # GET /me
