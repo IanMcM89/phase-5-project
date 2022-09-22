@@ -1,25 +1,15 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import {
   ContentDiv, InfoDiv, Label, Button,
   ErrorField, Error
 } from "../styles";
 import styled from "styled-components";
 
-const AccountPage = ({ user }) => {
-  const [avatar, setAvatar] = useState(null);
+const AccountPage = ({ user, setUser }) => {
+  const [avatar, setAvatar] = useState("/images/icons/avatar.png");
   const [input, setInput] = useState({
     avatar: null
   });
-
-  useEffect(() => {
-    // fetch user avatar on change
-    fetch("/api/me").then((r) => {
-      if (r.ok) {
-        r.json()
-          .then((userData) => setAvatar(userData.avatar));
-      }
-    });
-  }, [input]);
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -29,11 +19,16 @@ const AccountPage = ({ user }) => {
       method: 'PATCH',
       body: formData
     })
-      .then(data => console.log(data))
+      .then((r) => r.json())
+      .then((data) => setUser(data))
+      .then(setInput({
+        avatar: null
+      }))
       .catch(err => console.log(err));
   }
 
   const handleImageChange = (e) => {
+    setAvatar(URL.createObjectURL(e.target.files[0]));
     setInput({
       avatar: e.target.files[0]
     });
@@ -92,19 +87,35 @@ const AccountPage = ({ user }) => {
       </ContentDiv>
       <AvatarDiv>
         <Avatar
-          src={avatar ? avatar.url : "/images/icons/avatar.png"}
+          src={user.avatar ? user.avatar.url : avatar}
           alt="Avatar"
         />
         <Form onSubmit={handleSubmit} encType="multipart/form-data">
-          <Label htmlFor="avatar">Choose a profile picture:</Label>
-          <input type="file"
-            id="avatar"
-            name="avatar"
-            accept="image/png, image/jpeg"
-            multiple={false}
-            onChange={handleImageChange}
-          />
-          <button>Save</button>
+          <FormField>
+            <Label style={{ display: "flex", alignItems: "center", margin: 0 }}>
+              Choose a profile picture: &nbsp;
+            </Label>
+            <FileInput
+              type="file"
+              id="file"
+              accept="image/png, image/jpeg"
+              multiple={false}
+              onChange={handleImageChange}
+            />
+            <FileLabel htmlFor="file">
+              Select file
+            </FileLabel>
+          </FormField>
+          <FormField>
+            {input.avatar ? (
+              <File>
+                {input.avatar.name} {(input.avatar.size / 1000).toFixed(2)} KB
+              </File>
+            ) : (
+              null
+            )}
+            {input.avatar ? (<SaveButton>Save</SaveButton>) : (null)}
+          </FormField>
         </Form>
       </AvatarDiv>
     </Wrapper>
@@ -176,8 +187,60 @@ const Avatar = styled.img`
 
 const Form = styled.form`
   display: flex;
-  height: 5%;
-  margin: auto;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 15%;
+  margin: 5%;
+`;
+
+const FormField = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 80%;
+  height: 50%;
+`;
+
+const FileInput = styled.input`
+  display: none;
+`;
+
+const FileLabel = styled.label`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: rgb(200, 55, 55);
+  box-shadow: 4px 4px 7px #1a1a1a;
+  border-radius: 25px;
+  font-weight: bold;
+  color: white;
+  width: 150px;
+  height: fit-content;
+  cursor: pointer;
+  animation: hoverOut 0.2s ease forwards;
+  &:hover {
+    animation: hoverIn 0.2s ease forwards;
+  }
+`;
+
+const File = styled.p`
+  color: gray;
+`;
+
+const SaveButton = styled.button`
+  margin-left: 2%;
+  border: solid 2px lightgray;
+  border-radius: 10px;
+  background: transparent;
+  color: lightgray;
+  cursor: pointer;
+  animation: hoverOut 0.2s ease forwards;
+  &:hover {
+    border: 2px solid white;
+    color: white;
+    animation: hoverIn 0.2s ease forwards;
+  }
 `;
 
 export default AccountPage;
