@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import LoginForm from "../components/login/LoginForm";
 import SignUpForm from "../components/login/SignUpForm";
-import { Logo, Button, Error } from ".././styles";
+import { Logo, Button, ErrorField, Error } from ".././styles";
 import styled, { css } from "styled-components";
 
 const LoginPage = ({ onLogin }) => {
@@ -75,12 +75,6 @@ const Section = styled.section`
 
 const P = styled.p`
   color: white;
-`;
-
-const ErrorField = styled.div`
-  ${commonStyles}
-  height: 20%;
-  width: fit-content;
 `;
 
 export default LoginPage;

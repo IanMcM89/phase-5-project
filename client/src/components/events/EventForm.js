@@ -7,8 +7,8 @@ import { Redirect } from 'react-router';
 import MapStatic from "../map/MapStatic";
 import styled from "styled-components";
 import {
-  ContentDiv, Avatar, Username, MapDiv, InfoDiv,
-  FlexColumn, FlexRow, Rating, Button, Label, Error
+  ContentDiv, Avatar, Username, MapDiv, InfoDiv, FlexColumn, 
+  FlexRow, Rating, Button, Label, ErrorField, Error
 } from "../../styles";
 
 const libraries = ['places'];
@@ -68,7 +68,7 @@ const EventForm = ({ user }) => {
       <ContentDiv>
         <Avatar
           src={
-            user.avatar ? user.avatar : "/images/icons/avatar.png"
+            user.avatar ? user.avatar.url : "/images/icons/avatar.png"
           }
           alt={user.username}
         />
@@ -179,38 +179,31 @@ const Title = styled.input`
 `;
 
 const DateTime = styled.input`
-  display: flex;
-  flex-direction: row;
-  background: rgb(217, 217, 217);
-  border: solid 1px gray;
-  border-radius: 10px;
+  color: gray;
+  border: solid 2px #bfbfbf;
+  border-radius: 6px;
+  max-width: 100%;
   font-family: Arial, Helvetica, sans-serif;
-  font-size: 1rem;
-  margin: 2% 0 6%;
+  font-size: 0.8rem;
+  line-height: 1.4;
+  margin: 2% 0;
   padding: 2%;
 `;
 
 const TextArea = styled.textarea`
-  background: rgb(217, 217, 217);
-  border: solid 1px gray;
-  border-radius: 10px;
+  color: gray;
+  border: solid 2px #bfbfbf;
+  border-radius: 6px;
+  max-width: 100%;
   font-family: Arial, Helvetica, sans-serif;
   font-size: 1rem;
   height: 25%;
-  margin: 2% 0 2%;
+  margin: 2% 0;
   padding: 2%;
   overflow-y: scroll;
   ::-webkit-scrollbar {
     display: none;
   }
-`;
-
-const ErrorField = styled.div`
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  margin: auto;
 `;
 
 export default EventForm;
