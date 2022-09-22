@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { Switch, Route } from 'react-router-dom';
 import NavBar from "./components/header/NavBar";
+import AccountPage from "./pages/AccountPage";
 import EventForm from "./components/events/EventForm";
 import EventPage from "./pages/EventPage";
 import EventsList from "./pages/EventsList";
@@ -24,40 +25,40 @@ const App = ({ cable }) => {
 
   useEffect(() => {
     if (user) cable.subscriptions.create(
-        { 
-          channel: 'UsersChannel', 
-          id: user.id 
-        }, 
-        {
-          connected:    () => { console.log(`${user.username} logged in`) },
-          disconnected: () => { console.log(`${user.username} logged off`) },
-          received: (data) => { console.log(data) }
-        }
-      );
+      {
+        channel: 'UsersChannel',
+        id: user.id
+      },
+      {
+        connected: () => { console.log(`${user.username} logged in`) },
+        disconnected: () => { console.log(`${user.username} logged off`) },
+        received: (data) => { console.log(data) }
+      }
+    );
   }, [user, cable.subscriptions])
 
   if (!user) return (<LoginPage onLogin={setUser} />);
 
   return (
     <>
-      <NavBar user={user} setUser={setUser} />
+      <NavBar setUser={setUser}/>
       <Main>
         <UserList user={user} />
         <Switch>
-          <Route path="/profile">
-            <></>
+          <Route path="/account">
+            <AccountPage user={user}/>
           </Route>
           <Route path="/events/create">
-            <EventForm user={user}/>
+            <EventForm user={user} />
           </Route>
           <Route path="/events/:id">
-            <EventPage user={user}/>
+            <EventPage user={user} />
           </Route>
           <Route path="/events">
-            <EventsList user={user}/>
+            <EventsList user={user} />
           </Route>
           <Route path="/">
-            <MapPage user={user}/>
+            <MapPage user={user} />
           </Route>
         </Switch>
       </Main>

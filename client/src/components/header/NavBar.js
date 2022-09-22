@@ -56,7 +56,11 @@ const NavBar = ({ setUser }) => {
           alt="Events"
           onClick={() => history.push("/events")}
         />
-        <Icon src="/images/icons/profile.png" alt="Profile" />
+        <Icon
+          src="/images/icons/profile.png"
+          alt="Account"
+          onClick={() => history.push("/account")}
+        />
         <Icon
           src={`/images/icons/${friendRequests.length > 0 ?
             "bell-fill.png" : "bell-empty.png"
