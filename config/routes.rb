@@ -9,6 +9,7 @@ Rails.application.routes.draw do
     resources :users, only: [:index]
     post "/signup", to: "users#create"
     get "/me", to: "users#show"
+    patch "/me", to: "users#attach_avatar"
     post "/login", to: "sessions#create"
     delete "/logout", to: "sessions#destroy"
   end

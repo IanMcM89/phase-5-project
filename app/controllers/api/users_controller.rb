@@ -23,6 +23,12 @@ class Api::UsersController < ApplicationController
     render json: @current_user
   end
 
+  #PATCH /me
+  def attach_avatar
+    @current_user.avatar.attach(params[:avatar])
+    render json: @current_user
+  end
+
   # POST /signup
   def create
     user = User.create!(user_params)
@@ -33,6 +39,6 @@ class Api::UsersController < ApplicationController
   private
 
   def user_params
-    params.permit(:username, :password, :password_confirmation)
+    params.permit(:username, :password, :password_confirmation, :avatar).select {|x,v| v.present?}
   end
 end
