@@ -14,13 +14,35 @@ User.create(
   password_confirmation: "password"
 )
 
-5.times do |i|
-  User.create(
-    username: "user#{i+=2}",
-    password: "password",
-    password_confirmation: "password"
-  )
-end
+User.create(
+  username: "lmcmanus06",
+  password: "password",
+  password_confirmation: "password"
+)
+
+User.create(
+  username: "daleN33",
+  password: "password",
+  password_confirmation: "password"
+)
+
+User.create(
+  username: "JessWieleba93",
+  password: "password",
+  password_confirmation: "password"
+)
+
+User.create(
+  username: "kyleCastillo90",
+  password: "password",
+  password_confirmation: "password"
+)
+
+User.create(
+  username: "klBik",
+  password: "password",
+  password_confirmation: "password"
+)
 
 20.times do |i|
   password = (0...8).map { ('a'..'z').to_a[rand(26)] }.join
