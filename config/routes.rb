@@ -7,11 +7,12 @@ Rails.application.routes.draw do
     resources :friendships, only: [:index, :show]
     resources :friends, only: [:index, :show, :destroy]
     resources :users, only: [:index]
-    post "/signup", to: "users#create"
-    get "/me", to: "users#show"
-    patch "/me", to: "users#attach_avatar"
     post "/login", to: "sessions#create"
+    post "/signup", to: "users#create"
     delete "/logout", to: "sessions#destroy"
+    get "/me", to: "users#show"
+    patch "/me", to: "users#update"
+    patch "/me/upload_avatar", to: "users#attach_avatar"
   end
   # Routing logic: fallback requests for React Router.
   get "*path", to: "fallback#index", constraints: ->(req) { !req.xhr? && req.format.html? }

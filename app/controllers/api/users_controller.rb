@@ -24,6 +24,15 @@ class Api::UsersController < ApplicationController
   end
 
   #PATCH /me
+  def update
+    if @current_user.update(user_params)
+      render json: @current_user
+    else
+      render json: { errors: @current_user.errors.full_messages }, status: :unprocessable_entity
+    end
+  end
+
+  #PATCH /me/upload_avatar
   def attach_avatar
     @current_user.avatar.attach(params[:avatar])
     render json: @current_user
@@ -39,6 +48,7 @@ class Api::UsersController < ApplicationController
   private
 
   def user_params
-    params.permit(:username, :password, :password_confirmation, :avatar).select {|x,v| v.present?}
+    # params.permit(:username, :avatar, :password, :password_confirmation).select {|x,v| v.present?}
+    params.permit(:username, :avatar, :password, :password_confirmation)
   end
 end
