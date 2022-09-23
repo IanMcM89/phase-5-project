@@ -8,13 +8,30 @@ import styled from "styled-components";
 const AccountPage = ({ user, setUser }) => {
   const [error, setError] = useState(null);
 
+  const getVariant = (formData) => {
+    if (!Object.values(formData).includes('')) {
+      return "green";
+    } else {
+      return "transparent";
+    }
+  }
+
   return (
     <Wrapper>
       <ContentDiv>
         <Title>Account</Title>
-        <UsernameForm user={user} setUser={setUser} setError={setError} />
-        <PasswordForm setUser={setUser} setError={setError} />
-        <ErrorField style={{ height: '25%', margin: 'auto 4%'}}>
+        <UsernameForm
+          user={user}
+          setUser={setUser}
+          setError={setError}
+          getVariant={getVariant}
+        />
+        <PasswordForm
+          setUser={setUser}
+          setError={setError}
+          getVariant={getVariant}
+        />
+        <ErrorField style={{ height: '25%', margin: 'auto 4%' }}>
           {error ? (<Error>{error}</Error>) : (null)}
         </ErrorField>
         <Button

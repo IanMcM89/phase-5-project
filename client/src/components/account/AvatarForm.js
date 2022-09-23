@@ -4,12 +4,13 @@ import styled, { css } from "styled-components";
 
 const AvatarForm = ({ user, setUser }) => {
   const [avatar, setAvatar] = useState(null);
-  const [form, setForm] = useState({ avatar: null });
+  const [form, setForm] = useState({
+    avatar: null
+  });
 
   const handleChange = (e) => {
     setAvatar(URL.createObjectURL(e.target.files[0]));
     setForm({
-      ...form,
       avatar: e.target.files[0]
     });
   }
@@ -20,7 +21,7 @@ const AvatarForm = ({ user, setUser }) => {
     } else if (user.avatar) {
       return user.avatar.url;
     } else {
-      return "/images/icons/avatar.png"
+      return "/images/icons/avatar.png";
     }
   }
 
@@ -39,39 +40,38 @@ const AvatarForm = ({ user, setUser }) => {
   }
 
   return (
-      <Wrapper>
-        <Avatar
-          src={getAvatar()}
-          alt="Avatar"
-        />
-        <Form onSubmit={handleSubmit} encType="multipart/form-data">
-          <FormField>
-            <Label style={{ display: "flex", alignItems: "center", margin: 0 }}>
-              Choose a profile picture: &nbsp;
-            </Label>
-            <FileInput
-              type="file"
-              id="file"
-              accept="image/png, image/jpeg"
-              multiple={false}
-              onChange={handleChange}
-            />
-            <FileLabel htmlFor="file">
-              Select file
-            </FileLabel>
-          </FormField>
-          <FormField>
-            {form.avatar ? (
+    <Wrapper>
+      <Avatar src={getAvatar()} alt="Avatar" />
+      <Form onSubmit={handleSubmit} encType="multipart/form-data">
+        <FormField>
+          <Label style={{ display: "flex", alignItems: "center", margin: 0 }}>
+            Choose a profile picture: &nbsp;
+          </Label>
+          <FileInput
+            type="file"
+            id="file"
+            accept="image/png, image/jpeg"
+            multiple={false}
+            onChange={handleChange}
+          />
+          <FileLabel htmlFor="file">
+            Select file
+          </FileLabel>
+        </FormField>
+        <FormField>
+          {form.avatar ? (
+            <>
               <File>
                 {form.avatar.name} {(form.avatar.size / 1000).toFixed(2)} KB
               </File>
-            ) : (
-              null
-            )}
-            {form.avatar ? (<SaveButton>Save</SaveButton>) : (null)}
-          </FormField>
-        </Form>
-      </Wrapper>
+              <SaveButton>Save</SaveButton>
+            </>
+          ) : (
+            null
+          )}
+        </FormField>
+      </Form>
+    </Wrapper>
   )
 }
 
@@ -100,7 +100,7 @@ const Avatar = styled.img`
   display: flex;
   width: auto;
   height: 75%;
-  margin: 5% auto 0;
+  margin: auto auto 0;
 `;
 
 const Form = styled.form`
@@ -108,13 +108,13 @@ const Form = styled.form`
   flex-direction: column;
   width: 80%;
   height: 15%;
-  margin: 5%;
+  margin: auto;
 `;
 
 const FormField = styled.div`
   ${commonStyles}
-  width: 80%;
-  height: 45%;
+  width: 90%;
+  height: 50%;
 `;
 
 const FileInput = styled.input`

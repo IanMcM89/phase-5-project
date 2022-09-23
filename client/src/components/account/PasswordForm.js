@@ -1,8 +1,8 @@
 import React, { useState } from "react";
-import { Button } from "../../styles";
+import { Form, Button, Input } from "../../styles";
 import styled from "styled-components";
 
-const PasswordForm = ({ setUser, setError }) => {
+const PasswordForm = ({ setUser, setError, getVariant }) => {
   const [loading, setLoading] = useState(false);
   const [formData, setFormData] = useState({
     password: '',
@@ -19,8 +19,6 @@ const PasswordForm = ({ setUser, setError }) => {
   async function handleSubmit(e) {
     e.preventDefault();
     setLoading(true);
-
-    console.log(formData)
 
     const r = await fetch("/api/me", {
       method: "PATCH",
@@ -45,9 +43,10 @@ const PasswordForm = ({ setUser, setError }) => {
   }
 
   return (
-      <Form onSubmit={handleSubmit}>
+      <Form variant="account" onSubmit={handleSubmit}>
         <H2>Change Password</H2>
         <Input
+          variant="border"
           id="password"
           type="password"
           autoComplete="off"
@@ -56,6 +55,7 @@ const PasswordForm = ({ setUser, setError }) => {
           onChange={handleChange}
         />
         <Input
+          variant="border"
           id="password_confirmation"
           type="password"
           autoComplete="off"
@@ -64,6 +64,7 @@ const PasswordForm = ({ setUser, setError }) => {
           onChange={handleChange}
         />
         <Button
+          variant={getVariant(formData)}
           style={{ margin: '2%', borderRadius: '15px' }}
         >
           {loading ? "Loading..." : "Save Changes"}
@@ -72,29 +73,9 @@ const PasswordForm = ({ setUser, setError }) => {
   )
 }
 
-const Form = styled.form`
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-start;
-  width: 100%;
-  height: fit-content;
-  padding: 3%;
-`;
-
 const H2 = styled.h2`
   font-size: 1.2rem;
   margin: 1% 0 2% 0;
-`;
-
-const Input = styled.input`
-  color: gray;
-  border: solid 2px #bfbfbf;
-  border-radius: 6px;
-  max-width: 100%;
-  font-size: 0.8rem;
-  line-height: 1;
-  margin: 2% 0;
-  padding: 2%;
 `;
 
 export default PasswordForm;

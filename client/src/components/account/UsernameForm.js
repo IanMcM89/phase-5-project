@@ -1,8 +1,8 @@
 import React, { useState } from "react";
-import { Label, Button } from "../../styles";
+import { Form, Input, Label, Button } from "../../styles";
 import styled from "styled-components";
 
-const UsernameForm = ({ user, setUser, setError }) => {
+const UsernameForm = ({ user, setUser, setError, getVariant }) => {
   const [loading, setLoading] = useState(false);
   const [formData, setFormData] = useState({
     username: ''
@@ -17,8 +17,6 @@ const UsernameForm = ({ user, setUser, setError }) => {
   async function handleSubmit(e) {
     e.preventDefault();
     setLoading(true);
-
-    console.log(formData)
 
     const r = await fetch("/api/me", {
       method: "PATCH",
@@ -42,11 +40,12 @@ const UsernameForm = ({ user, setUser, setError }) => {
   }
 
   return (
-    <Form onSubmit={handleSubmit}>
+    <Form variant="account" onSubmit={handleSubmit}>
       <H2>Change Username</H2>
       <Label variant="blue" style={{ fontSize: "0.8rem" }}>Username</Label>
       <Username>{user.username}</Username>
       <Input
+        variant="border"
         id="username"
         type="text"
         autoComplete="off"
@@ -55,6 +54,7 @@ const UsernameForm = ({ user, setUser, setError }) => {
         onChange={handleChange}
       />
       <Button
+        variant={getVariant(formData)}
         style={{ margin: '2% 0 0 0', borderRadius: '15px' }}
       >
         {loading ? "Loading..." : "Save Changes"}
@@ -62,15 +62,6 @@ const UsernameForm = ({ user, setUser, setError }) => {
     </Form>
   )
 }
-
-const Form = styled.form`
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-start;
-  width: 100%;
-  height: fit-content;
-  padding: 3%;
-`;
 
 const Username = styled.h3`
   color: red;
@@ -82,16 +73,6 @@ const Username = styled.h3`
 const H2 = styled.h2`
   font-size: 1.2rem;
   margin: 1% 0 4% 0;
-`;
-
-const Input = styled.input`
-  color: gray;
-  border: solid 2px #bfbfbf;
-  border-radius: 6px;
-  max-width: 100%;
-  font-size: 0.8rem;
-  margin: 1% 0;
-  padding: 2%;
 `;
 
 export default UsernameForm;
