@@ -7,8 +7,8 @@ import { Redirect } from 'react-router';
 import MapStatic from "../map/MapStatic";
 import styled from "styled-components";
 import {
-  ContentDiv, Avatar, Username, MapDiv, InfoDiv, FlexColumn, 
-  FlexRow, Rating, Button, Label, ErrorField, Error
+  ContentDiv, Avatar, Username, MapDiv, InfoDiv, FlexColumn,
+  FlexRow, Rating, Button, Form, Label, ErrorField, Error, Input
 } from "../../styles";
 
 const libraries = ['places'];
@@ -72,7 +72,7 @@ const EventForm = ({ user }) => {
           }
           alt={user.username}
         />
-        <Form onSubmit={handleSubmit}>
+        <Form variant="event" onSubmit={handleSubmit}>
           <TitleWrapper>
             <Title
               type="text"
@@ -92,7 +92,8 @@ const EventForm = ({ user }) => {
             <FlexRow>
               <FlexColumn>
                 <Label variant="required" htmlFor="date">Date:</Label>
-                <DateTime
+                <Input
+                  variant="border"
                   type="date"
                   id="date"
                   autoComplete="off"
@@ -102,7 +103,8 @@ const EventForm = ({ user }) => {
               </FlexColumn>
               <FlexColumn>
                 <Label variant="required" htmlFor="time">Time:</Label>
-                <DateTime
+                <Input
+                  variant="border"
                   type="time"
                   id="time"
                   autoComplete="off"
@@ -112,7 +114,8 @@ const EventForm = ({ user }) => {
               </FlexColumn>
             </FlexRow>
             <Label variant="required" htmlFor="description">Description:</Label>
-            <TextArea
+            <Input
+              variant="textarea"
               id="description"
               autoComplete="off"
               value={formData.description}
@@ -151,12 +154,6 @@ const Wrapper = styled.div`
   padding: 2%;
 `;
 
-const Form = styled.form`
-  display: flex;
-  flex-direction: column;
-  height: 100%;
-`;
-
 const TitleWrapper = styled.div`
   display: flex;
   background: rgb(50,55,65);
@@ -176,34 +173,6 @@ const Title = styled.input`
   width: 100%;
   margin: 0 0 1% 0;
   padding: 1%;
-`;
-
-const DateTime = styled.input`
-  color: gray;
-  border: solid 2px #bfbfbf;
-  border-radius: 6px;
-  max-width: 100%;
-  font-family: Arial, Helvetica, sans-serif;
-  font-size: 0.8rem;
-  line-height: 1.4;
-  margin: 2% 0;
-  padding: 2%;
-`;
-
-const TextArea = styled.textarea`
-  color: gray;
-  border: solid 2px #bfbfbf;
-  border-radius: 6px;
-  max-width: 100%;
-  font-family: Arial, Helvetica, sans-serif;
-  font-size: 1rem;
-  height: 25%;
-  margin: 2% 0;
-  padding: 2%;
-  overflow-y: scroll;
-  ::-webkit-scrollbar {
-    display: none;
-  }
 `;
 
 export default EventForm;
