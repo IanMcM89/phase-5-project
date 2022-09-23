@@ -48,7 +48,6 @@ class Api::UsersController < ApplicationController
   private
 
   def user_params
-    # params.permit(:username, :avatar, :password, :password_confirmation).select {|x,v| v.present?}
-    params.permit(:username, :avatar, :password, :password_confirmation)
+    params.permit(:username, :avatar, :password, :password_confirmation).select {:avatar.present?}
   end
 end
