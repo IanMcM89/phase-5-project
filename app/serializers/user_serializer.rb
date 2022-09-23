@@ -1,6 +1,5 @@
 class UserSerializer < ActiveModel::Serializer
   include Rails.application.routes.url_helpers
-  default_url_options[:host] = 'localhost:3000'
   attributes :id, :username, :avatar, :login_status
 
   has_many :friends
@@ -9,7 +8,7 @@ class UserSerializer < ActiveModel::Serializer
 
   def avatar
     if object.avatar.attached?
-      {url: rails_blob_url(object.avatar)}
+      {cloudinary: object.avatar.service_url}
     end
   end
 end
