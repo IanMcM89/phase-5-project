@@ -23,19 +23,19 @@ const App = ({ cable }) => {
     });
   }, []);
 
-  useEffect(() => {
-    if (user) cable.subscriptions.create(
-      {
-        channel: 'UsersChannel',
-        id: user.id
-      },
-      {
-        connected: () => { console.log(`${user.username} logged in`) },
-        disconnected: () => { console.log(`${user.username} logged off`) },
-        received: (data) => { console.log(data) }
-      }
-    );
-  }, [user, cable.subscriptions])
+  // useEffect(() => {
+  //   if (user) cable.subscriptions.create(
+  //     {
+  //       channel: 'UsersChannel',
+  //       id: user.id
+  //     },
+  //     {
+  //       connected: () => { console.log(`${user.username} logged in`) },
+  //       disconnected: () => { console.log(`${user.username} logged off`) },
+  //       received: (data) => { console.log(data) }
+  //     }
+  //   );
+  // }, [user, cable.subscriptions])
 
   if (!user) return (<LoginPage onLogin={setUser} />);
 
