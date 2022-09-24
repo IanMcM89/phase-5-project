@@ -7,7 +7,7 @@ const User = ({ props, user }) => {
     <Li key={user.id}>
       {user.login_status ? <Status /> : null}
       <Avatar
-        src={user.avatar ? user.avatar.url : "/images/icons/avatar.png"}
+        src={user.avatar ? user.avatar : "/images/icons/avatar.png"}
         alt="Avatar Image"
       />
       <H2>{user.username}</H2>

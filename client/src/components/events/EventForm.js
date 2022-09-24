@@ -68,7 +68,7 @@ const EventForm = ({ user }) => {
       <ContentDiv>
         <Avatar
           src={
-            user.avatar ? user.avatar.url : "/images/icons/avatar.png"
+            user.avatar ? user.avatar : "/images/icons/avatar.png"
           }
           alt={user.username}
         />

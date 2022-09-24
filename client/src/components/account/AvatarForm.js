@@ -19,7 +19,7 @@ const AvatarForm = ({ user, setUser }) => {
     if (avatar) {
       return avatar;
     } else if (user.avatar) {
-      return user.avatar.url;
+      return user.avatar;
     } else {
       return "/images/icons/avatar.png";
     }

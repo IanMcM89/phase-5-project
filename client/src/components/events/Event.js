@@ -26,7 +26,7 @@ const Event = ({ event, user }) => {
       <ContentDiv>
         <Avatar
           src={
-            event.user.avatar ? event.user.avatar.url : "/images/icons/avatar.png"
+            event.user.avatar ? event.user.avatar : "/images/icons/avatar.png"
           }
           alt={event.user.username}
         />
