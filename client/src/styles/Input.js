@@ -43,6 +43,7 @@ const InputBorder = styled.input`
 
 const TextArea = styled.textarea`
   ${commonStyles}
+  font-size: 14px;
   height: 25%;
   margin: 2% 0;
   overflow-y: scroll;
