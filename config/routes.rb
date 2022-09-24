@@ -13,6 +13,7 @@ Rails.application.routes.draw do
     get "/me", to: "users#show"
     patch "/me", to: "users#update"
     patch "/me/upload_avatar", to: "users#attach_avatar"
+    delete "/me", to: "users#destroy"
   end
   # Routing logic: fallback requests for React Router.
   get "*path", to: "fallback#index", constraints: ->(req) { !req.xhr? && req.format.html? }

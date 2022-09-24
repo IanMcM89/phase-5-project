@@ -15,7 +15,7 @@ class Api::UsersController < ApplicationController
       end
     end
 
-    render json: users, include: [:id, :username, :avatar, :login_status]
+    render json: users, include: [:id, :username, :avatar]
   end
 
   # GET /me
@@ -23,7 +23,7 @@ class Api::UsersController < ApplicationController
     render json: @current_user
   end
 
-  #PATCH /me
+  # PATCH /me
   def update
     if @current_user.update(user_params)
       render json: @current_user
@@ -32,7 +32,7 @@ class Api::UsersController < ApplicationController
     end
   end
 
-  #PATCH /me/upload_avatar
+  # PATCH /me/upload_avatar
   def attach_avatar
     @current_user.avatar.attach(params[:avatar])
     render json: @current_user
@@ -43,6 +43,13 @@ class Api::UsersController < ApplicationController
     user = User.create!(user_params)
     session[:user_id] = user.id
     render json: user, status: :created
+  end
+
+  # DELETE /me
+  def destroy
+    @current_user.destroy
+    session.delete @current_user.id
+    head :no_content
   end
 
   private

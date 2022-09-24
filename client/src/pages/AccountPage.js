@@ -16,6 +16,13 @@ const AccountPage = ({ user, setUser }) => {
     }
   }
 
+  const handleDelete = () => {
+    fetch('/api/me', {
+      method: "DELETE"
+    })
+    .then(setUser(null));
+  }
+
   return (
     <Wrapper>
       <ContentDiv>
@@ -37,6 +44,7 @@ const AccountPage = ({ user, setUser }) => {
         <Button
           variant="red"
           style={{ margin: '3% 2% 2%', borderRadius: '6px' }}
+          onClick={handleDelete}
         >
           Delete Account
         </Button>
