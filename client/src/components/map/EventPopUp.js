@@ -59,7 +59,7 @@ const PopUp = styled.div`
   transform: translate(-50%, -160%);
   box-shadow: 0px 2px 10px 1px rgba(0, 0, 0, 0.5);
   border-radius: 10px;
-  width: 7vw;
+  width: 9vw;
   cursor: pointer;
   animation: appear 1.6s ease forwards;
 `;
@@ -83,7 +83,7 @@ const Avatar = styled.img`
   border: solid 2px rgb(50,55,65);
   border-radius: 50%;
   top: -20%;
-  left: -15%;
+  left: -20%;
   width: 30px;
   height: 30px;
   margin: 1%;
