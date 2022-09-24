@@ -8,7 +8,7 @@ class UserSerializer < ActiveModel::Serializer
 
   def avatar
     if object.avatar.attached?
-      {cloudinary: object.avatar.service_url}
+      Cloudinary::Utils.cloudinary_url(object.avatar.key)
     end
   end
 end
