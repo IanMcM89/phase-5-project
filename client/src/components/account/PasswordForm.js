@@ -1,8 +1,8 @@
 import React, { useState } from "react";
-import { Form, Button, Input } from "../../styles";
+import { Form, Button, Input, Error } from "../../styles";
 import styled from "styled-components";
 
-const PasswordForm = ({ setUser, setError, getVariant }) => {
+const PasswordForm = ({ setUser, setMessage, getVariant }) => {
   const [loading, setLoading] = useState(false);
   const [formData, setFormData] = useState({
     password: '',
@@ -32,13 +32,13 @@ const PasswordForm = ({ setUser, setError, getVariant }) => {
     setLoading(false);
     if (r.ok) {
       setUser(update);
-      setError(null);
+      setMessage(null);
       setFormData({
         password: '',
         password_confirmation: ''
       });
     } else {
-      setError(update.errors[0]);
+      setMessage(<Error>{update.errors[0]}</Error>);
     }
   }
 

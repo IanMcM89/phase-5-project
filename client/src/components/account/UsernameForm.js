@@ -1,8 +1,8 @@
 import React, { useState } from "react";
-import { Form, Input, Label, Button } from "../../styles";
+import { Form, Input, Label, Button, Error } from "../../styles";
 import styled from "styled-components";
 
-const UsernameForm = ({ user, setUser, setError, getVariant }) => {
+const UsernameForm = ({ user, setUser, setMessage, getVariant }) => {
   const [loading, setLoading] = useState(false);
   const [formData, setFormData] = useState({
     username: ''
@@ -30,12 +30,12 @@ const UsernameForm = ({ user, setUser, setError, getVariant }) => {
     setLoading(false);
     if (r.ok) {
       setUser(update);
-      setError(null);
+      setMessage(null);
       setFormData({
         username: ''
       });
     } else {
-      setError(update.errors[0]);
+      setMessage(<Error>{update.errors[0]}</Error>);
     }
   }
 

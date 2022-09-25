@@ -6,21 +6,32 @@ import { ContentDiv, Button, ErrorField, Error } from "../styles";
 import styled from "styled-components";
 
 const AccountPage = ({ user, setUser }) => {
-  const [error, setError] = useState(null);
+  const [message, setMessage] = useState(null);
 
   const getVariant = (formData) => {
     if (!Object.values(formData).includes('')) {
-      return "green";
+      return "red";
     } else {
       return "transparent";
     }
+  }
+
+  const handleClick = () => {
+    return setMessage(
+      <Error>
+        Account cannot be recovered! Confirm:
+        <br/>
+        <Confirm onClick={handleDelete}>Yes</Confirm>
+        <Confirm onClick={() => setMessage(null)}>No</Confirm>
+      </Error>
+    )
   }
 
   const handleDelete = () => {
     fetch('/api/me', {
       method: "DELETE"
     })
-    .then(setUser(null));
+      .then(setUser(null));
   }
 
   return (
@@ -30,21 +41,21 @@ const AccountPage = ({ user, setUser }) => {
         <UsernameForm
           user={user}
           setUser={setUser}
-          setError={setError}
+          setMessage={setMessage}
           getVariant={getVariant}
         />
         <PasswordForm
           setUser={setUser}
-          setError={setError}
+          setMessage={setMessage}
           getVariant={getVariant}
         />
         <ErrorField style={{ height: '25%', margin: 'auto 4%' }}>
-          {error ? (<Error>{error}</Error>) : (null)}
+          {message ? (message) : (null)}
         </ErrorField>
         <Button
           variant="red"
           style={{ margin: '3% 2% 2%', borderRadius: '6px' }}
-          onClick={handleDelete}
+          onClick={handleClick}
         >
           Delete Account
         </Button>
@@ -71,6 +82,19 @@ const Title = styled.h1`
   font-size: 1.8rem;
   height: 10%;
   margin: 0;
+`;
+
+const Confirm = styled.button`
+  background: rgb(200, 55, 55);
+  color: lightgray;
+  border: 2px solid transparent;
+  border-radius: 4px;
+  margin: 0 1%;
+  cursor: pointer;
+  &:hover {
+    background: red;
+    color: white;
+  }
 `;
 
 export default AccountPage;
