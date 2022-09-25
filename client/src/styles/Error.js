@@ -11,7 +11,7 @@ function Error({ children }) {
 
 const Wrapper = styled.div`
   color: red;
-  background-color: rgb(255,204,204,0.8);
+  background: rgb(255,204,204,0.8);
   border: solid 1px red;
   border-radius: 6px;
   display: flex;

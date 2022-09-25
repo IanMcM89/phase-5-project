@@ -14,7 +14,7 @@ function Button({ variant = "transparent", ...props }) {
 }
 
 const ButtonBase = styled.button`
-  background-color: transparent;
+  background: transparent;
   color: gray;
   cursor: pointer;
   font-size: 1rem;
@@ -32,32 +32,32 @@ const ButtonBase = styled.button`
 `;
 
 const ButtonRed = styled(ButtonBase)`
-  background-color: rgb(200, 55, 55);
+  background: rgb(200, 55, 55);
   color: lightgray;
   border: 2px solid transparent;
 
   &:hover {
-    background-color: red;
+    background: red;
   }
 `;
 
 const ButtonGreen = styled(ButtonBase)`
-  background-color: darkgreen;
+  background: darkgreen;
   color: lightgray;
   border: 2px solid transparent;
 
   &:hover {
-    background-color: #00b300;
+    background: #00b300;
   }
 `;
 
 const ButtonTransparent = styled(ButtonBase)`
-  background-color: rgb(100,100,100,.7);
+  background: rgb(100,100,100,.7);
   color: white;
   border: 2px solid white;
 
   &:hover {
-    background-color: gray;
+    background: gray;
   }
 `;
 
