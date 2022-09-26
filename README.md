@@ -1,327 +1,81 @@
-# Project Template: React/Rails API
+# GeoPlanner App
 
-## Description
+Welcome to `GeoPlanner!` A geolocation based event planning app that uses the Google Places API to find fun and interesting locations in your area for your next adventure!
 
-This project is scaffolded so that you can build a React frontend and Rails
-backend together, and easily deploy them to Heroku.
+## Find the app on Heroku:
+https://nameless-dawn-04634.herokuapp.com/
 
-## Requirements
+## Usage
 
-- Ruby 2.7.4
-- NodeJS (v16), and npm 
-- Heroku CLI
-- Postgresql
+### `Login`
 
-See Environment Setup below for instructions on installing these tools if you
-don't already have them.
+Existing users can login to the app from the login screen by providing the appropriate credentials and clicking the `Login` button.
 
-## Setup
+### `Signup`
 
-Start by **cloning** (not forking) the project template repository and removing
-the remote: 
+New users can signup via the login screen by clicking the `Sign Up` button and providing their desired username and password.
 
-```console
-$ git clone git@github.com:learn-co-curriculum/project-template-react-rails-api.git your-project-name
-$ cd your-project-name
-$ git remote rm origin
-```
+![Alt text](/client/public/images/readme/readme-login.png?raw=true "Login Page")
 
-Then, [create a new remote repository][create repo] on GitHub. Head to
-[github.com](https://github.com) and click the **+** icon in the top-right
-corner and follow the steps to create a new repository. **Important**: don't
-check any of the options such as 'Add a README file', 'Add a .gitignore file',
-etc — since you're importing an existing repository, creating any of those files
-on GitHub will cause issues.
+**Note: Usernames must be unique.** <br/>
+**Note: Password and password confirmation must match.** <br/>
 
-[create repo]: https://docs.github.com/en/github/importing-your-projects-to-github/importing-source-code-to-github/adding-an-existing-project-to-github-using-the-command-line#adding-a-project-to-github-without-github-cli
+### `Account Management`
 
-If you're working with a partner,
-[add them as a collaborator][add collaborator] on GitHub. From your repo on
-GitHub, go to Settings > Manage Access > Invite a collaborator and enter your
-partner's username. Once your partner has access, they should git **clone** (not
-fork) the repository.
+User's can click the account icon in the dashboard to view their account page. On this page, a user can update their username and password and upload a profile avatar to the database.
 
-[add collaborator]: https://docs.github.com/en/account-and-profile/setting-up-and-managing-your-github-user-account/managing-access-to-your-personal-repositories/inviting-collaborators-to-a-personal-repository
+![Alt text](/client/public/images/readme/readme-account.png?raw=true "Account Page")
 
-Finally, connect the GitHub remote repository to your local repository and push
-up your code:
+**Note: Usernames and avatars will show above created event markers on the map to all other friends in the area.**
 
-```console
-$ git remote add origin git@github.com:your-username/your-project-name.git
-$ git push -u origin main
-```
+### `Friends and Users List`
 
-When you're ready to start building your project, run:
+Users of the app can search for a known username using the provided searchbox. If the username exists, the user will show up under the `All Users` tab. Click the add icon to move the user from the `All Users` tab to the `Requested Friends` tab and send the user a friend request. Users who accept will show up under the `My Friends` tab and their events (if any) will pop up on the map.
 
-```sh
-bundle install
-rails db:create
-npm install --prefix client
-```
+![Alt text](/client/public/images/readme/readme-friendslist.png?raw=true "Friendslist")
 
-You can use the following commands to run the application:
+### `Dynamic map powered by` [react-google-maps](https://www.npmjs.com/package/react-google-maps)
 
-- `rails s`: run the backend on [http://localhost:3000](http://localhost:3000)
-- `npm start --prefix client`: run the frontend on
-  [http://localhost:4000](http://localhost:4000)
+The dynamic Google map automatically grabs the user's location via Google's geolocation service. Users can then use the provided searchbox to search the area for places. Click the red marker pin of the desired place to view the address, rating and photos (if provided), then click the `Create Event` button to redirect to the event creation page.
 
-Make sure to also update this README to include documentation about
-your project. Here's a list of some [awesome readmes][] for inspiration.
+The map shows nearby event markers and overlays for the user as well as for any friend's the user may have with events in the area.
 
-[awesome readmes]: https://github.com/matiassingers/awesome-readme
+![Alt text](/client/public/images/readme/readme-map.png?raw=true "Map Page")
 
-## Deploying
+**Note: Markers and overlays are color coded as follows:**
 
-This application has all the starter code needed to help you deploy your
-application to Heroku. It's recommended to deploy your project early and push up
-changes often to ensure that your code works equally well in production and
-development environments.
+🟩 Your Events <br/>
+🟦 Friends' Events <br/>
+🟥 Search Results <br/>
 
-If you've already set up your environment to deploy to Heroku, you can run the
-commands below to deploy your application. If not, make sure to check out the
-Environment Setup section below.
+### `Event Creation`
 
-To deploy, first log in to your Heroku account using the Heroku CLI:
+Once a location has been chosen on the map, the provided event form will be auto-filled with the name, address and rating of the desired place. A static Google map with a marker showing the place's location is also provided. To complete the form, simply fill in a title, date, time and a brief description of the event you are hosting. Click the "Create Event" button when finished to post the event to your events list.
 
-```sh
-heroku login
-```
+![Alt text](/client/public/images/readme/readme-create.png?raw=true "Event Form")
 
-Create the new Heroku app:
+**Note: Your eventslist is private, but any friends can view your events via the App's map if they are nearby**
 
-```sh
-heroku create my-app-name
-```
+### `Events List`
 
-Add the buildpacks for Heroku to build the React app on Node and run the Rails
-app on Ruby:
+The events page shows a user all of their current and past events via event cards. Each card shows a snapshot of the event's title, date and a mini map with a marker over the event's location. A user can enter a date and text value into the searchbar to filter results. Text value searches by event title and/or address. To view more information about the event, click the event card to redirect to the event's page. 
 
-```sh
-heroku buildpacks:add heroku/nodejs --index 1
-heroku buildpacks:add heroku/ruby --index 2
-```
+![Alt text](/client/public/images/readme/readme-eventlist-1.png?raw=true "Events List")
 
-To deploy, commit your code and push the changes to Heroku:
+To view more information about the event, click the event card to redirect to the event's page. 
 
-```sh
-git add .
-git commit -m 'Commit message'
-git push heroku main
-```
+![Alt text](/client/public/images/readme/readme-eventlist-2.png?raw=true "Events List")
 
-> Note: depending on your Git configuration, your default branch might be named
-> `master` or `main`. You can verify which by running
-> `git branch --show-current`. If it's `master`, you'll need to run
-> `git push heroku master` instead.
+**Note: All events owned by the user can be deleted. User's can not delete other user's events.**
 
-Any time you have changes to deploy, just make sure your changes are committed
-on the main branch of your repo, and push those changes to Heroku to deploy
-them.
+## Cloudinary
 
-You can view your deployed app with:
+Avatar upload is handled by [Cloudinary Platform](https://cloudinary.com/home-92022).
 
-```sh
-heroku open
-```
+## Image Credits
 
-## Environment Setup
+All images used in the creation of this app are provided by users of [pixabay](https://pixabay.com/) and are creative commons license CC0 “No Rights Reserved” (free for commercial use).
 
-### Install the Latest Ruby Version
+## Create React App
 
-Verify which version of Ruby you're running by entering this in the terminal:
-
-```sh
-ruby -v
-```
-
-Make sure that the Ruby version you're running is listed in the [supported
-runtimes][] by Heroku. At the time of writing, supported versions are 2.6.8,
-2.7.4, or 3.0.2. Our recommendation is 2.7.4, but make sure to check the site
-for the latest supported versions.
-
-If it's not, you can use `rvm` to install a newer version of Ruby:
-
-```sh
-rvm install 2.7.4 --default
-```
-
-You should also install the latest versions of `bundler` and `rails`:
-
-```sh
-gem install bundler
-gem install rails
-```
-
-[supported runtimes]: https://devcenter.heroku.com/articles/ruby-support#supported-runtimes
-
-### Install NodeJS
-
-Verify you are running a recent version of Node with:
-
-```sh
-node -v
-```
-
-If your Node version is not 16.x.x, install it and set it as the current and
-default version with:
-
-```sh
-nvm install 16
-nvm use 16
-nvm alias default 16
-```
-
-You can also update your npm version with:
-
-```sh
-npm i -g npm
-```
-
-### Sign Up for a [Heroku Account][heroku signup]
-
-You can sign up at for a free account at
-[https://signup.heroku.com/devcenter][heroku signup].
-
-### Download the [Heroku CLI][heroku cli] Application
-
-Download the Heroku CLI. For OSX users, you can use Homebrew:
-
-```sh
-brew tap heroku/brew && brew install heroku
-```
-
-For WSL users, run this command in the Ubuntu terminal:
-
-```sh
-curl https://cli-assets.heroku.com/install.sh | sh
-```
-
-If you run into issues installing, check out the [Heroku CLI][heroku cli]
-downloads page for more options.
-
-After downloading, you can login via the CLI in the terminal:
-
-```sh
-heroku login
-```
-
-This will open a browser window to log you into your Heroku account. After
-logging in, close the browser window and return to the terminal. You can run
-`heroku whoami` in the terminal to verify that you have logged in successfully.
-
-[heroku signup]: https://signup.heroku.com/devcenter
-[heroku cli]: https://devcenter.heroku.com/articles/heroku-cli#download-and-install
-
-### Install Postgresql
-
-Heroku requires that you use PostgreSQL for your database instead of SQLite.
-PostgreSQL (or just Postgres for short) is an advanced database management
-system with more features than SQLite. If you don't already have it installed,
-you'll need to set it up.
-
-#### PostgreSQL Installation for WSL
-
-To install Postgres for WSL, run the following commands from your Ubuntu terminal:
-
-```sh
-sudo apt update
-sudo apt install postgresql postgresql-contrib libpq-dev
-```
-
-Then confirm that Postgres was installed successfully:
-
-```sh
-psql --version
-```
-
-Run this command to start the Postgres service:
-
-```sh
-sudo service postgresql start
-```
-
-Finally, you'll also need to create a database user so that you are able to
-connect to the database from Rails. First, check what your operating system
-username is:
-
-```sh
-whoami
-```
-
-If your username is "ian", for example, you'd need to create a Postgres user
-with that same name. To do so, run this command to open the Postgres CLI:
-
-```sh
-sudo -u postgres -i
-```
-
-From the Postgres CLI, run this command (replacing "ian" with your username):
-
-```sh
-createuser -sr ian
-```
-
-Then enter `control + d` or type `logout` to exit.
-
-[This guide][postgresql wsl] has more info on setting up Postgres on WSL if you
-get stuck.
-
-[postgresql wsl]: https://docs.microsoft.com/en-us/windows/wsl/tutorials/wsl-database#install-postgresql
-
-#### Postgresql Installation for OSX
-
-To install Postgres for OSX, you can use Homebrew:
-
-```sh
-brew install postgresql
-```
-
-Once Postgres has been installed, run this command to start the Postgres
-service:
-
-```sh
-brew services start postgresql
-```
-
-## Troubleshooting
-
-If you ran into any errors along the way, here are some things you can try to
-troubleshoot:
-
-- If you're on a Mac and got a server connection error when you tried to run
-  `rails db:create`, one option for solving this problem for Mac users is to
-  install the Postgres app. To do this, first uninstall `postgresql` by running
-  `brew remove postgresql`. Next, download the app from the
-  [Postgres downloads page][postgres downloads page] and install it. Launch the
-  app and click "Initialize" to create a new server. You should now be able to
-  run `rails db:create`.
-
-- If you're using WSL and got the following error running `rails db:create`:
-
-  ```txt
-  PG::ConnectionBad: FATAL:  role "yourusername" does not exist
-  ```
-
-  The issue is that you did not create a role in Postgres for the default user
-  account. Check [this video](https://www.youtube.com/watch?v=bQC5izDzOgE) for
-  one possible fix.
-
-- If your app failed to deploy at the build stage, make sure your local
-  environment is set up correctly by following the steps at the beginning of
-  this lesson. Check that you have the latest versions of Ruby and Bundler, and
-  ensure that Postgresql was installed successfully.
-
-- If you deployed successfully, but you ran into issues when you visited the
-  site, make sure you migrated and seeded the database. Also, make sure that
-  your application works locally and try to debug any issues on your local
-  machine before re-deploying. You can also check the logs on the server by
-  running `heroku logs`.
-
-For additional support, check out these guides on Heroku:
-
-- [Deploying a Rails 6 App to Heroku][heroku rails deploying guide]
-- [Rails Troubleshooting on Heroku][troubleshooting guide on heroku]
-
-[postgres downloads page]: https://postgresapp.com/downloads.html
-[heroku rails deploying guide]: https://devcenter.heroku.com/articles/getting-started-with-rails6
-[troubleshooting guide on heroku]: https://devcenter.heroku.com/articles/getting-started-with-rails6#troubleshooting
+This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
