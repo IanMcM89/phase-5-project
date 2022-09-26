@@ -2,9 +2,6 @@
 
 Welcome to `GeoPlanner!` A geolocation based event planning app that uses the Google Places API to find fun and interesting locations in your area for your next adventure!
 
-## Find the app on Heroku:
-https://nameless-dawn-04634.herokuapp.com/
-
 ## Usage
 
 ### `Login`
