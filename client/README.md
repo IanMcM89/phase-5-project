@@ -81,6 +81,12 @@ development:
   api_secret: "yourapisecret"
   secure: true
 ```
+
+# Heroku
+You can access the deployed version of the app here: https://nameless-dawn-04634.herokuapp.com/
+
+**Note: App responsiveness is not yet optimized for all devices. Responsiveness map vary**
+
 # Usage
 
 ## Login
