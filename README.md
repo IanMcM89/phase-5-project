@@ -46,6 +46,11 @@ bundle install
 npm install --prefix client
 ```
 
+Migrate changes and seed the database using the following command:
+```sh
+rails db:migrate db:seed
+```
+
 Use the following commands to run the app:
 
 - run the backend on http://localhost:3000
