@@ -5,7 +5,6 @@ import { createGlobalStyle } from "styled-components";
 import { configureStore } from "@reduxjs/toolkit";
 import { Provider } from "react-redux";
 import rootReducer from "./reducer";
-import ActionCable from 'actioncable';
 import App from "./App";
 import "./index.css";
 // import reportWebVitals from './reportWebVitals';
@@ -35,14 +34,11 @@ const store = configureStore(
   }
 );
 
-const CableApp = {}
-CableApp.cable = ActionCable.createConsumer("/cable");
-
 ReactDOM.render(
   <BrowserRouter>
     <Provider store={store}>
       <GlobalStyle />
-      <App cable={CableApp.cable} />
+      <App />
     </Provider>
   </BrowserRouter>,
   document.getElementById("root")

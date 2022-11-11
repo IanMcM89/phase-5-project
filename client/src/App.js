@@ -10,7 +10,7 @@ import MapPage from "./pages/MapPage";
 import UserList from "./components/users/UserList";
 import styled from "styled-components";
 
-const App = ({ cable }) => {
+const App = () => {
   const [user, setUser] = useState(null);
 
   useEffect(() => {
@@ -22,20 +22,6 @@ const App = ({ cable }) => {
       }
     });
   }, []);
-
-  // useEffect(() => {
-  //   if (user) cable.subscriptions.create(
-  //     {
-  //       channel: 'UsersChannel',
-  //       id: user.id
-  //     },
-  //     {
-  //       connected: () => { console.log(`${user.username} logged in`) },
-  //       disconnected: () => { console.log(`${user.username} logged off`) },
-  //       received: (data) => { console.log(data) }
-  //     }
-  //   );
-  // }, [user, cable.subscriptions])
 
   if (!user) return (<LoginPage onLogin={setUser} />);
 
