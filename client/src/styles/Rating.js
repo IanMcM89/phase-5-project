@@ -1,13 +1,12 @@
 import styled from "styled-components";
 
 const Rating = ({ rating }) => {
-  const num = Math.round(rating);
-
   const displayStars = () => {
-    return [...Array(5)].map((e, i) => {
-      if (i < num) return <GoldStar key={i}>★</GoldStar>;
-      else return <GrayStar key={i}>★</GrayStar>
-    });
+    const num = Math.round(rating);
+    // Return five star components
+    return [...Array(5)].map((e, i) => (
+      <Star key={i} style={{ color: i < num ? 'gold' : 'darkgray' }} />
+    ));
   }
 
   return (
@@ -22,14 +21,12 @@ const Wrapper = styled.div`
   height: fit-content;
 `;
 
-const GoldStar = styled.p`
-  color: gold;
+const Star = styled.p`
   font-size: 1.2rem;
-  margin: 1% 0 3% 0;
-`;
-
-const GrayStar = styled(GoldStar)`
-  color: #bfbfbf;
+  margin: 1% 0 3%;
+  ::before {
+    content: '★';
+  }
 `;
 
 export default Rating;
