@@ -17,6 +17,10 @@ const LoginForm = styled.form`
   width: 50%;
   margin-top: 3%;
   animation: appear 1.5s ease forwards;
+
+  @media (max-width: 480px) {
+    width: 80%;
+  }
 `;
 
 const EventForm = styled.form`

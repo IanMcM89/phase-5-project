@@ -19,6 +19,10 @@ const LabelBase = styled.label`
   font-size: 1rem;
   font-weight: 500;
   margin-bottom: 5px;
+  
+  @media (max-width: 480px) {
+    font-size: 0.9rem;
+  }
 `;
 
 const LabelBlue = styled(LabelBase)`

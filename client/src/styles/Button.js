@@ -33,6 +33,11 @@ const ButtonBase = styled.button`
     border: 2px solid white;
     color: white;
   }
+
+  @media (max-width: 480px) {
+    font-size: 0.8rem;
+    padding: 6px 8px;
+  }
 `;
 
 const ButtonRed = styled(ButtonBase)`

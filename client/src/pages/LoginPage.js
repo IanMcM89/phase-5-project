@@ -65,6 +65,11 @@ const Wrapper = styled.div`
   width: 50%;
   height: 80%;
   padding: 5% 1%;
+
+  @media (max-width: 480px) {
+    width: 80%;
+    height: 80%;
+  }
 `;
 
 const Section = styled.section`
@@ -74,6 +79,10 @@ const Section = styled.section`
 
 const P = styled.p`
   color: white;
+
+  @media (max-width: 480px) {
+    font-size: 0.9rem;
+  }
 `;
 
 export default LoginPage;

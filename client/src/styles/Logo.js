@@ -26,6 +26,11 @@ const Title = styled.h1`
     content:'Planner';
     color: white;
   }
+
+  @media (max-width: 480px) {
+    font-size: 2.5rem;
+    margin-top: 10%;
+  }
 `;
 
 export default Logo;
