@@ -50,7 +50,6 @@ const commonStyles = css`
 
 const Main = styled.main`
   ${commonStyles}
-  background-color: transparent;
   height: 100vh;
 `;
 

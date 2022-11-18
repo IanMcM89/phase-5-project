@@ -1,7 +1,13 @@
+*,
+*::before, 
+*::after {
+  box-sizing: border-box;
+}
+
 html, body {
-  font-family: BlinkMacSystemFont,-apple-system,"Segoe UI",Roboto,Oxygen,
-    Ubuntu,Cantarell,"Fira Sans","Droid Sans","Helvetica Neue",Helvetica,
-    Arial,sans-serif;
+  font-family: BlinkMacSystemFont,-apple-system,"Segoe UI", Roboto, Oxygen,
+    Ubuntu,Cantarell, "Fira Sans", "Droid Sans", "Helvetica Neue", Helvetica,
+    Arial, sans-serif;
   width: 100vw;
   height: 100vh;
   margin: 0;
@@ -37,19 +43,11 @@ html, body {
 }
 
 @keyframes slideLeft {
-  0% {
-    transform: translateX(1000px);
-  }
-  100% {
-    transform: translateX(0px);
-  }
+  0%    { transform: translateX(1000px); }
+  100%  { transform: translateX(0px); }
 }
 
 @keyframes slideRight {
-  0% {
-    transform: translateX(0);
-  }
-  100% {
-    transform: translateX(1000px);
-  }
+  0%    { transform: translateX(0); }
+  100%  {transform: translateX(1000px); }
 }

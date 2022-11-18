@@ -10,15 +10,8 @@ import "./index.css";
 // import reportWebVitals from './reportWebVitals';
 
 const GlobalStyle = createGlobalStyle`
-  *,
-  *::before, 
-  *::after {
-    box-sizing: border-box;
-  }
-
   body {
-    background-image: url("/images/background.png");
-    background-color: beige;
+    background: beige url("/images/background.png");
     background-size: cover;
     backdrop-filter: blur(4px);
   }
