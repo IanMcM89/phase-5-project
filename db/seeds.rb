@@ -1,7 +1,7 @@
 # This file should contain all the record creation needed to seed the database with its default values.
 # The data can then be loaded with the bin/rails db:seed command (or created alongside the database with db:setup).
 
-# User Seeds
+#============ User Seeds ============
 
 User.create(
   username: "ianmcm89",
@@ -40,6 +40,7 @@ User.create(
 )
 
 20.times do |i|
+  # Generates random password for each user
   password = (0...8).map { ('a'..'z').to_a[rand(26)] }.join
   User.create(
     username: "user#{i+=5}",
@@ -48,7 +49,7 @@ User.create(
   )
 end
 
-# Friendship Seeds
+#============ Friendship Seeds ============
 
 4.times do |i|
   Friendship.create(
@@ -57,7 +58,7 @@ end
   )
 end
 
-# Friend Request Seeds
+#============ Friend Request Seeds ============
 
 2.times do |i|
   FriendRequest.create(
@@ -73,8 +74,8 @@ end
   )
 end
 
-# St. Petersburg, FL Seeds
-# My Event Seeds
+#============ St. Petersburg, FL Seeds ============
+#============ My Event Seeds ============
 
 Event.create(
   user_id: 1,
@@ -141,7 +142,7 @@ Event.create(
   lng: -82.7399899
 )
 
-# Friend Event Seeds
+#============ Friend Event Seeds ============
 
 Event.create(
   user_id: 2,
@@ -234,8 +235,8 @@ Event.create(
   lng: -82.6873275
 )
 
-# # Los Angeles, CA Seeds
-# # My Event Seeds
+# #============ Los Angeles, CA Seeds ============
+# #============ My Event Seeds ============
 
 # Event.create(
 #   user_id: 1,
@@ -302,7 +303,7 @@ Event.create(
 #   lng: -118.4076387
 # )
 
-# # Friend Event Seeds
+# #============ Friend Event Seeds ============
 
 # Event.create(
 #   user_id: 2,

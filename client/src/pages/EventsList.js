@@ -25,6 +25,7 @@ const EventsList = ({ user }) => {
   });
 
   const displayEvents = () => {
+    // Determine the number of placeholder divs to display
     const num = (8 - filterEvents.length);
 
     return (
