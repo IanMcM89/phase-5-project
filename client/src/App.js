@@ -27,12 +27,12 @@ const App = () => {
 
   return (
     <>
-      <NavBar setUser={setUser}/>
+      <NavBar setUser={setUser} />
       <Main>
         <UserList user={user} />
         <Switch>
           <Route path="/account">
-            <AccountPage user={user} setUser={setUser}/>
+            <AccountPage user={user} setUser={setUser} />
           </Route>
           <Route path="/events/create">
             <EventForm user={user} />
@@ -56,8 +56,10 @@ const Main = styled.main`
   display: flex;
   width: 100vw;
   height: 90vh;
-  margin: 0;
-  overflow: hidden;
+
+  @media (max-width: 480px) {
+    flex-direction: column;
+  }
 `;
 
 export default App;

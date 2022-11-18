@@ -24,6 +24,10 @@ const Wrapper = styled.div`
   width: 75%;
   height: 100%;
   overflow: hidden;
+  @media (max-width: 480px) {
+    width 100%;
+    height: 50%;
+  }
 `;
 
 export default Map;

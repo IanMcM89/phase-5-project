@@ -46,6 +46,10 @@ const Wrapper = styled.div`
   width: 25%;
   padding: 1%;
   overflow-y: hidden;
+  @media (max-width: 480px) {
+    width: 100%;
+    height: 50%;
+  }
 `;
 
 const SubLists = styled.div`

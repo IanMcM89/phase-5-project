@@ -93,6 +93,9 @@ const Header = styled.header`
   margin: 0;
   padding-left: 1%;
   top: 0;
+  @media (max-width: 480px) {
+    flex-direction: column;
+  }
 `;
 
 const Nav = styled.nav`
